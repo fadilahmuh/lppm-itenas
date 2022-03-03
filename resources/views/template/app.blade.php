@@ -5,10 +5,12 @@
         <meta charset="utf-8">
         <link href="dist/images/logo.svg" rel="shortcut icon">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>LP2M ITENAS</title>
+        <title>@isset($title){{$title}} -@endisset LP2M ITENAS</title>
         <!-- BEGIN: CSS Assets-->
         <link rel="stylesheet" href="{{ asset('dist/css/app.css') }} " />
         <link rel="stylesheet" href="{{ asset('dist/css/fontawesome/css/all.min.css') }}">
+        @yield('csslib')
+        @yield('custom-css')
         <!-- END: CSS Assets-->
     </head>
     <!-- END: Head -->
@@ -17,11 +19,11 @@
         <div class="mobile-menu md:hidden">
             <div class="mobile-menu-bar">
                 <a href="" class="flex mr-auto">
-                    <img alt="Midone Tailwind HTML Admin Template" class="w-6" src="dist/images/logo.svg">
+                    <img alt="LP2M ITENAS" class="w-6" src="{{ asset('logo-itenas.svg') }}">
                 </a>
                 <a href="javascript:;" id="mobile-menu-toggler"> <i data-feather="bar-chart-2" class="w-8 h-8 text-white transform -rotate-90"></i> </a>
             </div>
-            <ul class="border-t border-theme-24 py-5 hidden">
+            <ul class="border-t border-theme-2 py-5 hidden">
                 <li>
                     <a href="index.html" class="menu menu--active">
                         <div class="menu__icon"> <i data-feather="home"></i> </div>
@@ -91,8 +93,8 @@
             <!-- BEGIN: Side Menu -->
             <nav class="side-nav">
                 <a href="" class="intro-x flex items-center pl-5 pt-4">
-                    <img alt="Midone Tailwind HTML Admin Template" class="w-6" src="dist/images/logo.svg">
-                    <span class="hidden xl:block text-white text-lg ml-3"> Mid<span class="font-medium">one</span> </span>
+                    <img alt="LP2M" class="w-6" src="{{asset('logo-itenas.svg') }}">
+                    <span class="hidden xl:block text-black font-medium text-lg ml-3"><span class="font-bold text-white">LP2M </span>itenas</span>
                 </a>
                 <div class="side-nav__devider my-6"></div>
                 <ul>
@@ -269,24 +271,15 @@
                     <!-- END: Account Menu -->
                 </div>
                 <!-- END: Top Bar -->
-                <div class="grid grid-cols-12 gap-6">
-                    <div class="col-span-12 xxl:col-span-9 grid grid-cols-12 gap-6">
+                
+                @yield('content')
 
-                        {{-- Page Title --}}
-                        <div class="col-span-12 mt-8">
-                            <div class="intro-y flex items-center h-10">
-                                <h2 class="text-lg font-medium truncate mr-5">
-                                    Dashboard
-                                </h2>                                
-                            </div>                           
-                        </div>
-                        
-                   
-                    </div>
-                </div>
             </div>
             <!-- END: Content -->
         </div>
-        <script src="dist/js/app.js"></script>
+        <script src="{{ asset('dist/js/app.js') }}"></script>
+        @yield('lib-script')
+        @yield('page-script')
+        @yield('line-script')
     </body>
 </html>

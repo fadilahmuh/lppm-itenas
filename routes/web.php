@@ -18,5 +18,6 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard.index');
+    $title = 'Dashboard';
+    return view('index', compact('title'));
 });
