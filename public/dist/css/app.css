@@ -13819,8 +13819,7 @@ video {
 
 .hover\:bg-theme-1:hover{
   --bg-opacity: 1;
-  background-color: #1C3FAA;
-  background-color: rgba(28, 63, 170, var(--bg-opacity));
+  background-color: rgb(255 255 255 / 0.2);
 }
 
 .hover\:bg-theme-2:hover{
