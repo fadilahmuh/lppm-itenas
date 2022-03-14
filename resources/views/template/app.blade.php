@@ -32,26 +32,32 @@
                 </li>
                 <li>
                     <a href="javascript:;" class="menu">
-                        <div class="menu__icon"> <i data-feather="box"></i> </div>
-                        <div class="menu__title"> Menu Layout <i data-feather="chevron-down" class="menu__sub-icon"></i> </div>
+                        <div class="menu__icon"> <i data-feather="book"></i> </div>
+                        <div class="menu__title"> List Data Hibah <i data-feather="chevron-down" class="menu__sub-icon"></i> </div>
                     </a>
                     <ul class="">
                         <li>
                             <a href="index.html" class="menu">
                                 <div class="menu__icon"> <i data-feather="activity"></i> </div>
-                                <div class="menu__title"> Side Menu </div>
+                                <div class="menu__title"> Penelitian </div>
                             </a>
                         </li>
                         <li>
                             <a href="simple-menu-dashboard.html" class="menu">
                                 <div class="menu__icon"> <i data-feather="activity"></i> </div>
-                                <div class="menu__title"> Simple Menu </div>
+                                <div class="menu__title"> PKM </div>
                             </a>
                         </li>
                         <li>
                             <a href="top-menu-dashboard.html" class="menu">
                                 <div class="menu__icon"> <i data-feather="activity"></i> </div>
-                                <div class="menu__title"> Top Menu </div>
+                                <div class="menu__title"> Insentif </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="top-menu-dashboard.html" class="menu">
+                                <div class="menu__icon"> <i data-feather="activity"></i> </div>
+                                <div class="menu__title"> Haki </div>
                             </a>
                         </li>
                     </ul>
@@ -59,31 +65,13 @@
                 <li>
                     <a href="side-menu-inbox.html" class="menu">
                         <div class="menu__icon"> <i data-feather="inbox"></i> </div>
-                        <div class="menu__title"> Inbox </div>
+                        <div class="menu__title"> Input data Hibah </div>
                     </a>
                 </li>
                 <li>
                     <a href="side-menu-file-manager.html" class="menu">
                         <div class="menu__icon"> <i data-feather="hard-drive"></i> </div>
-                        <div class="menu__title"> File Manager </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="side-menu-point-of-sale.html" class="menu">
-                        <div class="menu__icon"> <i data-feather="credit-card"></i> </div>
-                        <div class="menu__title"> Point of Sale </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="side-menu-chat.html" class="menu">
-                        <div class="menu__icon"> <i data-feather="message-square"></i> </div>
-                        <div class="menu__title"> Chat </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="side-menu-post.html" class="menu">
-                        <div class="menu__icon"> <i data-feather="file-text"></i> </div>
-                        <div class="menu__title"> Post </div>
+                        <div class="menu__title"> Riwayat Input Data </div>
                     </a>
                 </li>
             </ul>
@@ -106,26 +94,32 @@
                     </li>
                     <li>
                         <a href="javascript:;" class="side-menu">
-                            <div class="side-menu__icon"> <i data-feather="box"></i> </div>
-                            <div class="side-menu__title"> Menu Layout <i data-feather="chevron-down" class="side-menu__sub-icon"></i> </div>
+                            <div class="side-menu__icon"> <i data-feather="book"></i> </div>
+                            <div class="side-menu__title"> List Data Hibah <i data-feather="chevron-down" class="side-menu__sub-icon"></i> </div>
                         </a>
                         <ul class="">
                             <li>
                                 <a href="index.html" class="side-menu">
-                                    <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                                    <div class="side-menu__title"> Side Menu </div>
+                                    <div class="side-menu__icon"> <i class="fa-solid fa-microscope"></i> </div>
+                                    <div class="side-menu__title"> Penelitian </div>
                                 </a>
                             </li>
                             <li>
                                 <a href="simple-menu-dashboard.html" class="side-menu">
-                                    <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                                    <div class="side-menu__title"> Simple Menu </div>
+                                    <div class="side-menu__icon"> <i class="fa-solid fa-calendar-days"></i> </div>
+                                    <div class="side-menu__title"> PKM </div>
                                 </a>
                             </li>
                             <li>
                                 <a href="top-menu-dashboard.html" class="side-menu">
-                                    <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                                    <div class="side-menu__title"> Top Menu </div>
+                                    <div class="side-menu__icon"> <i class="fa-solid fa-receipt"></i> </div>
+                                    <div class="side-menu__title"> Insentif </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="top-menu-dashboard.html" class="side-menu">
+                                    <div class="side-menu__icon"> <i class="fa-solid fa-file-invoice"></i> </div>
+                                    <div class="side-menu__title"> Haki </div>
                                 </a>
                             </li>
                         </ul>
@@ -133,31 +127,13 @@
                     <li>
                         <a href="side-menu-inbox.html" class="side-menu">
                             <div class="side-menu__icon"> <i data-feather="inbox"></i> </div>
-                            <div class="side-menu__title"> Inbox </div>
+                            <div class="side-menu__title"> Input data Hibah </div>
                         </a>
                     </li>
                     <li>
                         <a href="side-menu-file-manager.html" class="side-menu">
                             <div class="side-menu__icon"> <i data-feather="hard-drive"></i> </div>
-                            <div class="side-menu__title"> File Manager </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="side-menu-point-of-sale.html" class="side-menu">
-                            <div class="side-menu__icon"> <i data-feather="credit-card"></i> </div>
-                            <div class="side-menu__title"> Point of Sale </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="side-menu-chat.html" class="side-menu">
-                            <div class="side-menu__icon"> <i data-feather="message-square"></i> </div>
-                            <div class="side-menu__title"> Chat </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="side-menu-post.html" class="side-menu">
-                            <div class="side-menu__icon"> <i data-feather="file-text"></i> </div>
-                            <div class="side-menu__title"> Post </div>
+                            <div class="side-menu__title"> Riwayat Input Data </div>
                         </a>
                     </li>
                 </ul>

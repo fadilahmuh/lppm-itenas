@@ -21,3 +21,14 @@ Route::get('/dashboard', function () {
     $title = 'Dashboard';
     return view('index', compact('title'));
 });
+
+Route::get('/input', function () {
+    $title = 'Input Data Baru';
+    return view('inputUser', compact('title'));
+});
+
+Route::get('/profil', function () {
+    $title = 'Profil';
+    return view('profil', compact('title'));
+});
+
