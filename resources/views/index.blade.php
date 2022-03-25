@@ -165,12 +165,13 @@
                             <a href="#" class="font-semibold text-base tooltip" data-tooltip-content="#profil-dosen" data-theme="light">Uung Ungkawa</a>
                             <div class="tooltip-content">
                                 <div id="profil-dosen" class="relative flex items-center py-1">
-                                    <div class="w-12 h-12 image-fit"> <img alt="Midone Tailwind HTML Admin Template" class="rounded-full" src="dist/images/profile-13.jpg"> </div>
+                                    <div class="w-12 h-12 image-fit"><a target="_blank" href="https://unkl347.com/"><img alt="Midone Tailwind HTML Admin Template" class="rounded-full" src="dist/images/profile-13.jpg"></a></div>
                                     <div class="ml-4 mr-auto">
-                                        <div class="font-medium leading-relaxed">Uung Ungkawa</div>
+                                        <a target="_blank" href="https://unkl347.com/"><div class="font-medium leading-relaxed">Uung Ungkawa</div></a>
                                         <div class="text-gray-600">https://unkl347.com/</div>
                                     </div>
                                 </div>
+                
                             </div>
                             <div class="text-gray-600 font-normal mt-3 text-sm">Tahun</div>
                             <h3 class="font-semibold text-base">2022</h3>
@@ -193,7 +194,17 @@
                                 <h3 class="font-semibold text-xl">Potato Leaf Desease</h3>
                             </div>
                             <div class="text-gray-600 font-normal mt-3 text-sm">Ketua Penelitian</div>
-                            <h3 class="font-semibold text-base">Uung Ungkawa</h3>
+                            <a href="#" class="font-semibold text-base tooltip" data-tooltip-content="#profil-dosen" data-theme="light">Uung Ungkawa</a>
+                            <div class="tooltip-content">
+                                <div id="profil-dosen" class="relative flex items-center py-1">
+                                    <div class="w-12 h-12 image-fit"><a target="_blank" href="https://unkl347.com/"><img alt="Midone Tailwind HTML Admin Template" class="rounded-full" src="dist/images/profile-13.jpg"></a></div>
+                                    <div class="ml-4 mr-auto">
+                                        <a target="_blank" href="https://unkl347.com/"><div class="font-medium leading-relaxed">Uung Ungkawa</div></a>
+                                        <div class="text-gray-600">https://unkl347.com/</div>
+                                    </div>
+                                </div>
+                
+                            </div>
                             <div class="text-gray-600 font-normal mt-3 text-sm">Tahun</div>
                             <h3 class="font-semibold text-base">2022</h3>
                             <div class="text-gray-600 font-normal mt-3 text-sm">Jumlah</div>

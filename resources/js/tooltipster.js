@@ -6,8 +6,9 @@ import tooltipster from 'tooltipster'
     // Tooltipster
     $('.tooltip').each(function() {
         let options = {
-            delay: 0,
-            theme: 'tooltipster-borderless'
+            delay: 100,
+            theme: 'tooltipster-borderless',
+            interactive: true
         }
 
         if ($(this).data('event') == 'on-click') {

@@ -36,7 +36,8 @@
             </div>
         </div>
         <div class="flex flex-row gap-5 mb-5 mt-3 justify-center">
-            <div class="basis-1/4 report-box zoom-in tooltip" data-tooltip-content="#penelitian-tooltip">
+
+            <div class="basis-1/4 intro-x report-box zoom-in tooltip" data-tooltip-content="#penelitian-tooltip">
                 <div class="box p-5 ">
                     <div class="grid grid-cols-12 items-center">
                         <div class="col-span-12">
@@ -46,7 +47,16 @@
                     </div>
                 </div>
             </div>
-            <div class="basis-1/4 report-box zoom-in tooltip" data-tooltip-content="#pkm-tooltip">
+            <div class="tooltip-content">
+                <div id="penelitian-tooltip" class="relative flex items-center py-1">
+                    <div class="m-1">
+                        <div class="font-medium leading-relaxed">1 Ketua Penelitian</div>
+                        <div class="font-medium leading-relaxed">1 Anggota Penelitian</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="basis-1/4 intro-x report-box zoom-in tooltip" data-tooltip-content="#pkm-tooltip">
                 <div class="box p-5 ">
                     <div class="grid grid-cols-12 items-center">
                         <div class="col-span-12">
@@ -56,13 +66,30 @@
                     </div>
                 </div>
             </div>
-            <div class="basis-1/4 report-box zoom-in tooltip" data-tooltip-content="#haki-tooltip">
+            <div class="tooltip-content">
+                <div id="pkm-tooltip" class="relative flex items-center py-1">
+                    <div class="m-1">
+                        <div class="font-medium leading-relaxed">1 Ketua PKM</div>
+                        <div class="font-medium leading-relaxed">2 Anggota PKM</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="basis-1/4 intro-x report-box zoom-in tooltip" data-tooltip-content="#haki-tooltip">
                 <div class="box p-5 ">
                     <div class="grid grid-cols-12 items-center">
                         <div class="col-span-12">
                             <div class="text-3xl text-center font-bold leading-8 mt-2">2</div>
                             <div class="text-base text-center text-gray-600 mt-1">HAKI</div>
                         </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tooltip-content">
+                <div id="haki-tooltip" class="relative flex items-center py-1">
+                    <div class="m-1">
+                        <div class="font-medium leading-relaxed">1 Ketua Penelitian</div>
+                        <div class="font-medium leading-relaxed">1 Anggota Penelitian</div>
                     </div>
                 </div>
             </div>

@@ -2904,8 +2904,9 @@ __webpack_require__.r(__webpack_exports__);
 
   $('.tooltip').each(function () {
     var options = {
-      delay: 0,
-      theme: 'tooltipster-borderless'
+      delay: 100,
+      theme: 'tooltipster-borderless',
+      interactive: true
     };
 
     if ($(this).data('event') == 'on-click') {

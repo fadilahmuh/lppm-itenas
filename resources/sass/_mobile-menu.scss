@@ -1,5 +1,5 @@
 .mobile-menu {
-    @apply border-b border-theme-24 -mt-5 -mx-8 mb-6;
+    @apply border-b border-theme-2 -mt-5 -mx-8 mb-6;
     @media (max-width: $sm) {
         @apply -mx-3;
     }
