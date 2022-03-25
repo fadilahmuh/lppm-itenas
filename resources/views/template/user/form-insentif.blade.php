@@ -1,4 +1,4 @@
-<div class="intro-y box">  
+<div class="intro-y box form">  
     <div class="p-5" id="input">
         <label class="mb-3">Insentif</label>
         <div>
