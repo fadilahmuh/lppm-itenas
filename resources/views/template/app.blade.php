@@ -5,9 +5,10 @@
         <meta charset="utf-8">
         <link href="dist/images/logo.svg" rel="shortcut icon">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>@isset($title){{$title}} -@endisset LP2M ITENAS</title>
+        <title>@isset($title){{$title}} -@endisset NEW LP2M ITENAS</title>
         <!-- BEGIN: CSS Assets-->
         <link rel="stylesheet" href="{{ asset('dist/css/app.css') }} " />
+        {{-- <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet"> --}}
         <link rel="stylesheet" href="{{ asset('dist/css/fontawesome/css/all.min.css') }}">
         @yield('csslib')
         @yield('custom-css')
@@ -254,6 +255,7 @@
             <!-- END: Content -->
         </div>
         <script src="{{ asset('dist/js/app.js') }}"></script>
+        <script src="{{ asset('js/jquery/dist/jquery.js') }}"></script>
         @yield('lib-script')
         @yield('page-script')
         @yield('line-script')

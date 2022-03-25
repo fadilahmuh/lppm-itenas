@@ -2,13 +2,13 @@
 
 @section('content')
 
-<div class="col-span-12 mt-8">
-    <div class="intro-y flex items-center h-10">
-        <h2 class="text-lg font-medium truncate mr-5">
-            Profil
-        </h2>
-    </div>
-</div>      
+
+<div class="intro-y flex items-center h-10">
+    <h2 class="text-lg font-medium truncate mr-5">
+        Profil
+    </h2>
+</div>  
+
 <div class="grid grid-cols-12 gap-6">
 
     <div class="col-span-12 lg:col-span-4 xxl:col-span-3 flex lg:block flex-col-reverse">

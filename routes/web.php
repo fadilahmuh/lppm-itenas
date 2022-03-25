@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,3 +33,46 @@ Route::get('/profil', function () {
     return view('profil', compact('title'));
 });
 
+Route::get('/form-penelitian', function(Request $request) {
+    if ($request->ajax()) {
+
+        $form = view('template.user.form-penelitian')->render();
+
+        return response()->json([
+            'form' =>  $form
+        ]);  
+    }
+})->name('penelitian');
+
+Route::get('/form-pkm', function(Request $request) {
+    if ($request->ajax()) {
+
+        $form = view('template.user.form-pkm')->render();
+
+        return response()->json([
+            'form' =>  $form
+        ]);  
+    }
+})->name('pkm');
+
+Route::get('/form-isentif', function(Request $request) {
+    if ($request->ajax()) {
+
+        $form = view('template.user.form-insentif')->render();
+
+        return response()->json([
+            'form' =>  $form
+        ]);  
+    }
+})->name('insentif');
+
+Route::get('/form-haki', function(Request $request) {
+    if ($request->ajax()) {
+
+        $form = view('template.user.form-haki')->render();
+
+        return response()->json([
+            'form' =>  $form
+        ]);  
+    }
+})->name('haki');

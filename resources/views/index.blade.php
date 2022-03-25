@@ -151,7 +151,7 @@
                 </h2>
             </div>
             <div class="grid grid-cols-12 gap-10 mt-5">
-                <div class="md:col-span-6 col-span-12 box zoom-in intro-x">
+                <div class="md:col-span-6 col-span-12 box intro-x">
                     <div class="px-5 py-3 mb-3 flex ">
                         <div class="flex items-start">
                             <i class="mr-2 fa-solid fa-microscope text-5xl xl:text-5xl"></i>
@@ -162,7 +162,16 @@
                                 <h3 class="font-semibold text-xl">Potato Leaf Desease</h3>
                             </div>
                             <div class="text-gray-600 font-normal mt-3 text-sm">Ketua Penelitian</div>
-                            <h3 class="font-semibold text-base">Uung Ungkawa</h3>
+                            <a href="#" class="font-semibold text-base tooltip" data-tooltip-content="#profil-dosen" data-theme="light">Uung Ungkawa</a>
+                            <div class="tooltip-content">
+                                <div id="profil-dosen" class="relative flex items-center py-1">
+                                    <div class="w-12 h-12 image-fit"> <img alt="Midone Tailwind HTML Admin Template" class="rounded-full" src="dist/images/profile-13.jpg"> </div>
+                                    <div class="ml-4 mr-auto">
+                                        <div class="font-medium leading-relaxed">Uung Ungkawa</div>
+                                        <div class="text-gray-600">https://unkl347.com/</div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="text-gray-600 font-normal mt-3 text-sm">Tahun</div>
                             <h3 class="font-semibold text-base">2022</h3>
                             <div class="text-gray-600 font-normal mt-3 text-sm">Jumlah</div>
@@ -173,7 +182,7 @@
                         <a class="button w-20 text-white bg-theme-1 shadow-md ml-auto">Detail</a>
                     </div>
                 </div>
-                <div class="md:col-span-6 col-span-12 box zoom-in intro-x">
+                <div class="md:col-span-6 col-span-12 box intro-x">
                     <div class="px-5 py-3 mb-3 flex ">
                         <div class="flex items-start">
                             <i class="mr-2 fa-solid fa-microscope text-5xl xl:text-5xl"></i>
