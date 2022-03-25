@@ -32,3 +32,14 @@
         </div>
      </div>
 </div>
+
+<script>
+    $('.dropify').dropify({
+        messages: {
+        'default': 'Tarik dan lepaskan file atau klik disini',
+        'replace': 'Tarik dan lepaskan file atau klik untuk ganti',
+        'remove':  'Hapus',
+        'error':   'Ooops, terjadi kesalahan.'
+        }
+    });
+</script>

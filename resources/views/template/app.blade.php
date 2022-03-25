@@ -5,13 +5,14 @@
         <meta charset="utf-8">
         <link href="dist/images/logo.svg" rel="shortcut icon">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>@isset($title){{$title}} -@endisset NEW LP2M ITENAS</title>
+        <meta name="description" content="Midone admin is super flexible, powerful, clean & modern responsive tailwind admin template with unlimited possibilities.">
+        <meta name="keywords" content="admin template, Midone admin template, dashboard template, flat admin template, responsive admin template, web app">
+        <meta name="author" content="LEFT4CODE">
+        <title>@isset($title){{$title}} -@endisset LP2M ITENAS</title>
         <!-- BEGIN: CSS Assets-->
-        <link rel="stylesheet" href="{{ asset('dist/css/app.css') }} " />
-        {{-- <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet"> --}}
+        <link rel="stylesheet" href="{{ asset('css/app.css') }} " />
         <link rel="stylesheet" href="{{ asset('dist/css/fontawesome/css/all.min.css') }}">
-        @yield('csslib')
-        @yield('custom-css')
+        @yield('lib-css')
         <!-- END: CSS Assets-->
     </head>
     <!-- END: Head -->
@@ -228,7 +229,7 @@
                             <img alt="Midone Tailwind HTML Admin Template" src="dist/images/profile-12.jpg">
                         </div>
                         <div class="dropdown-box mt-10 absolute w-56 top-0 right-0 z-20">
-                            <div class="dropdown-box__content box bg-theme-1 text-white">
+                            <div class="dropdown-box__content bg-theme-1 box text-white">
                                 <div class="p-4 border-b border-theme-2">
                                     <div class="font-medium">Angelina Jolie</div>
                                     <div class="text-xs text-theme-2">Software Engineer</div>
@@ -248,16 +249,17 @@
                     <!-- END: Account Menu -->
                 </div>
                 <!-- END: Top Bar -->
-                
+
                 @yield('content')
 
             </div>
-            <!-- END: Content -->
         </div>
-        <script src="{{ asset('dist/js/app.js') }}"></script>
+        <!-- BEGIN: JS Assets-->
         <script src="{{ asset('js/jquery/dist/jquery.js') }}"></script>
+        <script src="{{ asset('js/app.js') }}"></script>
+        <!-- END: JS Assets-->
+
         @yield('lib-script')
-        @yield('page-script')
         @yield('line-script')
     </body>
 </html>

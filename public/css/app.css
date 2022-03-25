@@ -5945,9 +5945,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .col-span-8 {
   grid-column: span 8 / span 8;
 }
-.m-1 {
-  margin: 0.25rem;
-}
 .my-6 {
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
@@ -5972,9 +5969,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-left: auto;
   margin-right: auto;
 }
-.mt-8 {
-  margin-top: 2rem;
-}
 .mr-5 {
   margin-right: 1.25rem;
 }
@@ -5998,6 +5992,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .mt-1 {
   margin-top: 0.25rem;
+}
+.mt-8 {
+  margin-top: 2rem;
 }
 .ml-auto {
   margin-left: auto;
@@ -6070,6 +6067,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .block {
   display: block;
+}
+.inline {
+  display: inline;
 }
 .flex {
   display: flex;
@@ -6219,6 +6219,20 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .transform {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+@-webkit-keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.animate-spin {
+  -webkit-animation: spin 1s linear infinite;
+          animation: spin 1s linear infinite;
 }
 .cursor-pointer {
   cursor: pointer;
@@ -6420,6 +6434,9 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-bg-opacity: 1;
   background-color: rgb(156 163 175 / var(--tw-bg-opacity));
 }
+.fill-\[\#ff6f1a\] {
+  fill: #ff6f1a;
+}
 .p-5 {
   padding: 1.25rem;
 }
@@ -6440,10 +6457,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-top: 1.25rem;
   padding-bottom: 1.25rem;
 }
-.py-1 {
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
-}
 .px-4 {
   padding-left: 1rem;
   padding-right: 1rem;
@@ -6451,6 +6464,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 .py-4 {
   padding-top: 1rem;
   padding-bottom: 1rem;
+}
+.py-1 {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
 }
 .px-2 {
   padding-left: 0.5rem;
@@ -6564,11 +6581,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .leading-8 {
   line-height: 2rem;
 }
-.leading-relaxed {
-  line-height: 1.625;
-}
 .leading-7 {
   line-height: 1.75rem;
+}
+.leading-relaxed {
+  line-height: 1.625;
 }
 .tracking-wider {
   letter-spacing: 0.05em;
@@ -9198,29 +9215,9 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgb(229 231 235 / var(--tw-bg-opacity));
 }
 @media (prefers-color-scheme: dark) {
-  .dark\:border-gray-700 {
-    --tw-border-opacity: 1;
-    border-color: rgb(55 65 81 / var(--tw-border-opacity));
-  }
   .dark\:bg-gray-900 {
     --tw-bg-opacity: 1;
     background-color: rgb(17 24 39 / var(--tw-bg-opacity));
-  }
-  .dark\:bg-gray-800 {
-    --tw-bg-opacity: 1;
-    background-color: rgb(31 41 55 / var(--tw-bg-opacity));
-  }
-  .dark\:text-gray-500 {
-    --tw-text-opacity: 1;
-    color: rgb(107 114 128 / var(--tw-text-opacity));
-  }
-  .dark\:text-white {
-    --tw-text-opacity: 1;
-    color: rgb(255 255 255 / var(--tw-text-opacity));
-  }
-  .dark\:text-gray-400 {
-    --tw-text-opacity: 1;
-    color: rgb(156 163 175 / var(--tw-text-opacity));
   }
 }
 @media (min-width: 640px) {
@@ -9285,9 +9282,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   .sm\:h-24 {
     height: 6rem;
   }
-  .sm\:h-20 {
-    height: 5rem;
-  }
   .sm\:w-24 {
     width: 6rem;
   }
@@ -9312,14 +9306,8 @@ Ensure the default browser behavior of the `hidden` attribute.
   .sm\:justify-start {
     justify-content: flex-start;
   }
-  .sm\:justify-between {
-    justify-content: space-between;
-  }
   .sm\:whitespace-normal {
     white-space: normal;
-  }
-  .sm\:rounded-lg {
-    border-radius: 0.5rem;
   }
   .sm\:py-3 {
     padding-top: 0.75rem;
@@ -9339,9 +9327,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   .sm\:text-left {
     text-align: left;
   }
-  .sm\:text-right {
-    text-align: right;
-  }
 }
 @media (min-width: 768px) {
   .md\:col-span-6 {
@@ -9352,15 +9337,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   }
   .md\:hidden {
     display: none;
-  }
-  .md\:grid-cols-2 {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-  .md\:border-t-0 {
-    border-top-width: 0px;
-  }
-  .md\:border-l {
-    border-left-width: 1px;
   }
 }
 @media (min-width: 1024px) {

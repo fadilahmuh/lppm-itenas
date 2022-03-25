@@ -10,7 +10,7 @@
 </div>  
 
 <div class="grid grid-cols-12 gap-6">
-
+    <!-- BEGIN: Profile Menu -->
     <div class="col-span-12 lg:col-span-4 xxl:col-span-3 flex lg:block flex-col-reverse">
         <div class="intro-y box mt-5">
             <div class="flex flex-1 p-5 items-center justify-center lg:justify-start">
@@ -23,9 +23,9 @@
                 </div>
             </div>
         </div>
-        
     </div>
-    
+
+    <!-- END: Profile Menu -->
     <div class="col-span-12 lg:col-span-8 xxl:col-span-9">
         <!-- BEGIN: Daily Sales -->
         <div class="intro-y box lg:mt-5">
@@ -36,62 +36,32 @@
             </div>
         </div>
         <div class="flex flex-row gap-5 mb-5 mt-3 justify-center">
-            <div class="basis-1/4 intro-x">
-                <div class="report-box zoom-in tooltip" data-tooltip-content="#penelitian-tooltip">
-                    <div class="box p-5 ">
-                        <div class="grid grid-cols-12 items-center">
-                            <div class="col-span-12">
-                                <div class="text-3xl text-center font-bold leading-8 mt-2">2</div>
-                                <div class="text-base text-center text-gray-600 mt-1">Penelitian</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="tooltip-content">
-                    <div id="penelitian-tooltip" class="relative flex items-center py-1">
-                        <div class="m-1">
-                            <div class="font-medium leading-relaxed">1 Ketua Penelitian</div>
-                            <div class="font-medium leading-relaxed">1 Anggota Penelitian</div>
+            <div class="basis-1/4 report-box zoom-in tooltip" data-tooltip-content="#penelitian-tooltip">
+                <div class="box p-5 ">
+                    <div class="grid grid-cols-12 items-center">
+                        <div class="col-span-12">
+                            <div class="text-3xl text-center font-bold leading-8 mt-2">2</div>
+                            <div class="text-base text-center text-gray-600 mt-1">Penelitian</div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="basis-1/4 intro-x">
-                <div class="report-box zoom-in tooltip" data-tooltip-content="#pkm-tooltip">
-                    <div class="box p-5 ">
-                        <div class="grid grid-cols-12 items-center">
-                            <div class="col-span-12">
-                                <div class="text-3xl text-center font-bold leading-8 mt-2">3</div>
-                                <div class="text-base text-center text-gray-600 mt-1">PKM</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="tooltip-content">
-                    <div id="pkm-tooltip" class="relative flex items-center py-1">
-                        <div class="m-1">
-                            <div class="font-medium leading-relaxed">1 Ketua PKM</div>
-                            <div class="font-medium leading-relaxed">2 Anggota PKM</div>
+            <div class="basis-1/4 report-box zoom-in tooltip" data-tooltip-content="#pkm-tooltip">
+                <div class="box p-5 ">
+                    <div class="grid grid-cols-12 items-center">
+                        <div class="col-span-12">
+                            <div class="text-3xl text-center font-bold leading-8 mt-2">3</div>
+                            <div class="text-base text-center text-gray-600 mt-1">PKM</div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="basis-1/4 intro-x">
-                <div class="report-box zoom-in tooltip" data-tooltip-content="#haki-tooltip">
-                    <div class="box p-5 ">
-                        <div class="grid grid-cols-12 items-center">
-                            <div class="col-span-12">
-                                <div class="text-3xl text-center font-bold leading-8 mt-2">2</div>
-                                <div class="text-base text-center text-gray-600 mt-1">HAKI</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="tooltip-content">
-                    <div id="haki-tooltip" class="relative flex items-center py-1">
-                        <div class="m-1">
-                            <div class="font-medium leading-relaxed">1 Ketua Penelitian</div>
-                            <div class="font-medium leading-relaxed">1 Anggota Penelitian</div>
+            <div class="basis-1/4 report-box zoom-in tooltip" data-tooltip-content="#haki-tooltip">
+                <div class="box p-5 ">
+                    <div class="grid grid-cols-12 items-center">
+                        <div class="col-span-12">
+                            <div class="text-3xl text-center font-bold leading-8 mt-2">2</div>
+                            <div class="text-base text-center text-gray-600 mt-1">HAKI</div>
                         </div>
                     </div>
                 </div>
@@ -119,7 +89,7 @@
                 </div>
             </div>
         </div>
-        <!-- END: Daily Sales -->
+
         <div class="intro-y box mt-5">
             <div class="flex items-center px-5 py-5 sm:py-3 border-b border-gray-200">
                 <h2 class="font-medium text-base mr-auto">
@@ -144,8 +114,6 @@
                 <a class="button w-20 text-white bg-theme-1 shadow-md ml-auto">Edit</a>
             </div>
         </div>
-      
     </div>
 </div>
-
 @endsection

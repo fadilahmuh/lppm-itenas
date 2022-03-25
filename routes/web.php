@@ -51,7 +51,7 @@ Route::get('/form-pkm', function(Request $request) {
 
         return response()->json([
             'form' =>  $form
-        ]);  
+        ]);   
     }
 })->name('pkm');
 

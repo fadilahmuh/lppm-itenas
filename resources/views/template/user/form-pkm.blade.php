@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="{{ asset('js/dropify/dist/css/dropify.css') }}" />
 
 <div class="intro-y box form">  
     <div class="p-5" id="input">
@@ -87,7 +86,6 @@
      </div>
 </div>
 
-<script src="{{ asset('js/dropify/dist/js/dropify.js') }}"></script>
 <script>
     $('.dropify').dropify({
         messages: {
