@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\MainController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,65 +16,22 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Auth::routes();
+
+Route::middleware('auth')->group(function() {
+    Route::get('/', [MainController::class, 'index'])->name('base');
+    Route::get('/input', [MainController::class, 'input'])->name('input');
+    
+    Route::middleware('role:dosen')->group(function () {
+        Route::get('/profil', [MainController::class, 'profil'])->name('profil');
+    });
+
+    // json
+    Route::get('/form-penelitian', [MainController::class, 'input_penelitian'])->name('penelitian');
+    Route::get('/form-pkm', [MainController::class, 'input_pkm'])->name('pkm');
+    Route::get('/form-isentif', [MainController::class, 'input_insentif'])->name('insentif');
+    Route::get('/form-haki', [MainController::class, 'input_haki'])->name('haki');
 });
 
-Route::get('/dashboard', function () {
-    $title = 'Dashboard';
-    return view('index', compact('title'));
-});
+// Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/input', function () {
-    $title = 'Input Data Baru';
-    return view('inputUser', compact('title'));
-});
-
-Route::get('/profil', function () {
-    $title = 'Profil';
-    return view('profil', compact('title'));
-});
-
-Route::get('/form-penelitian', function(Request $request) {
-    if ($request->ajax()) {
-
-        $form = view('template.user.form-penelitian')->render();
-
-        return response()->json([
-            'form' =>  $form
-        ]);  
-    }
-})->name('penelitian');
-
-Route::get('/form-pkm', function(Request $request) {
-    if ($request->ajax()) {
-
-        $form = view('template.user.form-pkm')->render();
-
-        return response()->json([
-            'form' =>  $form
-        ]);   
-    }
-})->name('pkm');
-
-Route::get('/form-isentif', function(Request $request) {
-    if ($request->ajax()) {
-
-        $form = view('template.user.form-insentif')->render();
-
-        return response()->json([
-            'form' =>  $form
-        ]);  
-    }
-})->name('insentif');
-
-Route::get('/form-haki', function(Request $request) {
-    if ($request->ajax()) {
-
-        $form = view('template.user.form-haki')->render();
-
-        return response()->json([
-            'form' =>  $form
-        ]);  
-    }
-})->name('haki');

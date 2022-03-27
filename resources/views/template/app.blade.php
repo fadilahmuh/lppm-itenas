@@ -1,146 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-    <!-- BEGIN: Head -->
     <head>
         <meta charset="utf-8">
         <link href="dist/images/logo.svg" rel="shortcut icon">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="Midone admin is super flexible, powerful, clean & modern responsive tailwind admin template with unlimited possibilities.">
-        <meta name="keywords" content="admin template, Midone admin template, dashboard template, flat admin template, responsive admin template, web app">
-        <meta name="author" content="LEFT4CODE">
+        <meta name="author" content="LP2M ITENAS">
+        <meta name="decription" content="E-Office LP2M ITENAS">
+        <meta name="decription" content="Sistem Informasi Lembaga Penelitian dan Pengabdian kepada Masyarakat">
         <title>@isset($title){{$title}} -@endisset LP2M ITENAS</title>
-        <!-- BEGIN: CSS Assets-->
+
         <link rel="stylesheet" href="{{ asset('css/app.css') }} " />
         <link rel="stylesheet" href="{{ asset('dist/css/fontawesome/css/all.min.css') }}">
         @yield('lib-css')
-        <!-- END: CSS Assets-->
+
     </head>
-    <!-- END: Head -->
+
     <body class="app">
-        <!-- BEGIN: Mobile Menu -->
-        <div class="mobile-menu md:hidden">
-            <div class="mobile-menu-bar">
-                <a href="" class="flex mr-auto">
-                    <img alt="LP2M ITENAS" class="w-6" src="{{ asset('logo-itenas.svg') }}">
-                </a>
-                <a href="javascript:;" id="mobile-menu-toggler"> <i data-feather="bar-chart-2" class="w-8 h-8 text-white transform -rotate-90"></i> </a>
-            </div>
-            <ul class="border-t border-theme-2 py-5 hidden">
-                <li>
-                    <a href="index.html" class="menu menu--active">
-                        <div class="menu__icon"> <i data-feather="home"></i> </div>
-                        <div class="menu__title"> Dashboard </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="javascript:;" class="menu">
-                        <div class="menu__icon"> <i data-feather="book"></i> </div>
-                        <div class="menu__title"> List Data Hibah <i data-feather="chevron-down" class="menu__sub-icon"></i> </div>
-                    </a>
-                    <ul class="">
-                        <li>
-                            <a href="index.html" class="menu">
-                                <div class="menu__icon"> <i data-feather="activity"></i> </div>
-                                <div class="menu__title"> Penelitian </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="simple-menu-dashboard.html" class="menu">
-                                <div class="menu__icon"> <i data-feather="activity"></i> </div>
-                                <div class="menu__title"> PKM </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="top-menu-dashboard.html" class="menu">
-                                <div class="menu__icon"> <i data-feather="activity"></i> </div>
-                                <div class="menu__title"> Insentif </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="top-menu-dashboard.html" class="menu">
-                                <div class="menu__icon"> <i data-feather="activity"></i> </div>
-                                <div class="menu__title"> Haki </div>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="side-menu-inbox.html" class="menu">
-                        <div class="menu__icon"> <i data-feather="inbox"></i> </div>
-                        <div class="menu__title"> Input data Hibah </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="side-menu-file-manager.html" class="menu">
-                        <div class="menu__icon"> <i data-feather="hard-drive"></i> </div>
-                        <div class="menu__title"> Riwayat Input Data </div>
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <!-- END: Mobile Menu -->
+
+       @include('template.mobile-menu')
+
         <div class="flex">
-            <!-- BEGIN: Side Menu -->
-            <nav class="side-nav">
-                <a href="" class="intro-x flex items-center pl-5 pt-4">
-                    <img alt="LP2M" class="w-6" src="{{asset('logo-itenas.svg') }}">
-                    <span class="hidden xl:block text-black font-medium text-lg ml-3"><span class="font-bold text-white">LP2M </span>itenas</span>
-                </a>
-                <div class="side-nav__devider my-6"></div>
-                <ul>
-                    <li>
-                        <a href="index.html" class="side-menu side-menu--active">
-                            <div class="side-menu__icon"> <i data-feather="home"></i> </div>
-                            <div class="side-menu__title"> Dashboard </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="javascript:;" class="side-menu">
-                            <div class="side-menu__icon"> <i data-feather="book"></i> </div>
-                            <div class="side-menu__title"> List Data Hibah <i data-feather="chevron-down" class="side-menu__sub-icon"></i> </div>
-                        </a>
-                        <ul class="">
-                            <li>
-                                <a href="index.html" class="side-menu">
-                                    <div class="side-menu__icon"> <i class="fa-solid fa-microscope"></i> </div>
-                                    <div class="side-menu__title"> Penelitian </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="simple-menu-dashboard.html" class="side-menu">
-                                    <div class="side-menu__icon"> <i class="fa-solid fa-calendar-days"></i> </div>
-                                    <div class="side-menu__title"> PKM </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="top-menu-dashboard.html" class="side-menu">
-                                    <div class="side-menu__icon"> <i class="fa-solid fa-receipt"></i> </div>
-                                    <div class="side-menu__title"> Insentif </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="top-menu-dashboard.html" class="side-menu">
-                                    <div class="side-menu__icon"> <i class="fa-solid fa-file-invoice"></i> </div>
-                                    <div class="side-menu__title"> Haki </div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="side-menu-inbox.html" class="side-menu">
-                            <div class="side-menu__icon"> <i data-feather="inbox"></i> </div>
-                            <div class="side-menu__title"> Input data Hibah </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="side-menu-file-manager.html" class="side-menu">
-                            <div class="side-menu__icon"> <i data-feather="hard-drive"></i> </div>
-                            <div class="side-menu__title"> Riwayat Input Data </div>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-            <!-- END: Side Menu -->
+
+           @include('template.side-menu')
+
+
             <!-- BEGIN: Content -->
             <div class="content">
                 <!-- BEGIN: Top Bar -->
@@ -161,7 +44,7 @@
                                     </div>
                                     <div class="ml-2 overflow-hidden">
                                         <div class="flex items-center">
-                                            <a href="javascript:;" class="font-medium truncate mr-5">Angelina Jolie</a> 
+                                            <a href="javascript:;" class="font-medium truncate mr-5">{{Auth::user()->nama}}</a> 
                                             <div class="text-xs text-gray-500 ml-auto whitespace-no-wrap">05:09 AM</div>
                                         </div>
                                         <div class="w-full truncate text-gray-600">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 20</div>
@@ -226,22 +109,25 @@
                     <!-- BEGIN: Account Menu -->
                     <div class="intro-x dropdown w-8 h-8 relative">
                         <div class="dropdown-toggle w-8 h-8 rounded-full overflow-hidden shadow-lg image-fit zoom-in">
-                            <img alt="Midone Tailwind HTML Admin Template" src="dist/images/profile-12.jpg">
+                            <img alt="Profile Picture" src="{{ asset('dist/images/'.Auth::user()->pict) }}">
                         </div>
                         <div class="dropdown-box mt-10 absolute w-56 top-0 right-0 z-20">
                             <div class="dropdown-box__content bg-theme-1 box text-white">
                                 <div class="p-4 border-b border-theme-2">
-                                    <div class="font-medium">Angelina Jolie</div>
-                                    <div class="text-xs text-theme-2">Software Engineer</div>
+                                    <div class="font-medium">{{Auth::user()->nama}}</div>
+                                    <div class="text-xs text-theme-2">{{ Str::ucfirst(preg_replace('/[^\p{L}\p{N}\s]/u', '', Auth::user()->getRoleNames()))}}</div>
                                 </div>
                                 <div class="p-2">
-                                    <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 rounded-md"> <i data-feather="user" class="w-4 h-4 mr-2"></i> Profile </a>
-                                    <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 rounded-md"> <i data-feather="edit" class="w-4 h-4 mr-2"></i> Add Account </a>
-                                    <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 rounded-md"> <i data-feather="lock" class="w-4 h-4 mr-2"></i> Reset Password </a>
+                                    <a href="{{ route('profil') }}" class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 rounded-md"> <i data-feather="user" class="w-4 h-4 mr-2"></i> Profile </a>
                                     <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 rounded-md"> <i data-feather="help-circle" class="w-4 h-4 mr-2"></i> Help </a>
                                 </div>
                                 <div class="p-2 border-t border-theme-2">
-                                    <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 rounded-md"> <i data-feather="toggle-right" class="w-4 h-4 mr-2"></i> Logout </a>
+                                    <a href="{{ route('logout') }}" class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 rounded-md" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> 
+                                        <i data-feather="toggle-right" class="w-4 h-4 mr-2"></i> Logout 
+                                    </a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
+                                        {{ csrf_field() }}
+                                    </form>
                                 </div>
                             </div>
                         </div>
