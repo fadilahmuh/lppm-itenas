@@ -8,7 +8,7 @@
     &:before {
         content: "";
         margin-left: -48%;
-        background-image: url(../images/bg-login-page.svg);
+        background-image: url(../dist/images/bg-login-page.svg);
         background-repeat: no-repeat;
         background-size: auto 100%;
         background-position: right;
@@ -24,4 +24,10 @@
             @apply min-w-full;
         }
     }
+}
+
+.body-bg {
+    background-image: url(../dist/images/itenas_baru_cenah.jpg);
+    height: 100%;
+    @apply bg-no-repeat bg-cover bg-center;
 }
