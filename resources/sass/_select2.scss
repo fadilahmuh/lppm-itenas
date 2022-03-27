@@ -27,7 +27,7 @@
     .select2-selection {
         &.select2-selection--single {
             height: 39px;
-            @apply border-gray-300;
+            @apply border-gray-300 items-center;
         }
         .select2-selection__rendered {
             @apply h-full flex items-center pl-3 pr-8;

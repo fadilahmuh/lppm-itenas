@@ -1,4 +1,3 @@
-
 <div class="intro-y box form">  
     <div class="p-5" id="input">
         <div>
@@ -7,11 +6,24 @@
         </div>
         <div class="mt-3">
             <label>Anggota Dosen</label>
-            <input type="text" class="input w-full border mt-2" placeholder="Anggota Dosen">
+            {{-- <input type="text" class="input w-full border mt-2" placeholder="Anggota Dosen"> --}}
+            <select name="anggota-dosen" class="select2 input w-full border mt-2 select-dosen" data-placeholder="Pilih anggota dosen">
+                <option value="-1">Pilih anggota dosen</option>
+                <option>Jasman Pardede</option>
+                <option>Winarno Sugeng</option>
+                <option>Galih Azhari</option>
+            </select>
         </div>
         <div class="mt-3">
             <label>Anggota Mahasiswa</label>
-            <input type="text" class="input w-full border mt-2" placeholder="Kosongkan jika tida ada">
+            <select name="anggota-dosen" class="select2 input w-full border mt-2 select-mhs" multiple style="width: 100%" data-placeholder="Pilih anggota mahasiswa">
+                <option>152018002 - Fannie M Fadilah S</option>
+                <option>152018019 - Andika Fauzi</option>
+                <option>152018033 - Gilang Rama</option>
+                <option>152018002 - Fannie M Fadilah S</option>
+                <option>152018019 - Andika Fauzi</option>
+                <option>152018033 - Gilang Rama</option>
+            </select>
         </div>
         <div class="mt-3">
             <label>Nama Hibah</label>
@@ -25,31 +37,33 @@
             <div class="grid grid-cols-12 gap-2">
                 <div class="col-span-4">
                     <label for="">Tanggal Mulai</label>
-                    <div class="relative w-full mt-2">
+                    <div class="relative mt-2">
                         <div class="absolute rounded-l w-10 h-full flex items-center justify-center bg-gray-100 border text-gray-600"><i class="fa-solid fa-calendar"></i></div>
-                        <input type="text" class="datepicker input pl-12 border pr-0">
+                        <input type="text" class="input datepicker pl-12 w-full border col-span-4" placeholder="Pilih Tanggal">
                     </div>
                 </div>
                 <div class="col-span-4">
                     <label for="">Tanggal Selesai</label>
-                    <div class="relative w-full mt-2">
+                    <div class="relative mt-2">
                         <div class="absolute rounded-l w-10 h-full flex items-center justify-center bg-gray-100 border text-gray-600"><i class="fa-solid fa-calendar"></i></div>
-                        <input type="text" class="datepicker input pl-12 border pr-0">
+                        <input type="text" class="input datepicker pl-12 w-full border col-span-4" placeholder="Pilih Tanggal">
                     </div>
                 </div>
                 <div class="col-span-4">
                     <label for="">Tahun</label>
-                    <div class="mt-2"> <select class="input border mr-2 w-full">
-                        <option>2019</option>
-                        <option>2020</option>
-                        <option>2021</option>
-                    </select> </div>
+                    <div class="relative mt-2">
+                        <div class="absolute rounded-l w-10 h-full flex items-center justify-center bg-gray-100 border text-gray-600"><i class="fa-solid fa-calendar-week"></i></div>
+                        <input type="text" class="yearpicker input pl-12 w-full border col-span-4" value="" placeholder="Pilih Tahun">
+                    </div>
                 </div>
             </div>
         </div>
         <div class="mt-3">
             <label>Jumlah</label>
-            <input type="text" class="input w-full border mt-2" placeholder="Jumlah pengajuan dana">
+            <div class="relative mt-2">
+                <div class="absolute rounded-l w-10 h-full flex items-center justify-center bg-gray-100 border text-gray-600">Rp. </div>
+                <input type="number" class="input pl-12 w-full border col-span-4" value="" placeholder="Jumlah Pengajuan dana">
+            </div>
         </div>
 
         <div class="mt-3">
@@ -85,18 +99,18 @@
         </div>
         <div class="mt-3">
             <label>Haki</label>
-            <input type="text" class="input w-full border mt-2" placeholder="Jumlah pengajuan dana">
+            <input type="text" class="input w-full border mt-2" placeholder="Dokumen HAKI yang sudah diunggah">
         </div>
      </div>
 </div>
 
 <script>
-    $('.dropify').dropify({
-        messages: {
-        'default': 'Tarik dan lepaskan file atau klik disini',
-        'replace': 'Tarik dan lepaskan file atau klik untuk ganti',
-        'remove':  'Hapus',
-        'error':   'Ooops, terjadi kesalahan.'
-        }
-    });
+    // $('.dropify').dropify({
+    //     messages: {
+    //     'default': 'Tarik dan lepaskan file atau klik disini',
+    //     'replace': 'Tarik dan lepaskan file atau klik untuk ganti',
+    //     'remove':  'Hapus',
+    //     'error':   'Ooops, terjadi kesalahan.'
+    //     }
+    // });
 </script>

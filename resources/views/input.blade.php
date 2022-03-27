@@ -1,8 +1,11 @@
 @extends('template.app')
 
 @section('lib-css')
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" rel="stylesheet">
+{{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" rel="stylesheet"> --}}
 <link rel="stylesheet" href="{{ asset('js/dropify/dist/css/dropify.css') }}" />
+<link rel="stylesheet" href="{{ asset('js/select2/dist/css/select2.css') }}" />
+{{-- <link rel="stylesheet" href="{{ asset('js/yearpicker/dist/yearpicker.css') }}" /> --}}
+<link rel="stylesheet" href="{{ asset('js/daterangepicker/daterangepicker.css') }}" />
 @endsection
 
 @section('content')
@@ -49,55 +52,22 @@
         <div class="intro-y box p-5">
             <div>
                 <label>Ketua</label>
-                <div class="dropdown relative mt-2">
-                    <button class="dropdown-toggle button w-full border flex items-center">
-                        <div class="w-6 h-6 absolute image-fit mr-3">
-                            <img class="rounded" alt="Midone Tailwind HTML Admin Template" src="dist/images/profile-2.jpg">
-                        </div>
-                        <div class="ml-8 pl-1 truncate">John Travolta</div>
-                        <i class="w-4 h-4 ml-auto" data-feather="chevron-down"></i> 
-                    </button>
-                    <div class="dropdown-box mt-10 absolute w-full top-0 right-0 z-20">
-                        <div class="dropdown-box__content box p-2">
-                            <a href="javascript:;" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white hover:bg-gray-200 rounded-md">
-                                <div class="w-6 h-6 absolute image-fit mr-3">
-                                    <img class="rounded" alt="Midone Tailwind HTML Admin Template" src="dist/images/profile-2.jpg">
-                                </div>
-                                <div class="ml-8 pl-1">John Travolta</div>
-                            </a>
-                            <a href="javascript:;" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white hover:bg-gray-200 rounded-md">
-                                <div class="w-6 h-6 absolute image-fit mr-3">
-                                    <img class="rounded" alt="Midone Tailwind HTML Admin Template" src="dist/images/profile-1.jpg">
-                                </div>
-                                <div class="ml-8 pl-1">Tom Cruise</div>
-                            </a>
-                            <a href="javascript:;" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white hover:bg-gray-200 rounded-md">
-                                <div class="w-6 h-6 absolute image-fit mr-3">
-                                    <img class="rounded" alt="Midone Tailwind HTML Admin Template" src="dist/images/profile-15.jpg">
-                                </div>
-                                <div class="ml-8 pl-1">Al Pacino</div>
-                            </a>
-                            <a href="javascript:;" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white hover:bg-gray-200 rounded-md">
-                                <div class="w-6 h-6 absolute image-fit mr-3">
-                                    <img class="rounded" alt="Midone Tailwind HTML Admin Template" src="dist/images/profile-11.jpg">
-                                </div>
-                                <div class="ml-8 pl-1">Leonardo DiCaprio</div>
-                            </a>
-                            <a href="javascript:;" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white hover:bg-gray-200 rounded-md">
-                                <div class="w-6 h-6 absolute image-fit mr-3">
-                                    <img class="rounded" alt="Midone Tailwind HTML Admin Template" src="dist/images/profile-2.jpg">
-                                </div>
-                                <div class="ml-8 pl-1">Kevin Spacey</div>
-                            </a>
-                        </div>
+                <div class="box flex mt-2 items-center">
+                    <div class="w-10 h-10 flex-none image-fit relative mr-3">
+                        <img alt="Profile Picture" class="rounded-full" src="{{ asset('dist/images/'.Auth::user()->pict) }}">
+                    </div>
+                    <div class="w-full relative text-gray-700">
+                        <input type="text" class="input w-full border bg-gray-100 cursor-not-allowed" value="{{Auth::user()->nama}}" disabled="">
                     </div>
                 </div>
             </div>
-            <div class="mt-3">
+            <div class="mt-4">
                 <label>Tanggal Dibuat</label>
-                <input data-timepicker="true" class="datepicker input w-full border mt-2">
+                <div class="relative mt-2">
+                    <div class="absolute rounded-l w-10 h-full flex items-center justify-center bg-gray-100 border text-gray-600"><i class="fa-solid fa-calendar"></i></div>
+                    <input type="text" class="input pl-12 w-full border col-span-4 bg-gray-100" disabled value="{{date('d/m/Y', time())}}">
+                </div>
             </div>
-            
         </div>
     </div>
 
@@ -107,7 +77,10 @@
 
 @section('lib-script')
 <script src="{{ asset('js/dropify/dist/js/dropify.js') }}"></script>
-
+<script src="{{ asset('js/select2/dist/js/select2.js') }}"></script>
+<script src="{{ asset('js/yearpicker/dist/yearpicker.js') }}"></script>
+<script src="{{ asset('js/daterangepicker/moment.min.js') }}"></script>
+<script src="{{ asset('js/daterangepicker/daterangepicker.js') }}"></script>
 @endsection
 
 @section('line-script')
@@ -120,6 +93,34 @@
         'error':   'Ooops, terjadi kesalahan.'
         }
     });
+
+    $('.select-dosen').select2({
+        placeholder: {
+            id: '-1', // the value of the option
+            text: 'Pilih anggota dosen'
+        },
+        width: "100%",
+    });
+
+    $('.select-mhs').select2({
+        placeholder: 'Pilih Anggota Mahasiswa',
+    });
+
+    $(".yearpicker").yearpicker({
+        startYear: 2000,
+        endYear: new Date().getFullYear()
+    });
+
+    $('.datepicker').daterangepicker({
+        singleDatePicker: true,
+        showDropdowns: true,
+        autoUpdateInput: true,
+        locale: {
+            cancelLabel: 'Hapus',
+            applyLabel: 'Terapkan',
+            format: 'DD/MM/YYYY'
+        }
+  });
 
     $(document).on("click", ".nav-form", function(e) {
         e.preventDefault();

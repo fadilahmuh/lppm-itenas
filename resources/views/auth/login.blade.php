@@ -34,13 +34,17 @@
                     <input type="text" id="nip" name="nip" value="{{ old('nip') }}" class="bg-gray-200 rounded w-full text-gray-700 focus:outline-none border-b-4 border-gray-300 focus:border-theme-4 transition duration-500 px-3 pb-3" placeholder="NIP atau email">
                 </div>
                 <label class="block text-gray-700 text-sm font-bold mb-2 ml-3" for="pin">PIN</label>
-                <div class="mb-8 pt-3 rounded bg-gray-200">
+                <div class="mb-4 pt-3 rounded bg-gray-200">
                     <input type="password" id="password" name="password" class="bg-gray-200 rounded w-full text-gray-700 focus:outline-none border-b-4 border-gray-300 focus:border-theme-4 transition duration-500 px-3 pb-3" >
                 </div>
                 {{-- <div class="flex justify-end">
                     <a href="#" class="text-sm text-theme-1 hover:underline mb-6">Forgot your password?</a>
                 </div> --}}
-                <button class="bg-theme-1 hover:bg-theme-4 text-white font-bold py-2 rounded shadow-lg hover:shadow-xl transition duration-200" type="submit">Sign In</button>
+                {{-- <div class="flex items-center text-gray-700 mb-6">
+                    <input name="remember" id="remember" type="checkbox" class="input border mr-2 border-zinc-500" id="vertical-remember-me" {{ old('remember') ? 'checked' : '' }}>
+                    <label class="cursor-pointer select-none" for="vertical-remember-me">Ingatkan Saya</label>
+                </div> --}}
+                <button class="bg-theme-1 mt-4 hover:bg-theme-4 text-white font-bold py-2 rounded shadow-lg hover:shadow-xl transition duration-200" type="submit">Sign In</button>
             </form>
         </section>
     </main>
