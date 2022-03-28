@@ -24,7 +24,12 @@ class MainController extends Controller
     public function input_penelitian(Request $request) {
         if ($request->ajax()) {
             $form = view('template.user.form-penelitian')->render();
-            return response()->json([
+
+            // return response()->json([
+            //     'form' =>  $form
+            // ]);  
+
+            return response([
                 'form' =>  $form
             ]);  
         }

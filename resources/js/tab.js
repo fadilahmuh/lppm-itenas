@@ -16,4 +16,13 @@
             .removeClass('active')
         $(elementId).addClass('active')
     })
+
+    $('body').on('click', 'button[data-toggle="tab"]', function(key, el) {
+        // Set active tab nav
+        $(this).closest('.nav-tabs')
+            .find('button[data-toggle="tab"]')
+            .removeClass('active')
+        $(this).addClass('active')
+
+    })
 })($)

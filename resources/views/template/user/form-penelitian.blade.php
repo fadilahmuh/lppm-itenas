@@ -1,4 +1,7 @@
+
 <div class="intro-y box form">  
+<form action="" method="POST" enctype="multipart/form-data">
+@csrf
     <div class="p-5" id="input">
         <div>
             <label>Judul Penelitian</label>
@@ -71,27 +74,27 @@
         </div>
         <div class="border border-gray-200 rounded-md p-5 mt-3">
             <div class="grid grid-cols-12 gap-2">
-                <div class="col-span-4 mt-2">
+                <div class="col-span-6 md:col-span-4 lg:col-span-4 mt-2">
                     <label for="">Proposal</label>
                     <input name="proposal" type="file" class="dropify" data-default-file="" />  
                 </div>
-                <div class="col-span-4 mt-2">
+                <div class="col-span-6 md:col-span-4 lg:col-span-4 mt-2">
                     <label for="">Laporan Tengah</label>
                     <input name="lap_tengah" type="file" class="dropify" data-default-file="" />  
                 </div>
-                <div class="col-span-4 mt-2">
+                <div class="col-span-6 md:col-span-4 lg:col-span-4 mt-2">
                     <label for="">Laporan Keuangan Tengah</label>
                     <input name="lap_uang_tengah" type="file" class="dropify" data-default-file="" />  
                 </div>
-                <div class="col-span-4 mt-2">
+                <div class="col-span-6 md:col-span-4 lg:col-span-4 mt-2">
                     <label for="">Laporan Akhir</label>
                     <input name="lap_akhir" type="file" class="dropify" data-default-file="" />  
                 </div>
-                <div class="col-span-4 mt-2">
+                <div class="col-span-6 md:col-span-4 lg:col-span-4 mt-2">
                     <label for="">Laporan Keuangan Akhir</label>
                     <input name="lap_uang_akhir" type="file" class="dropify" data-default-file="" />  
                 </div>
-                <div class="col-span-4 mt-2">
+                <div class="col-span-6 md:col-span-4 lg:col-span-4 mt-2">
                     <label for="">Publikasi Paper</label>
                     <input name="paper" type="file" class="dropify" data-default-file="" />  
                 </div>
@@ -102,15 +105,44 @@
             <input type="text" class="input w-full border mt-2" placeholder="Dokumen HAKI yang sudah diunggah">
         </div>
      </div>
+</form>
 </div>
 
 <script>
-    // $('.dropify').dropify({
-    //     messages: {
-    //     'default': 'Tarik dan lepaskan file atau klik disini',
-    //     'replace': 'Tarik dan lepaskan file atau klik untuk ganti',
-    //     'remove':  'Hapus',
-    //     'error':   'Ooops, terjadi kesalahan.'
-    //     }
-    // });
+    $('.dropify').dropify({
+        messages: {
+        'default': 'Tarik dan lepaskan file atau klik disini',
+        'replace': 'Tarik dan lepaskan file atau klik untuk ganti',
+        'remove':  'Hapus',
+        'error':   'Ooops, terjadi kesalahan.'
+        }
+    });
+
+    $('.select-dosen').select2({
+        placeholder: {
+            id: '-1',
+            text: 'Pilih anggota dosen'
+        },
+        width: "100%",
+    });
+
+    $('.select-mhs').select2({
+        placeholder: 'Pilih Anggota Mahasiswa',
+    });
+
+    $(".yearpicker").yearpicker({
+        startYear: 2000,
+        endYear: new Date().getFullYear()
+    });
+
+    $('.datepicker').daterangepicker({
+        singleDatePicker: true,
+        showDropdowns: true,
+        autoUpdateInput: true,
+        locale: {
+            cancelLabel: 'Hapus',
+            applyLabel: 'Terapkan',
+            format: 'DD/MM/YYYY'
+        }
+  });
 </script>

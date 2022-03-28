@@ -1,11 +1,12 @@
 <div class="intro-y box form">  
+    <form action="" method="POST" enctype="multipart/form-data">
+    @csrf
     <div class="p-5" id="input">
-        <label class="mb-3">Insentif</label>
         <div>
             <label>Jenis Insentif</label>
             <input type="text" class="input w-full border mt-2" placeholder="Judul Penelitian">
         </div>
-        <div>
+        <div class="mt-3">
             <label>Judul Publikasi</label>
             <input type="text" class="input w-full border mt-2" placeholder="Judul Penelitian">
         </div>
@@ -31,6 +32,7 @@
             <input name="proposal" type="file" class="dropify" data-default-file="" />  
         </div>
      </div>
+    </form>
 </div>
 
 <script>

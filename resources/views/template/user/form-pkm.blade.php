@@ -1,5 +1,7 @@
 
 <div class="intro-y box form">  
+    <form action="" method="POST" enctype="multipart/form-data">
+    @csrf
     <div class="p-5" id="input">
         <div>
             <label>Judul PKM</label>
@@ -84,6 +86,7 @@
             </div>
         </div>
      </div>
+    </form>
 </div>
 
 <script>

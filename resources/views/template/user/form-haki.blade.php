@@ -1,6 +1,5 @@
 <div class="intro-y box form">  
     <div class="p-5" id="input">
-        <label class="mb-3">HAKI</label>
         <div>
             <label>Nama HAKI</label>
             <input type="text" class="input w-full border mt-2" placeholder="Judul Penelitian">

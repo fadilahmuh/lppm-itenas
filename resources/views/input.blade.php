@@ -23,16 +23,16 @@
         <div class="intro-y pr-1 mb-5">
             <div class="box p-2">
                 <div class="pos__tabs nav-tabs justify-center flex"> 
-                    <a data-toggle="tab" data-target="#penelitian" href="{{ route('penelitian') }}" class="nav-form flex-1 py-2 rounded-md text-center active">Penelitian</a> 
-                    <a data-toggle="tab" data-target="#pkm" href="{{ route('pkm') }}" class="nav-form flex-1 py-2 rounded-md text-center">PKM</a> 
-                    <a data-toggle="tab" data-target="#insentif" href="{{ route('insentif') }}" class="nav-form flex-1 py-2 rounded-md text-center ">Insentif</a> 
-                    <a data-toggle="tab" data-target="#haki" href="{{ route('haki') }}" class="nav-form flex-1 py-2 rounded-md text-center ">HAKI</a> 
+                    <button data-toggle="tab" data-target="#penelitian" href="{{ route('penelitian') }}" class="nav-form flex-1 py-2 rounded-md text-center active">Penelitian</button> 
+                    <button data-toggle="tab" data-target="#pkm" href="{{ route('pkm') }}" class="nav-form flex-1 py-2 rounded-md text-center">PKM</button> 
+                    <button data-toggle="tab" data-target="#insentif" href="{{ route('insentif') }}" class="nav-form flex-1 py-2 rounded-md text-center ">Insentif</button> 
+                    <button data-toggle="tab" data-target="#haki" href="{{ route('haki') }}" class="nav-form flex-1 py-2 rounded-md text-center ">HAKI</button> 
                 </div>
             </div>
         </div>
 
 
-        <div id="wait" class="p-5 text-center" style="display: none">
+        <div id="wait" class="p-5 text-center">
             <div class="">
                 <svg role="status" class="inline mr-2 w-8 h-8 text-gray-400 animate-spin fill-[#ff6f1a]" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
@@ -43,7 +43,7 @@
  
 
         <div id="form-canvas">
-            @include('template.user.form-penelitian')
+            
         </div>
 
     </div>
@@ -69,6 +69,7 @@
                 </div>
             </div>
         </div>
+        <button class="save button w-full mt-5 text-white bg-theme-1 shadow-md disabled:bg-theme-4">Submit</button>
     </div>
 
 </div>
@@ -85,47 +86,27 @@
 
 @section('line-script')
 <script>
-    $('.dropify').dropify({
-        messages: {
-        'default': 'Tarik dan lepaskan file atau klik disini',
-        'replace': 'Tarik dan lepaskan file atau klik untuk ganti',
-        'remove':  'Hapus',
-        'error':   'Ooops, terjadi kesalahan.'
-        }
+    $( document ).ready(function() {
+        // console.log( "ready!" );
+        var url = $('button[data-target="#penelitian"]').attr('href');
+        $.ajax({
+            type: 'GET',
+            url: url,
+            dataType: "json",
+            success: function(response) {
+                $('#form-canvas').html(response.form);
+                $( "#wait" ).hide();
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+            }
+        });
     });
-
-    $('.select-dosen').select2({
-        placeholder: {
-            id: '-1', // the value of the option
-            text: 'Pilih anggota dosen'
-        },
-        width: "100%",
-    });
-
-    $('.select-mhs').select2({
-        placeholder: 'Pilih Anggota Mahasiswa',
-    });
-
-    $(".yearpicker").yearpicker({
-        startYear: 2000,
-        endYear: new Date().getFullYear()
-    });
-
-    $('.datepicker').daterangepicker({
-        singleDatePicker: true,
-        showDropdowns: true,
-        autoUpdateInput: true,
-        locale: {
-            cancelLabel: 'Hapus',
-            applyLabel: 'Terapkan',
-            format: 'DD/MM/YYYY'
-        }
-  });
 
     $(document).on("click", ".nav-form", function(e) {
         e.preventDefault();
         var url = $(this).attr('href');
-            $.ajax({
+        $.ajax({
             type: 'GET',
             url: url,
             dataType: "json",
@@ -141,7 +122,29 @@
                 alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
             }
         });
-  });
+    });
+
+    $('.save').click(function(event) {
+    var form =  $(".form" ).children('form');
+    $(this).prop('disabled', true);
+    $(this).html(`<svg role="status" class="inline mr-2 w-4 h-4 text-gray-400 animate-spin fill-white" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+                    <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="white"/>
+                </svg>`);
+    console.log(form);
+    event.preventDefault();
+    // swal({
+    //     title: `Simpan hasil edit ${bagian} ?`,          
+    //     icon: "warning",
+    //     buttons: true,
+    //     dangerMode: true,
+    // })
+    // .then((willDelete) => {
+    //   if (willDelete) {
+    //     form.submit();
+    //   }
+    // });
+    });
 
 </script>
 @endsection

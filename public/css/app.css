@@ -5641,6 +5641,12 @@ span.yearpicker-next:hover {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
+.pos .pos__tabs button.active {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 111 26 / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
 .pos .pos__ticket .pos__ticket__item-name {
   max-width: 50%;
 }
@@ -6395,6 +6401,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .w-16 {
   width: 4rem;
 }
+.w-32 {
+  width: 8rem;
+}
 .max-w-xl {
   max-width: 36rem;
 }
@@ -6746,6 +6755,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-bg-opacity: 1;
   background-color: rgb(107 114 128 / var(--tw-bg-opacity));
 }
+.bg-theme-4 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 140 72 / var(--tw-bg-opacity));
+}
 .bg-opacity-50 {
   --tw-bg-opacity: 0.5;
 }
@@ -6772,6 +6785,12 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .fill-\[\#ff6f1a\] {
   fill: #ff6f1a;
+}
+.fill-black {
+  fill: #000;
+}
+.fill-white {
+  fill: #fff;
 }
 .p-5 {
   padding: 1.25rem;
@@ -10038,6 +10057,17 @@ Ensure the default browser behavior of the `hidden` attribute.
   outline: 2px solid transparent;
   outline-offset: 2px;
 }
+.disabled\:bg-theme-1:disabled {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 111 26 / var(--tw-bg-opacity));
+}
+.disabled\:bg-theme-4:disabled {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 140 72 / var(--tw-bg-opacity));
+}
+.disabled\:opacity-75:disabled {
+  opacity: 0.75;
+}
 @media (prefers-color-scheme: dark) {
   .dark\:bg-gray-900 {
     --tw-bg-opacity: 1;
@@ -10321,6 +10351,9 @@ Ensure the default browser behavior of the `hidden` attribute.
   }
   .md\:col-span-3 {
     grid-column: span 3 / span 3;
+  }
+  .md\:col-span-4 {
+    grid-column: span 4 / span 4;
   }
   .md\:my-6 {
     margin-top: 1.5rem;
