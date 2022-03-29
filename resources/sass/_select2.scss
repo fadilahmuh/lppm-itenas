@@ -25,6 +25,8 @@
         }
     }
     .select2-selection {
+        @apply mt-2;
+
         &.select2-selection--single {
             height: 39px;
             @apply border-gray-300 items-center;

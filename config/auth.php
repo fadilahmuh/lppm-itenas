@@ -40,6 +40,19 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'api' => [
+            'driver' => 'token',
+            'provider' => 'users',
+            'hash' => false,
+        ],
+        'pegawai' => [
+            'driver' => 'session',
+            'provider' => 'pegawais',
+        ],
+        'dosen' => [
+            'driver' => 'session',
+            'provider' => 'dosens',
+        ],
     ],
 
     /*
@@ -65,10 +78,15 @@ return [
             'model' => App\Models\User::class,
         ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        'dosens' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Dosen::class,
+        ],
+
+        'pegawais' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Pegawai::class,
+        ],
     ],
 
     /*
@@ -92,6 +110,16 @@ return [
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,
+        ],
+        'pegawais' => [
+            'provider' => 'pegawais',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+        'dosens' => [
+            'provider' => 'dosens',
+            'table' => 'password_resets',
+            'expire' => 60,
         ],
     ],
 

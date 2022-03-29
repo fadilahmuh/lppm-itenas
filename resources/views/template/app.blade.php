@@ -44,7 +44,11 @@
                                     </div>
                                     <div class="ml-2 overflow-hidden">
                                         <div class="flex items-center">
-                                            <a href="javascript:;" class="font-medium truncate mr-5">{{Auth::user()->nama}}</a> 
+                                            @if(Auth::guard('pegawai')->check())
+                                            <a href="javascript:;" class="font-medium truncate mr-5">{{ Auth::guard('pegawai')->user()->nama }}</a> 
+                                            @elseif(Auth::guard('dosen')->check())
+                                            <a href="javascript:;" class="font-medium truncate mr-5">{{ Auth::guard('dosen')->user()->nama }}</a> 
+                                            @endif
                                             <div class="text-xs text-gray-500 ml-auto whitespace-no-wrap">05:09 AM</div>
                                         </div>
                                         <div class="w-full truncate text-gray-600">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 20</div>
@@ -109,18 +113,32 @@
                     <!-- BEGIN: Account Menu -->
                     <div class="intro-x dropdown w-8 h-8 relative">
                         <div class="dropdown-toggle w-8 h-8 rounded-full overflow-hidden shadow-lg image-fit zoom-in">
-                            <img alt="Profile Picture" src="{{ asset('dist/images/'.Auth::user()->pict) }}">
+                            @if(Auth::guard('pegawai')->check())
+                            <img alt="Profile Picture" src="{{ asset('dist/images/'.Auth::guard('pegawai')->user()->pict) }}">
+                            @elseif(Auth::guard('dosen')->check())
+                            <img alt="Profile Picture" src="{{ asset('dist/images/'.Auth::guard('dosen')->user()->pict) }}">
+                            @endif
+                            
                         </div>
                         <div class="dropdown-box mt-10 absolute w-56 top-0 right-0 z-20">
                             <div class="dropdown-box__content bg-theme-1 box text-white">
                                 <div class="p-4 border-b border-theme-2">
-                                    <div class="font-medium">{{Auth::user()->nama}}</div>
-                                    <div class="text-xs text-theme-2">{{ Str::ucfirst(preg_replace('/[^\p{L}\p{N}\s]/u', '', Auth::user()->getRoleNames()))}}</div>
+
+                                    @if(Auth::guard('pegawai')->check())
+                                    <div class="font-medium"> {{ Auth::guard('pegawai')->user()->nama }}</div>
+                                    @elseif(Auth::guard('dosen')->check())
+                                    <div class="font-medium"> {{ Auth::guard('dosen')->user()->nama }}</div>
+                                    @endif
+                                    
+                                    @if(Auth::guard('pegawai')->check())
+                                    <div class="text-xs text-theme-2">Pegawai</div>
+                                    @elseif(Auth::guard('dosen')->check())
+                                    <div class="text-xs text-theme-2">Dosen</div>
+                                    @endif
+
                                 </div>
                                 <div class="p-2">
-                                    @role('dosen')
                                     <a href="{{ route('profil') }}" class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 rounded-md"> <i data-feather="user" class="w-4 h-4 mr-2"></i> Profile </a>
-                                    @endrole
                                     <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 rounded-md"> <i data-feather="help-circle" class="w-4 h-4 mr-2"></i> Help </a>
                                 </div>
                                 <div class="p-2 border-t border-theme-2">

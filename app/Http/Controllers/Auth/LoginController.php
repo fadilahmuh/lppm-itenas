@@ -37,6 +37,9 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+        $this->middleware('guest:web')->except('logout');
+        $this->middleware('guest:dosen')->except('logout');
+        $this->middleware('guest:pegawai')->except('logout');
     }
 
     public function login(Request $request)
@@ -47,15 +50,38 @@ class LoginController extends Controller
             'nip' => 'required',
             'password' => 'required',
         ]);
-  
+
         $fieldType = filter_var($request->nip, FILTER_VALIDATE_EMAIL) ? 'email' : 'nip';
-        if(auth()->attempt(array($fieldType => $input['nip'], 'password' => $input['password'])))
+        if(auth()->guard('dosen')->attempt(array($fieldType => $input['nip'], 'password' => $input['password'])))
+        {
+            return redirect()->route('base');
+        }elseif(auth()->guard('pegawai')->attempt(array($fieldType => $input['nip'], 'password' => $input['password'])))
         {
             return redirect()->route('base');
         }else{
             return redirect()->route('login')
                 ->withInput()->with('error','NIP/Email atau Password salah.');
         }
+
           
     }
+    // public function login(Request $request)
+    // {   
+    //     $input = $request->all();
+  
+    //     $this->validate($request, [
+    //         'nip' => 'required',
+    //         'password' => 'required',
+    //     ]);
+  
+    //     $fieldType = filter_var($request->nip, FILTER_VALIDATE_EMAIL) ? 'email' : 'nip';
+    //     if(auth()->attempt(array($fieldType => $input['nip'], 'password' => $input['password'])))
+    //     {
+    //         return redirect()->route('base');
+    //     }else{
+    //         return redirect()->route('login')
+    //             ->withInput()->with('error','NIP/Email atau Password salah.');
+    //     }
+          
+    // }
 }

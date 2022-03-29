@@ -18,11 +18,11 @@ use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
 
-Route::middleware('auth')->group(function() {
+Route::middleware('auth:pegawai,dosen')->group(function() {
     Route::get('/', [MainController::class, 'index'])->name('base');
     Route::get('/input', [MainController::class, 'input'])->name('input');
     
-    Route::middleware('role:dosen')->group(function () {
+    Route::middleware('auth')->group(function () {
         Route::get('/profil', [MainController::class, 'profil'])->name('profil');
     });
 

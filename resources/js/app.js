@@ -17,6 +17,7 @@ import validation from './validation'
 import imageZoom from './image-zoom'
 import svgLoader from './svg-loader'
 import toast from './toast'
+// import currency from './currency'
 
 import maps from './maps'
 import chat from './chat'
