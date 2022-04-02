@@ -6,7 +6,7 @@
     <div class="side-nav__devider my-6"></div>
     <ul>
         <li>
-            <a href="{{ route('base') }}" class="side-menu side-menu--active">
+            <a href="{{ route('base') }}" class="side-menu @if(url()->current()==route('base')) side-menu--active @endif">
                 <div class="side-menu__icon"> <i data-feather="home"></i> </div>
                 <div class="side-menu__title"> Dashboard </div>
             </a>
@@ -44,7 +44,7 @@
             </ul>
         </li>
         <li>
-            <a href="{{ route('input')}}" class="side-menu">
+            <a href="{{ route('input')}}" class="side-menu @if(url()->current()==route('input')) side-menu--active @endif">
                 <div class="side-menu__icon"> <i data-feather="inbox"></i> </div>
                 <div class="side-menu__title"> Input data Hibah </div>
             </a>

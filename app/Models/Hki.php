@@ -13,7 +13,7 @@ class Hki extends Model
         'nama_hki',
         'jenis_hki',
         'penulis_ketua_id',
-        'penulis_anggota_id',
+        'penulis_anggota',
         'tahun',
         'jumlah',
         'status'
@@ -23,8 +23,8 @@ class Hki extends Model
     	return $this->belongsTo(Dosen::class);
     }
 
-    public function penulis_anggota(){
-    	return $this->belongsTo(Dosen::class);
-    }
+    // public function penulis_anggota(){
+    // 	return $this->belongsTo(Dosen::class);
+    // }
 
 }

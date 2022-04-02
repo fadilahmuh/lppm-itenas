@@ -12,9 +12,9 @@ class Penelitian extends Model
     protected $fillable = [
         'judul_penelitian',
         'dosen_ketua_id',
-        'dosen_anggota_id',
+        'dosen_anggota',
         'anggota_mhs',
-        'nama_hibah_id',
+        'jenis_hibah_id',
         'nama_mitra',
         'mulai',
         'selesai',
@@ -27,12 +27,17 @@ class Penelitian extends Model
     	return $this->belongsTo(Dosen::class);
     }
 
-    public function dosen_anggota(){
-    	return $this->belongsTo(Dosen::class);
-    }
+    // public function dosen_anggota(){
+    // 	return $this->belongsTo(Dosen::class);
+    // }
 
-    public function nama_hibah(){
+    public function jenis_hibah(){
     	return $this->belongsTo(Ref_jenishibah::class);
     }
+
+    // public function getdosen_anggotaAttribute($value)
+    // {
+    //     return explode(',', $value);
+    // }
 
 }

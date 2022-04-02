@@ -18,9 +18,9 @@ class CreateHkisTable extends Migration
             $table->string('nama_hki')->nullable(false);
             $table->string('jenis_hki');
             $table->unsignedInteger("penulis_ketua_id")->index()->nullable(false);
-            $table->unsignedInteger("penulis_anggota_id")->index()->nullable(false);
+            $table->string("penulis_anggota")->nullable();
             $table->string('jumlah')->nullable(false);
-            $table->date('tahun');
+            $table->year('tahun');
             $table->boolean('status');
             $table->timestamps();
             $table->softDeletes();

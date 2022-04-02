@@ -25,13 +25,6 @@ class UserSeeder extends Seeder
             'jurusan' => 'Informatika',
         ]);
         
-        Pegawai::create([
-            'nama' => 'Andika Fauzi',
-            'nip' => '152018019',
-            'password' => bcrypt('123456789'),
-            'email' => 'andika@lppm.itenas.ac.id',
-        ]);
-        
         Dosen::create([
             'nama' => 'Gilang Rama',
             'nip' => '152018033',
@@ -40,6 +33,15 @@ class UserSeeder extends Seeder
             'email' => 'gilang@lppm.itenas.ac.id',
             'jurusan' => 'Informatika',
         ]);
+
+        Pegawai::create([
+            'nama' => 'Andika Fauzi',
+            'nip' => '152018019',
+            'password' => bcrypt('123456789'),
+            'email' => 'andika@lppm.itenas.ac.id',
+        ]);
+
+        // Dosen::create(['nama' => '','nip' => '','password' => bcrypt('123456789'),'nidn' => '','email' => '','jurusan' => 'Informatika']);
       
     }
 }

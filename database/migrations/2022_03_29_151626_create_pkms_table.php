@@ -17,13 +17,13 @@ class CreatePkmsTable extends Migration
             $table->id();
             $table->string('judul_pkm')->nullable(false);
             $table->unsignedInteger("dosen_ketua_id")->index()->nullable(false);
-            $table->unsignedInteger("dosen_anggota_id")->index()->nullable();
+            $table->string("dosen_anggota")->nullable();
             $table->string('anggota_mhs')->nullable();
-            $table->unsignedInteger("nama_hibah_id")->index()->nullable();
+            $table->unsignedInteger("jenis_hibah_id")->index()->nullable();
             $table->string('nama_mitra')->nullable();
             $table->date('mulai');
             $table->date('selesai');
-            $table->date('tahun');
+            $table->year('tahun');
             $table->string('jumlah')->nullable(false);
             $table->boolean('status');
             $table->timestamps();

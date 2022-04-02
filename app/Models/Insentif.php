@@ -12,20 +12,16 @@ class Insentif extends Model
     protected $fillable = [
         'judul_publikasi',
         'penulis_ketua_id',
-        'penulis_anggota_id',
-        'anggota_mhs',
+        'penulis_anggota',
         'jenis_insentif_id',
         'jenis_publikasi_id',
+        'jurnal',
         'tahun',
         'jumlah',
         'status'
     ];
 
     public function penulis_ketua(){
-    	return $this->belongsTo(Dosen::class);
-    }
-
-    public function penulis_anggota(){
     	return $this->belongsTo(Dosen::class);
     }
 

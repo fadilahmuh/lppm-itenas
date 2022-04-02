@@ -24,5 +24,11 @@
             .removeClass('active')
         $(this).addClass('active')
 
+        let elementId = $(this).attr('data-target')
+        $(elementId).closest('.tab-content')
+            .find('.tab-content__pane')
+            .removeClass('active')
+        $(elementId).addClass('active')
+
     })
 })($)

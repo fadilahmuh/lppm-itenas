@@ -2848,6 +2848,9 @@ __webpack_require__.r(__webpack_exports__);
     // Set active tab nav
     $(this).closest('.nav-tabs').find('button[data-toggle="tab"]').removeClass('active');
     $(this).addClass('active');
+    var elementId = $(this).attr('data-target');
+    $(elementId).closest('.tab-content').find('.tab-content__pane').removeClass('active');
+    $(elementId).addClass('active');
   });
 })($);
 

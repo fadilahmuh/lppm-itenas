@@ -19,9 +19,10 @@ class CreateInsentifsTable extends Migration
             $table->unsignedInteger('jenis_insentif_id')->index()->nullable(false);
             $table->unsignedInteger('jenis_publikasi_id')->index()->nullable(false);
             $table->unsignedInteger("penulis_ketua_id")->index()->nullable(false);
-            $table->unsignedInteger("penulis_anggota_id")->index()->nullable(false);
+            $table->string("penulis_anggota")->nullable();
+            $table->string('jurnal')->nullable();
             $table->string('jumlah')->nullable(false);
-            $table->date('tahun');
+            $table->year('tahun');
             $table->boolean('status');
             $table->timestamps();
             $table->softDeletes();
