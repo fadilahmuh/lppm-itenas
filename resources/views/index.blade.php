@@ -75,7 +75,6 @@
         </div>
     </div>
 </div>
-
 <div class="intro-y flex items-center h-10 mt-10">
     <h2 class="text-lg font-medium truncate mr-5">
         Statistik
@@ -148,6 +147,11 @@
     </div>
 </div>
 @endif 
+
+<div class="modal" id="large-modal-size-preview">
+
+</div>
+
 @endsection
 
 @section('lib-script')
@@ -204,7 +208,6 @@
         }
         });
     };
-
     
 </script>
 @endsection

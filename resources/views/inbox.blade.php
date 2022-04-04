@@ -56,7 +56,7 @@
                             <td class="text-center border-b">{{$d->updated_at}}</td>
                             <td class="border-b w-5">
                                 <div class="flex sm:justify-center items-center">
-                                    <button class="button px-2 mr-1 mb-2 bg-theme-14 text-theme-10 tooltip" title="Lihat"> <span class="w-5 h-5 flex items-center justify-center"> <i data-feather="eye" class="w-4 h-4"></i> </span> </button>
+                                    <button class="show-data button px-2 mr-1 mb-2 bg-theme-14 text-theme-10 tooltip" data-url="@if($d->table_name == 'Penelitian') {{ route('penelitian.show', [$d->id]) }} @elseif ($d->table_name == 'Pkm') {{ route('pkm.show', [$d->id]) }} @elseif($d->table_name == 'Insentif') {{ route('insentif.show', [$d->id]) }} @elseif($d->table_name == 'HKI') {{ route('hki.show', [$d->id]) }} @endif" title="Lihat"> <span class="w-5 h-5 flex items-center justify-center"> <i data-feather="eye" class="w-4 h-4"></i> </span> </button>
                                     <button class="button px-2 mr-1 mb-2 bg-theme-18 text-theme-9 tooltip" title="Accept"> <span class="w-5 h-5 flex items-center justify-center"> <i data-feather="check-square" class="w-4 h-4"></i> </span> </button>
                                     <a href="@if($d->table_name == 'Penelitian') {{ route('penelitian.edit', [$d->id]) }} @elseif ($d->table_name == 'Pkm') {{ route('pkm.edit', [$d->id]) }} @elseif($d->table_name == 'Insentif') {{ route('insentif.edit', [$d->id]) }} @elseif($d->table_name == 'HKI') {{ route('hki.edit', [$d->id]) }} @endif" class="button btn-edit px-2 mr-1 mb-2 bg-theme-17 text-theme-11 tooltip" title="Edit"> <span class="w-5 h-5 flex items-center justify-center"> <i data-feather="edit-3" class="w-4 h-4"></i> </span> </a>
                                     <a class="button px-2 mr-1 mb-2 bg-theme-31 text-theme-6 tooltip" title="Tolak"> <span class="w-5 h-5 flex items-center justify-center"> <i data-feather="trash-2" class="w-4 h-4"></i> </span> </a>
@@ -69,6 +69,8 @@
             </div>
         </div>
     </div>
+</div>
+<div class="modal" id="large-modal-size-preview">
 </div>
 @endsection
 

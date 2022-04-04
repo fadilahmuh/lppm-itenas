@@ -96,9 +96,17 @@ class HkiController extends Controller
      * @param  \App\Models\Hki  $hki
      * @return \Illuminate\Http\Response
      */
-    public function show(Hki $hki)
+    public function show(Request $request, Hki $hki)
     {
-        //
+        if ($request->ajax()) {
+
+            // $modal = $hki;
+            $modal = view('template.modal-hki',compact('hki'))->render();
+    
+            return response()->json([
+                'modal' =>  $modal
+            ]);  
+        }
     }
 
     /**

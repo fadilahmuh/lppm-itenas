@@ -26,6 +26,10 @@
         </div>
     </div>
 </div>
+
+<div class="modal" id="large-modal-size-preview">
+
+</div>
 @endsection
 
 @section('lib-script')

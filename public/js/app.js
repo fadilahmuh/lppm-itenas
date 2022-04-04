@@ -2717,6 +2717,22 @@ __webpack_require__.r(__webpack_exports__);
   $('#programmatically-toggle-modal').on('click', function () {
     $('#programmatically-modal').modal('toggle');
   });
+  $('.show-data').on('click', function (e) {
+    e.preventDefault();
+    var url = $(this).data("url");
+    $.ajax({
+      type: 'GET',
+      url: url,
+      dataType: "json",
+      success: function success(response) {
+        $('#large-modal-size-preview').html(response.modal);
+        $('#large-modal-size-preview').modal('show');
+      },
+      error: function error(xhr, ajaxOptions, thrownError) {
+        alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+      }
+    });
+  });
 })($);
 
 /***/ }),

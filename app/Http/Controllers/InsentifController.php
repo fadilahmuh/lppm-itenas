@@ -6,6 +6,7 @@ use App\Models\Insentif;
 use App\Http\Requests\StoreInsentifRequest;
 use App\Http\Requests\UpdateInsentifRequest;
 use App\Models\Dosen;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -100,9 +101,16 @@ class InsentifController extends Controller
      * @param  \App\Models\Insentif  $insentif
      * @return \Illuminate\Http\Response
      */
-    public function show(Insentif $insentif)
+    public function show(Request $request, Insentif $insentif)
     {
-        //
+        if ($request->ajax()) {
+
+            $modal = view('template.modal-insentif',compact('insentif'))->render();
+    
+            return response()->json([
+                'modal' =>  $modal
+            ]);  
+        }
     }
 
     /**
@@ -123,7 +131,7 @@ class InsentifController extends Controller
      * @param  \App\Models\Insentif  $insentif
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateInsentifRequest $request, Insentif $insentif)
+    public function update(StoreInsentifRequest $request, Insentif $insentif)
     {
         $rules = array(
             'judul_publikasi' => 'required',

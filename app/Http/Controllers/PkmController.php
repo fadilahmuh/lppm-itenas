@@ -106,9 +106,16 @@ class PkmController extends Controller
      * @param  \App\Models\pkm  $pkm
      * @return \Illuminate\Http\Response
      */
-    public function show(pkm $pkm)
+    public function show(Request $request, pkm $pkm)
     {
-        //
+        if ($request->ajax()) {
+
+            $modal = view('template.modal-pkm',compact('pkm'))->render();
+    
+            return response()->json([
+                'modal' =>  $modal
+            ]);  
+        }
     }
 
     /**

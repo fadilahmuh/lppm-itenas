@@ -114,9 +114,16 @@ class PenelitianController extends Controller
      * @param  \App\Models\Penelitian  $penelitian
      * @return \Illuminate\Http\Response
      */
-    public function show(Penelitian $penelitian)
+    public function show(Request $request, Penelitian $penelitian)
     {
-        //
+        if ($request->ajax()) {
+
+            $modal = view('template.modal-penelitian',compact('penelitian'))->render();
+    
+            return response()->json([
+                'modal' =>  $modal
+            ]);  
+        }
     }
 
     /**
