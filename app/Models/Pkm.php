@@ -9,7 +9,7 @@ class Pkm extends Model
 {
 
     protected $fillable = [
-        'judul_pkm',
+        'judul',
         'dosen_ketua_id',
         'dosen_anggota',
         'anggota_mhs',
@@ -30,12 +30,12 @@ class Pkm extends Model
     	return $this->belongsTo(Ref_jenishibah::class);
     }
 
-    public function dsn_list()
+    public function getDosenAnggota()
     {
         return Dosen::findMany(explode(',', $this->dosen_anggota));
     }
 
-    public function mhs_list()
+    public function getMhsAnggota()
     {
         return Mahasiswa::findMany(explode(',', $this->anggota_mhs));
     }

@@ -18,7 +18,10 @@ class PkmController extends Controller
      */
     public function index()
     {
-        //
+        $title = 'Hibah PKM';
+        $data = Pkm::where('status', 1)->get();
+
+        return view('template.table-pkm', compact('title','data'));
     }
 
     /**
@@ -76,7 +79,7 @@ class PkmController extends Controller
                 $stat = $request->status;
             }
             Pkm::create([
-                'judul_pkm' => $request->judul_pkm,
+                'judul' => $request->judul_pkm,
                 'dosen_ketua_id' => $ketua->id,
                 'dosen_anggota' => $request->dosen_anggota,
                 'anggota_mhs' => $request->anggota_mhs,
@@ -116,7 +119,7 @@ class PkmController extends Controller
      */
     public function edit(pkm $pkm)
     {
-        //
+        return view('template.edit-pkm', compact('pkm'));
     }
 
     /**
@@ -126,9 +129,63 @@ class PkmController extends Controller
      * @param  \App\Models\pkm  $pkm
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, pkm $pkm)
+    public function update(StorePkmRequest $request, pkm $pkm)
     {
-        //
+        $rules = array(
+            'judul_pkm' => 'required',
+            'jenis_hibah' => 'required',
+            'mulai' => 'required',
+            'selesai' => 'required|after:mulai',
+            'tahun' => 'required',
+            'jumlah' => 'required|integer',
+            'status' => 'required|boolean',
+        );    
+        $messages = array(
+            'judul_pkm.required' => 'Judul penelitian tidak boleh kosong!',
+            'jenis_hibah.required' => 'Jenis Hibah tidak boleh kosong!',
+            'mulai.required' => 'Tanggal mulai tidak boleh kosong!',
+            'selesai.required' => 'Tanggal selesai tidak boleh kosong!',
+            'selesai.after' => 'Tanggal Mulai-Selesai tidak valid!',
+            'tahun.required' => 'Tahun tidak boleh kosong!!',
+            'jumlah.required' => 'Jumlah tidak boleh kosong!!',
+            'jumlah.integer' => 'Jumlah tidak valid, masukan nominal angka!!',
+            'status.required' => 'Status tidak valid!',
+            'status.boolean' => 'Status tidak valid!',
+        );
+
+        $request->all();
+        $validator = Validator::make($request->all(), $rules, $messages);        
+
+        if ($validator->fails()) {
+            return redirect()->back()->withInput()->withErrors($validator);
+        } else {
+            if (Auth::guard('dosen')->check()){
+                $ketua = Auth::user();
+                $stat = 0;
+            }elseif(Auth::guard('pegawai')->check()){
+                $ketua = Dosen::find($request->dosen_ketua);
+                $stat = $request->status;
+            }
+            $pkm->update([
+                'judul' => $request->judul_pkm,
+                'dosen_ketua_id' => $ketua->id,
+                'dosen_anggota' => $request->dosen_anggota,
+                'anggota_mhs' => $request->anggota_mhs,
+                'jenis_hibah_id' => $request->jenis_hibah,
+                'nama_mitra' => $request->nama_mitra,
+                'mulai' => $request->mulai,
+                'selesai' => $request->selesai,
+                'tahun' => $request->tahun,
+                'jumlah' => $request->jumlah,
+                'status' => $stat,
+                
+            ]);
+
+
+            $msg = 'Data Hibah PKM berhasil diupdate.';
+   
+            return redirect()->route('pkm.index')->with('success',$msg);
+        }
     }
 
     /**

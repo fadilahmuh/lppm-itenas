@@ -17,5 +17,6 @@ class DatabaseSeeder extends Seeder
         $this->call(Refference::class);
         $this->call(DosenSeeder::class);
         $this->call(MahasiswaSeeder::class);
+        $this->call(DataSeeder::class);
     }
 }

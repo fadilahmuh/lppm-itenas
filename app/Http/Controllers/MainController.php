@@ -8,6 +8,7 @@ use App\Models\Insentif;
 use App\Models\Mahasiswa;
 use App\Models\Penelitian;
 use App\Models\Pkm;
+use App\Models\RawQue;
 use App\Models\Ref_jenishibah;
 use App\Models\Ref_jenisinsentif;
 use App\Models\Ref_jenispublikasi;
@@ -23,16 +24,19 @@ class MainController extends Controller
     public function index() {
         $title = 'Dashboard';
 
-        // $penelitians = Penelitian::where('status', 1)->get();
-        $penelitians = Penelitian::all();
-        $pkms = Pkm::all();
-        $insentifs = Insentif::all();
-        $hkis = Hki::all();
+        $penelitians = Penelitian::where('status', 1)->get();
+        // $penelitians = Penelitian::all();
+        $pkms = Pkm::where('status', 1)->get();
+        // $pkms = Pkm::all();
+        $insentifs = Insentif::where('status', 1)->get();
+        // $insentifs = Insentif::all();
+        $hkis = Hki::where('status', 1)->get();
+        // $hkis = Hki::all();
 
-        $latest = DB::select(DB::raw("select 'penelitian' as table_name, id, jumlah, status, created_at from penelitians WHERE STATUS = 0 UNION ALL
-        select 'pkm' as table_name, id, jumlah, status, created_at from pkms WHERE STATUS = 0 UNION all
-        select 'insentif' as table_name, id, jumlah, status, created_at from insentifs WHERE STATUS = 0 UNION all
-        select 'hki' as table_name, id, jumlah, status, created_at from hkis WHERE STATUS = 0
+        $latest = DB::select(DB::raw("select 'penelitian' as table_name, id, jumlah, status, created_at from penelitians WHERE STATUS = 1 UNION ALL
+        select 'pkm' as table_name, id, jumlah, status, created_at from pkms WHERE STATUS = 1 UNION all
+        select 'insentif' as table_name, id, jumlah, status, created_at from insentifs WHERE STATUS = 1 UNION all
+        select 'hki' as table_name, id, jumlah, status, created_at from hkis WHERE STATUS = 1
         ORDER BY created_at DESC"));
 
         $panel= '';
@@ -58,6 +62,29 @@ class MainController extends Controller
         
 
         return view('index', compact('title','panel', 'penelitians', 'pkms','insentifs', 'hkis'));
+    }
+
+    public function inbox() {
+        $title = 'Kotak Masuk';
+
+        $latest = DB::select(DB::raw("select 'Penelitian' as table_name, id, jumlah, status, updated_at from penelitians WHERE STATUS = 0 UNION ALL
+        select 'Pkm' as table_name, id, jumlah, status, updated_at from pkms WHERE STATUS = 0 UNION all
+        select 'Insentif' as table_name, id, jumlah, status, updated_at from insentifs WHERE STATUS = 0 UNION all
+        select 'HKI' as table_name, id, jumlah, status, updated_at from hkis WHERE STATUS = 0
+        ORDER BY updated_at DESC"));
+
+        $latest = array_map(function ($value) {
+            return (array)$value;
+        }, $latest);
+
+        $data = collect(new RawQue());
+        foreach ($latest as $l) {
+            $r = new RawQue($l);
+            $data->push($r);
+        };
+
+        // dd($d);
+        return view('inbox', compact('title', 'data'));
     }
 
     public function test() {
@@ -133,11 +160,20 @@ class MainController extends Controller
             
             if($request->has('q')){
                 $search = $request->q;
-                $data = Dosen::where('id', '!=', Auth::user()->id)
-                            ->where('nama','LIKE', '%'.$search.'%')->get();
+                if(Auth::guard('pegawai')->check()){
+                    $data = Dosen::where('nama','LIKE', '%'.$search.'%')->get();
+                }else{
+                    $data = Dosen::where('id', '!=', Auth::user()->id)
+                    ->where('nama','LIKE', '%'.$search.'%')->get();
+                }
+                
             }else {
-                // $data = DB::table('dosens')->select("nama")->get();
-                $data = Dosen::where('id', '!=', Auth::user()->id)->get();
+                if(Auth::guard('pegawai')->check()){
+                    $data = Dosen::all();
+                }else{
+                    $data = Dosen::where('id', '!=', Auth::user()->id)->get();
+                }
+                
             }
 
             $response = array();

@@ -15,13 +15,13 @@ class CreateHkisTable extends Migration
     {
         Schema::create('hkis', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_hki')->nullable(false);
+            $table->string('judul')->nullable(false);
             $table->string('jenis_hki');
-            $table->unsignedInteger("penulis_ketua_id")->index()->nullable(false);
+            $table->unsignedInteger("dosen_ketua_id")->index()->nullable(false);
             $table->string("penulis_anggota")->nullable();
-            $table->string('jumlah')->nullable(false);
+            $table->integer('jumlah')->nullable(false);
             $table->year('tahun');
-            $table->boolean('status');
+            $table->boolean('status')->nullable(false);
             $table->timestamps();
             $table->softDeletes();
         });

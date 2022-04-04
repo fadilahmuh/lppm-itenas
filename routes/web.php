@@ -28,25 +28,34 @@ Route::middleware('auth:pegawai,dosen')->group(function() {
     // Route::get('/input2', [MainController::class, 'input2']);
     Route::get('/profil', [MainController::class, 'profil'])->name('profil');
     Route::get('/test', [MainController::class, 'test']);
-
+    Route::prefix('data')->group(function() {
+        Route::resource('penelitian', PenelitianController::class)->only(['index']);
+        Route::resource('insentif', InsentifController::class)->only(['index']);
+        Route::resource('pkm', PkmController::class)->only(['index']);
+        Route::resource('hki', HkiController::class)->only(['index']);
+    });
 
     
 
-    Route::resource('penelitian', PenelitianController::class);
-    Route::resource('pkm', PkmController::class);
-    Route::resource('insentif', InsentifController::class);
-    Route::resource('hki', HkiController::class);
+    Route::resource('penelitian', PenelitianController::class)->except(['index']);
+    Route::resource('insentif', InsentifController::class)->except(['index']);
+    Route::resource('pkm', PkmController::class)->except(['index']);
+    Route::resource('hki', HkiController::class)->except(['index']);
     // Route::get('/form-penelitian', [MainController::class, 'input_penelitian'])->name('penelitian');
     // Route::get('/form-pkm', [MainController::class, 'input_pkm'])->name('pkm');
     // Route::get('/form-isentif', [MainController::class, 'input_insentif'])->name('insentif');
     // Route::get('/form-hki', [MainController::class, 'input_haki'])->name('haki');
-    
+
     // json
     Route::get('/data-dosen', [MainController::class, 'get_dosen'])->name('get_dosen');
     Route::get('/data-mhs', [MainController::class, 'get_mhs'])->name('get_mhs');
     Route::get('/data-hibah', [MainController::class, 'get_hibah'])->name('get_hibah');
     Route::get('/data-insentif', [MainController::class, 'get_insentif'])->name('get_insentif');
     Route::get('/data-publikasi', [MainController::class, 'get_pub'])->name('get_pub');
+});
+
+Route::middleware('auth:pegawai,dosen')->group(function() {
+    Route::get('/kotak-masuk', [MainController::class, 'inbox'])->name('inbox');
 });
 
 // Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');

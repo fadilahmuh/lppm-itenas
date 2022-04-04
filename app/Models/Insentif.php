@@ -10,8 +10,8 @@ class Insentif extends Model
     use HasFactory;
 
     protected $fillable = [
-        'judul_publikasi',
-        'penulis_ketua_id',
+        'judul',
+        'dosen_ketua_id',
         'penulis_anggota',
         'jenis_insentif_id',
         'jenis_publikasi_id',
@@ -21,7 +21,7 @@ class Insentif extends Model
         'status'
     ];
 
-    public function penulis_ketua(){
+    public function dosen_ketua(){
     	return $this->belongsTo(Dosen::class);
     }
 
@@ -31,5 +31,9 @@ class Insentif extends Model
 
     public function jenis_publikasi(){
     	return $this->belongsTo(Ref_jenispublikasi::class);
+    }
+
+    public function getDosenAnggota(){
+        return  Dosen::findMany(explode(',', $this->penulis_anggota));
     }
 }

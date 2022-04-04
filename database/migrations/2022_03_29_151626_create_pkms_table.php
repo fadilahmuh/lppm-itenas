@@ -15,7 +15,7 @@ class CreatePkmsTable extends Migration
     {
         Schema::create('pkms', function (Blueprint $table) {
             $table->id();
-            $table->string('judul_pkm')->nullable(false);
+            $table->string('judul')->nullable(false);
             $table->unsignedInteger("dosen_ketua_id")->index()->nullable(false);
             $table->string("dosen_anggota")->nullable();
             $table->string('anggota_mhs')->nullable();
@@ -24,8 +24,8 @@ class CreatePkmsTable extends Migration
             $table->date('mulai');
             $table->date('selesai');
             $table->year('tahun');
-            $table->string('jumlah')->nullable(false);
-            $table->boolean('status');
+            $table->integer('jumlah')->nullable(false);
+            $table->boolean('status')->nullable(false);
             $table->timestamps();
             $table->softDeletes();
         });

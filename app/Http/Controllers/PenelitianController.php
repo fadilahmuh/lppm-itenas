@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Penelitian;
 use App\Http\Requests\StorePenelitianRequest;
-use App\Http\Requests\UpdatePenelitianRequest;
 use App\Models\Dosen;
 use App\Models\Ref_jenishibah;
 use Illuminate\Http\Request;
@@ -20,7 +19,10 @@ class PenelitianController extends Controller
      */
     public function index()
     {
-        //
+        $title = 'Hibah Penelitian';
+        $data = Penelitian::where('status', 1)->get();
+
+        return view('template.table-peneltian', compact('title','data'));
     }
 
     /**
@@ -85,7 +87,7 @@ class PenelitianController extends Controller
                 $stat = $request->status;
             }
             Penelitian::create([
-                'judul_penelitian' => $request->judul_penelitian,
+                'judul' => $request->judul_penelitian,
                 'dosen_ketua_id' => $ketua->id,
                 'dosen_anggota' => $request->dosen_anggota,
                 'anggota_mhs' => $request->anggota_mhs,
@@ -125,7 +127,7 @@ class PenelitianController extends Controller
      */
     public function edit(Penelitian $penelitian)
     {
-        //
+        return view('template.edit-penelitian', compact('penelitian'));
     }
 
     /**
@@ -135,9 +137,64 @@ class PenelitianController extends Controller
      * @param  \App\Models\Penelitian  $penelitian
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatePenelitianRequest $request, Penelitian $penelitian)
+    public function update(StorePenelitianRequest $request, Penelitian $penelitian)
     {
-        //
+        // dd($penelitian);
+        $rules = array(
+            'judul_penelitian' => 'required',
+            'jenis_hibah' => 'required',
+            'mulai' => 'required',
+            'selesai' => 'required|after:mulai',
+            'tahun' => 'required',
+            'jumlah' => 'required|integer',
+            'status' => 'required|boolean',
+        );    
+        $messages = array(
+            'judul_penelitian.required' => 'Judul penelitian tidak boleh kosong!',
+            'jenis_hibah.required' => 'Jenis Hibah tidak boleh kosong!',
+            'mulai.required' => 'Tanggal mulai tidak boleh kosong!',
+            'selesai.required' => 'Tanggal selesai tidak boleh kosong!',
+            'selesai.after' => 'Tanggal Mulai-Selesai tidak valid!',
+            'tahun.required' => 'Tahun tidak boleh kosong!!',
+            'jumlah.required' => 'Jumlah tidak boleh kosong!!',
+            'jumlah.integer' => 'Jumlah tidak valid, masukan nominal angka!!',
+            'status.required' => 'Status tidak valid!',
+            'status.boolean' => 'Status tidak valid!',
+        );
+
+        $request->all();
+        $validator = Validator::make($request->all(), $rules, $messages);        
+
+        if ($validator->fails()) {
+            return redirect()->back()->withInput()->withErrors($validator);
+        } else {
+            if (Auth::guard('dosen')->check()){
+                $ketua = Auth::user();
+                $stat = 0;
+            }elseif(Auth::guard('pegawai')->check()){
+                $ketua = Dosen::find($request->dosen_ketua);
+                $stat = $request->status;
+            }
+            $penelitian->update([
+                'judul' => $request->judul_penelitian,
+                'dosen_ketua_id' => $ketua->id,
+                'dosen_anggota' => $request->dosen_anggota,
+                'anggota_mhs' => $request->anggota_mhs,
+                'jenis_hibah_id' => $request->jenis_hibah,
+                'nama_mitra' => $request->nama_mitra,
+                'mulai' => $request->mulai,
+                'selesai' => $request->selesai,
+                'tahun' => $request->tahun,
+                'jumlah' => $request->jumlah,
+                'status' => $stat,
+                
+            ]);
+
+
+            $msg = 'Data Hibah Penelitian berhasil diupdate.';
+   
+            return redirect()->route('penelitian.index')->with('success',$msg);
+        }
     }
 
     /**

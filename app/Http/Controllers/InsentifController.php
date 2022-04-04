@@ -18,7 +18,10 @@ class InsentifController extends Controller
      */
     public function index()
     {
-        //
+        $title = 'Hibah Insentif';
+        $data = Insentif::where('status', 1)->get();
+
+        return view('template.table-insentif', compact('title','data'));
     }
 
     /**
@@ -73,8 +76,8 @@ class InsentifController extends Controller
                 $stat = $request->status;
             }
             Insentif::create([
-                'judul_publikasi' => $request->judul_publikasi,
-                'penulis_ketua_id' => $ketua->id,
+                'judul' => $request->judul_publikasi,
+                'dosen_ketua_id' => $ketua->id,
                 'penulis_anggota' => $request->dosen_anggota,
                 'jenis_insentif_id' => $request->jenis_insentif,
                 'jenis_publikasi_id' => $request->jenis_publikasi,
@@ -110,7 +113,7 @@ class InsentifController extends Controller
      */
     public function edit(Insentif $insentif)
     {
-        //
+        return view('template.edit-insentif', compact('insentif'));
     }
 
     /**
@@ -122,7 +125,56 @@ class InsentifController extends Controller
      */
     public function update(UpdateInsentifRequest $request, Insentif $insentif)
     {
-        //
+        $rules = array(
+            'judul_publikasi' => 'required',
+            'jenis_insentif' => 'required',
+            'jenis_publikasi' => 'required',
+            'tahun' => 'required',
+            'jumlah' => 'required|integer',
+            'status' => 'required|boolean',
+        );    
+        $messages = array(
+            'judul_publikasi.required' => 'Judul penelitian tidak boleh kosong!',
+            'jenis_insentif.required' => 'Jenis Insentif tidak boleh kosong!',
+            'jenis_publikasi.required' => 'Jenis Publikasi tidak boleh kosong!',
+            'tahun.required' => 'Tahun tidak boleh kosong!!',
+            'jumlah.required' => 'Jumlah tidak boleh kosong!!',
+            'jumlah.integer' => 'Jumlah tidak valid, masukan nominal angka!!',
+            'status.required' => 'Status tidak valid!',
+            'status.boolean' => 'Status tidak valid!',
+        );
+
+        $request->all();
+        $validator = Validator::make($request->all(), $rules, $messages);        
+
+        if ($validator->fails()) {
+            return redirect()->back()->withInput()->withErrors($validator);
+        } else {
+            // dd($request->all());
+            if (Auth::guard('dosen')->check()){
+                $ketua = Auth::user();
+                $stat = 0;
+            }elseif(Auth::guard('pegawai')->check()){
+                $ketua = Dosen::find($request->dosen_ketua);
+                $stat = $request->status;
+            }
+            Insentif::create([
+                'judul' => $request->judul_publikasi,
+                'dosen_ketua_id' => $ketua->id,
+                'penulis_anggota' => $request->dosen_anggota,
+                'jenis_insentif_id' => $request->jenis_insentif,
+                'jenis_publikasi_id' => $request->jenis_publikasi,
+                'jurnal' => $request->jurnal,
+                'tahun' => $request->tahun,
+                'jumlah' => $request->jumlah,
+                'status' => $stat,
+                
+            ]);
+
+            $msg = 'Data Hibah Insentif berhasil diupdate.';
+   
+            return redirect()->route('pkm.index')->with('success',$msg);
+        }
     }
 
     /**

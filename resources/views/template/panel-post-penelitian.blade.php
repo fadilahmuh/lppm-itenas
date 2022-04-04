@@ -6,7 +6,7 @@
         <div class="ml-4 mr-auto items-center">
             <div class="text-gray-600 font-normal">Hibah Penelitian</div>
             <div class="border-l-2 border-theme-1 pl-4 mt-3">
-                <h3 class="font-semibold text-xl">{{$data->judul_penelitian}}</h3>
+                <h3 class="font-semibold text-xl">{{$data->judul}}</h3>
             </div>
             <div class="text-gray-600 font-normal mt-3 text-sm">Ketua Penelitian</div>
             <a href="#" class="font-semibold text-base tooltip" >{{$data->dosen_ketua->nama}}</a>

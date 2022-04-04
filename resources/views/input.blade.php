@@ -16,7 +16,7 @@
     </div>
 </div>      
 <div class="pos intro-y grid grid-cols-12 gap-5 mt-5">
-    <div class="col-span-12 lg:col-span-4 md:col-span-4 xxl:col-span-23">
+    <div class="col-span-12 lg:col-span-4 md:col-span-12 xxl:col-span-3">
         <div class="intro-y box p-5">
             <div class="pos__tabs nav-tabs mt-1">
                 <button data-toggle="tab" data-target="#penelitian" href="javascript:;" class="flex items-center px-3 py-2 rounded-md w-full active"> <i class="fa-solid fa-microscope text-lg mr-2"></i> Penelitian </button>
@@ -39,19 +39,19 @@
         
         <div class="tab-content">
             <div class="tab-content__pane active" id="penelitian">
-                @include('template.user.form-penelitian')
+                @include('template.form-penelitian')
             </div>
           
             <div class="tab-content__pane" id="pkm">
-                @include('template.user.form-pkm')
+                @include('template.form-pkm')
             </div>
 
             <div class="tab-content__pane" id="insentif">
-                @include('template.user.form-insentif')
+                @include('template.form-insentif')
             </div>
 
             <div class="tab-content__pane" id="hki">
-                @include('template.user.form-hki')
+                @include('template.form-hki')
             </div>
            
         </div>

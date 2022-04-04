@@ -10,21 +10,17 @@ class Hki extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nama_hki',
+        'judul',
         'jenis_hki',
-        'penulis_ketua_id',
+        'dosen_ketua_id',
         'penulis_anggota',
         'tahun',
         'jumlah',
         'status'
     ];
 
-    public function penulis_ketua(){
+    public function dosen_ketua(){
     	return $this->belongsTo(Dosen::class);
     }
-
-    // public function penulis_anggota(){
-    // 	return $this->belongsTo(Dosen::class);
-    // }
 
 }

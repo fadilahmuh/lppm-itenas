@@ -10,7 +10,7 @@ class Penelitian extends Model
     use HasFactory;
 
     protected $fillable = [
-        'judul_penelitian',
+        'judul',
         'dosen_ketua_id',
         'dosen_anggota',
         'anggota_mhs',
@@ -27,17 +27,16 @@ class Penelitian extends Model
     	return $this->belongsTo(Dosen::class);
     }
 
-    // public function dosen_anggota(){
-    // 	return $this->belongsTo(Dosen::class);
-    // }
+    public function getDosenAnggota(){
+        return  Dosen::findMany(explode(',', $this->dosen_anggota));
+    }
 
     public function jenis_hibah(){
     	return $this->belongsTo(Ref_jenishibah::class);
     }
 
-    // public function getdosen_anggotaAttribute($value)
-    // {
-    //     return explode(',', $value);
-    // }
+    public function getMhsAnggota(){
+        return Mahasiswa::findMany(explode(',', $this->anggota_mhs));
+    }
 
 }

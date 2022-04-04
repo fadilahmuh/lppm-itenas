@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests;
 
-use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
+use Carbon\Carbon;
 use Illuminate\Support\Str;
 
 class StorePenelitianRequest extends FormRequest
