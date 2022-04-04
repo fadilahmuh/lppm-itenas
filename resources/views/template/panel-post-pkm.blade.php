@@ -17,6 +17,6 @@
         </div>
     </div>
     <div class="flex items-center px-5 py-5 sm:py-3 border-t border-gray-200">
-        <a class="button w-20 text-white bg-theme-1 shadow-md ml-auto">Detail</a>
+        <a class="show-data button w-20 text-white bg-theme-1 shadow-md ml-auto" data-url="{{ route('pkm.show', [$data->id]) }}">Detail</a>
     </div>
 </div>

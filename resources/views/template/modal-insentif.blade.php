@@ -8,7 +8,7 @@
         <div class="col-span-12 intro-y">
             <div class="px-5 py-3 mb-3 flex ">
                 <div class="flex items-start">
-                    <i class="mt-2 mr-2 fa-solid fa-microscope text-5xl xl:text-5xl"></i>
+                    <i class="mt-2 mr-2 fa-solid fa-file-invoice text-5xl xl:text-5xl"></i>
                 </div>
                 <div class="ml-4 mr-auto items-center">
                     <div class="border-l-2 border-theme-1 pl-4 mt-3">

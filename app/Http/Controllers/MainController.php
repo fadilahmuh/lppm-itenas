@@ -24,6 +24,15 @@ class MainController extends Controller
     public function index() {
         $title = 'Dashboard';
 
+        $users = DB::table('penelitians')
+        ->join('pkms', 'penelitians.tahun', '=', 'pkms.tahun')
+        ->join('insentifs', 'penelitians.tahun', '=', 'insentifs.tahun')
+        ->join('hkis', 'penelitians.tahun', '=', 'hkis.tahun')
+        ->select('*')
+        ->get();
+    
+        dd($users);
+
         $penelitians = Penelitian::where('status', 1)->get();
         // $penelitians = Penelitian::all();
         $pkms = Pkm::where('status', 1)->get();
@@ -59,6 +68,8 @@ class MainController extends Controller
                 }
             }
         } 
+
+       
         
 
         return view('index', compact('title','panel', 'penelitians', 'pkms','insentifs', 'hkis'));
@@ -85,6 +96,32 @@ class MainController extends Controller
 
         // dd($d);
         return view('inbox', compact('title', 'data'));
+    }
+
+    public function history() {
+        $title = 'Riwayat Data';
+
+        $mydata = DB::select(DB::raw("select 'Penelitian' as table_name, id, dosen_ketua_id, jumlah, status, updated_at from penelitians WHERE dosen_ketua_id = ". Auth::user()->id ." AND deleted_at IS NULL
+        UNION ALL
+        select 'Pkm' as table_name, id,dosen_ketua_id, jumlah, status, updated_at from pkms WHERE dosen_ketua_id = ". Auth::user()->id ." AND deleted_at IS NULL
+        UNION ALL
+        select 'Insentif' as table_name, id,dosen_ketua_id, jumlah, status, updated_at from insentifs WHERE dosen_ketua_id = ". Auth::user()->id ." AND deleted_at IS NULL
+        UNION ALL
+        select 'HKI' as table_name, id, dosen_ketua_id, jumlah, status, updated_at from hkis WHERE dosen_ketua_id = ". Auth::user()->id ." AND deleted_at IS NULL
+        ORDER BY updated_at ASC"));
+
+        $mydata = array_map(function ($value) {
+            return (array)$value;
+        }, $mydata);
+
+        $data = collect(new RawQue());
+        foreach ($mydata as $l) {
+            $r = new RawQue($l);
+            $data->push($r);
+        };
+
+        // // dd($d);
+        return view('history', compact('title', 'data'));
     }
 
     public function test() {

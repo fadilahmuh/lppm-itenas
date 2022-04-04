@@ -38,7 +38,7 @@
                 <li>
                     <a href="{{ route('hki.index') }}" class="side-menu">
                         <div class="side-menu__icon"> <i class="fa-solid fa-file-invoice"></i> </div>
-                        <div class="side-menu__title"> Haki </div>
+                        <div class="side-menu__title"> HKI </div>
                     </a>
                 </li>
             </ul>
@@ -51,7 +51,7 @@
         </li>
         @auth('dosen')
         <li>
-            <a href="side-menu-file-manager.html" class="side-menu">
+            <a href="{{ route('history') }}" class="side-menu @if(url()->current()==route('history')) side-menu--active @endif">
                 <div class="side-menu__icon"> <i data-feather="hard-drive"></i> </div>
                 <div class="side-menu__title"> Riwayat Input Data </div>
             </a>

@@ -34,7 +34,7 @@ Route::middleware('auth:pegawai,dosen')->group(function() {
         Route::resource('pkm', PkmController::class)->only(['index']);
         Route::resource('hki', HkiController::class)->only(['index']);
     });
-
+    Route::get('/history', [MainController::class, 'history'])->name('history');
     
 
     Route::resource('penelitian', PenelitianController::class)->except(['index']);
