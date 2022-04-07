@@ -23,15 +23,15 @@ class MainController extends Controller
 {
     public function index() {
         $title = 'Dashboard';
-
-        $users = DB::table('penelitians')
-        ->join('pkms', 'penelitians.tahun', '=', 'pkms.tahun')
-        ->join('insentifs', 'penelitians.tahun', '=', 'insentifs.tahun')
-        ->join('hkis', 'penelitians.tahun', '=', 'hkis.tahun')
-        ->select('*')
-        ->get();
     
-        dd($users);
+        $r = DB::select(DB::raw("
+        select tahun from penelitians WHERE  STATUS = 1 AND deleted_at IS NULL UNION ALL
+        select tahun from pkms WHERE STATUS = 1 AND deleted_at IS NULL UNION ALL
+        select tahun from insentifs WHERE STATUS = 1 AND deleted_at IS NULL UNION ALL
+        select tahun from hkis WHERE STATUS = 1 AND deleted_at IS NULL"));
+
+        $tahun = range($r[0]->tahun,end($r)->tahun);
+        // dd($tahun);
 
         $penelitians = Penelitian::where('status', 1)->get();
         // $penelitians = Penelitian::all();
@@ -69,10 +69,7 @@ class MainController extends Controller
             }
         } 
 
-       
-        
-
-        return view('index', compact('title','panel', 'penelitians', 'pkms','insentifs', 'hkis'));
+        return view('index', compact('title','panel', 'penelitians', 'pkms','insentifs', 'hkis', 'tahun'));
     }
 
     public function inbox() {

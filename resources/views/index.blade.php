@@ -88,9 +88,9 @@
                     <div class="flex flex-col sm:flex-row items-center p-5 border-b border-gray-200 text-center justify-center">
                         <h2 class="font-medium text-base">Statistik Hibah Pertahun</h2>
                         <select class="input border ml-auto">
-                            <option>2022</option>
-                            <option>2021</option>
-                            <option>2020</option>
+                            @foreach ($tahun as $t) 
+                            <option value="{{$t}}">{{$t}}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="p-5" id="pie-chart">
@@ -109,9 +109,9 @@
                     <div class="flex flex-col sm:flex-row items-center p-5 border-b border-gray-200 text-center justify-center">
                         <h2 class="font-medium text-base">Statistik Jumlah Hibah Pertahun</h2>
                         <select class="input border ml-auto">
-                            <option>2022</option>
-                            <option>2021</option>
-                            <option>2020</option>
+                            @foreach ($tahun as $t) 
+                            <option value="{{$t}}">{{$t}}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="p-5" id="vertical-bar-chart">
@@ -160,7 +160,7 @@
 
 @section('line-script')
 <script>    
-    if ($('#pie-chart-widget').length) {
+    // if ($('#pie-chart-widget').length) {
         let ctx = $('#pie-chart-widget')[0].getContext('2d')
         let myPieChart = new Chart(ctx, {
             type: 'pie',
@@ -174,8 +174,8 @@
                     borderColor: "#fff"
                 }]
             }
-        })
-    };
+        });
+    // };
 
     if ($('#vertical-bar-chart-widget').length) {
         const ctx = $('#vertical-bar-chart-widget');
@@ -208,6 +208,13 @@
         }
         });
     };
-    
+
+    myPieChart.data.datasets[0].data = [3, 3, 3 ,3];
+    myPieChart.update();
+
+    $('').click(function (e) { 
+        e.preventDefault();
+        
+    });
 </script>
 @endsection
