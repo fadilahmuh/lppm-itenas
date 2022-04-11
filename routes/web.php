@@ -1,13 +1,14 @@
 <?php
 
-use App\Http\Controllers\HkiController;
-use App\Http\Controllers\InsentifController;
-use App\Http\Controllers\MainController;
-use App\Http\Controllers\PenelitianController;
-use App\Http\Controllers\PkmController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\PrintController;
+use App\Http\Controllers\Admin\LetterController;
+use App\Http\Controllers\Admin\SenderController;
+use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\DepartmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,43 +21,42 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Auth::routes();
+Route::get('/', [LoginController::class, 'index']);
 
-Route::middleware('auth:pegawai,dosen')->group(function() {
-    Route::get('/', [MainController::class, 'index'])->name('base');
-    Route::get('/input', [MainController::class, 'input'])->name('input');
-    // Route::get('/input2', [MainController::class, 'input2']);
-    Route::get('/profil', [MainController::class, 'profil'])->name('profil');
-    Route::get('/test', [MainController::class, 'test']);
-    Route::prefix('data')->group(function() {
-        Route::resource('penelitian', PenelitianController::class)->only(['index']);
-        Route::resource('insentif', InsentifController::class)->only(['index']);
-        Route::resource('pkm', PkmController::class)->only(['index']);
-        Route::resource('hki', HkiController::class)->only(['index']);
-    });
-    Route::get('/history', [MainController::class, 'history'])->name('history');
-    
+// Authentication
+Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
+Route::post('/login', [LoginController::class, 'authenticate']);
+Route::post('/logout', [LoginController::class, 'logout']);
 
-    Route::resource('penelitian', PenelitianController::class)->except(['index']);
-    Route::resource('insentif', InsentifController::class)->except(['index']);
-    Route::resource('pkm', PkmController::class)->except(['index']);
-    Route::resource('hki', HkiController::class)->except(['index']);
-    // Route::get('/form-penelitian', [MainController::class, 'input_penelitian'])->name('penelitian');
-    // Route::get('/form-pkm', [MainController::class, 'input_pkm'])->name('pkm');
-    // Route::get('/form-isentif', [MainController::class, 'input_insentif'])->name('insentif');
-    // Route::get('/form-hki', [MainController::class, 'input_haki'])->name('haki');
+//Admin
+Route::prefix('admin')
+        ->middleware('auth')
+        ->group(function(){
+            Route::get('/dashboard',[DashboardController::class, 'index'])->name('admin-dashboard');
+            Route::resource('/department', DepartmentController::class);
+            Route::resource('/sender', SenderController::class);
+            Route::resource('/letter', LetterController::class, [
+			    'except' => [ 'show' ]
+		    ]);
+            Route::get('letter/surat-masuk', [LetterController::class, 'incoming_mail'])->name('surat-masuk');
+            Route::get('letter/surat-keluar', [LetterController::class, 'outgoing_mail'])->name('surat-keluar');
 
-    // json
-    Route::get('/data-dosen', [MainController::class, 'get_dosen'])->name('get_dosen');
-    Route::get('/data-mhs', [MainController::class, 'get_mhs'])->name('get_mhs');
-    Route::get('/data-hibah', [MainController::class, 'get_hibah'])->name('get_hibah');
-    Route::get('/data-insentif', [MainController::class, 'get_insentif'])->name('get_insentif');
-    Route::get('/data-publikasi', [MainController::class, 'get_pub'])->name('get_pub');
-});
+            Route::get('letter/surat/{id}', [LetterController::class, 'show'])->name('detail-surat');
+            Route::get('letter/download/{id}', [LetterController::class, 'download_letter'])->name('download-surat');
+            Route::get('suratmasuk', [LetterController::class, 'cetakSurat'])->name('cetak-surat');
+            //export
+            Route::get('letter/exportpdf', [LetterController::class, 'exportpdf'])->name('exportpdf');
 
-Route::middleware('auth:pegawai,dosen')->group(function() {
-    Route::get('/kotak-masuk', [MainController::class, 'inbox'])->name('inbox');
-});
+            //print
+            Route::get('print/surat-masuk', [PrintController::class, 'index'])->name('print-surat-masuk');
+            Route::get('print/surat-keluar', [PrintController::class, 'outgoing'])->name('print-surat-keluar');
 
-// Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+            Route::resource('user', UserController::class);
+            Route::resource('setting', SettingController::class, [
+			    'except' => [ 'show' ]
+		    ]);
+            Route::get('setting/password',[SettingController::class, 'change_password'])->name('change-password');
+            Route::post('setting/upload-profile', [SettingController::class, 'upload_profile'])->name('profile-upload');
+            Route::post('change-password', [SettingController::class, 'update_password'])->name('update.password');
+        });

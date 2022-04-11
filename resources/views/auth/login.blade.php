@@ -1,52 +1,70 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>LOGIN - LP2M ITENAS</title>
-    <meta name="description" content="">
+@extends('layouts.auth')
 
-    <link rel="stylesheet" href="{{ asset('css/app.css') }} " />
-
-</head>
-<body class="body-bg min-h-screen pt-12 md:pt-20 pb-6 px-2 md:px-0" style="font-family:'Lato',sans-serif;">
-    <header class="max-w-lg mx-auto justify-center">
-        <a href="" class="intro-x flex justify-center items-center pt-4">
-            <img alt="LP2M" class="w-12" src="{{asset('logo-itenas.svg') }}">
-            <span class="text-black font-bold text-3xl ml-3"><span class=" text-theme-1">LP2M </span>ITENAS</span>
-        </a>
-    </header>
-
-    <main class="bg-white bg-opacity-90 max-w-lg mx-auto p-8 md:p-12 my-10 rounded-lg shadow-2xl intro-x">
-        @if(Session::has('error'))        
-        <div class="rounded-md flex items-center px-5 py-4 mb-2 bg-theme-6 text-white bg-opacity-90"> 
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-alert-octagon w-6 h-6 mr-2"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"></polygon><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> 
-            {{ Session('error') }} 
+@section('main')
+    <main>
+        <div class="container-xl px-4">
+            <div class="row justify-content-center">
+                <div class="col-lg-5">
+                    <!-- Basic login form-->
+                    <div class="card shadow-lg border-0 rounded-lg mt-5">
+                        <div class="card-header justify-content-center"><h3 class="fw-light my-4">Login</h3></div>
+                        <div class="card-body">
+                            @if (session()->has('success'))
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                {{ session('success') }}    
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                            @endif
+                            @if (session()->has('loginError'))
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                {{ session('loginError') }}    
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                            @endif
+                            <!-- Login form-->
+                            <form action="/login" method="post">
+                                @csrf
+                                <!-- Form Group (email address)-->
+                                <div class="mb-3">
+                                    <label class="small mb-1" for="email">Email</label>
+                                    <input class="form-control @error('email') is-invalid @enderror" id="email" name="email" type="email" value="{{ old('email') }}" placeholder="Enter email address" autofocus required/>
+                                    @error('email')
+                                        <div class="invalid-feedback">
+                                            {{ $message; }}
+                                        </div>
+                                    @enderror
+                                </div>
+                                <!-- Form Group (password)-->
+                                <div class="mb-3">
+                                    <label class="small mb-1" for="password">Password</label>
+                                    <input class="form-control" id="password" name="password" type="password" placeholder="Enter password" required/>
+                                </div>
+                                <!-- Form Group (remember password checkbox)-->
+                                <div class="mb-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" id="rememberPasswordCheck" type="checkbox" value="" />
+                                        <label class="form-check-label" for="rememberPasswordCheck">Remember password</label>
+                                    </div>
+                                </div>
+                                <!-- Form Group (login box)-->
+                                <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
+                                    <a class="small" href="#">
+                                        
+                                    </a>
+                                    <button type="submit" class="btn btn-primary">Login</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="card-footer text-center">
+                            <div class="small">
+                                {{-- <a href="/">
+                                    <i class="fas fa-arrow-left"></i> Pergi ke Texno.id
+                                </a> --}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        @endif
-
-        <section class="mt-5">
-            <form class="flex flex-col" method="POST" action="{{ route('login') }}">
-                @csrf
-                <label class="block text-gray-700 text-sm font-bold mb-2 ml-3" for="nip">NIP</label>
-                <div class="mb-6 pt-3 rounded bg-gray-200"> 
-                    <input type="text" id="nip" name="nip" value="{{ old('nip') }}" class="bg-gray-200 rounded w-full text-gray-700 focus:outline-none border-b-4 border-gray-300 focus:border-theme-4 transition duration-500 px-3 pb-3" placeholder="NIP atau email">
-                </div>
-                <label class="block text-gray-700 text-sm font-bold mb-2 ml-3" for="pin">PIN</label>
-                <div class="mb-4 pt-3 rounded bg-gray-200">
-                    <input type="password" id="password" name="password" class="bg-gray-200 rounded w-full text-gray-700 focus:outline-none border-b-4 border-gray-300 focus:border-theme-4 transition duration-500 px-3 pb-3" >
-                </div>
-                {{-- <div class="flex justify-end">
-                    <a href="#" class="text-sm text-theme-1 hover:underline mb-6">Forgot your password?</a>
-                </div> --}}
-                {{-- <div class="flex items-center text-gray-700 mb-6">
-                    <input name="remember" id="remember" type="checkbox" class="input border mr-2 border-zinc-500" id="vertical-remember-me" {{ old('remember') ? 'checked' : '' }}>
-                    <label class="cursor-pointer select-none" for="vertical-remember-me">Ingatkan Saya</label>
-                </div> --}}
-                <button class="bg-theme-1 mt-4 hover:bg-theme-4 text-white font-bold py-2 rounded shadow-lg hover:shadow-xl transition duration-200" type="submit">Sign In</button>
-            </form>
-        </section>
     </main>
-</body>
-</html>
+@endsection
