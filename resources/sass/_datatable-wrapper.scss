@@ -1,5 +1,10 @@
 .datatable-wrapper {
+    @apply overflow-auto;
+    .dataTables_scroll {
+        @apply mb-1;
+    }
     .dataTables_length {
+        @apply float-left;
         select {
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='rgb(74, 85, 104)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-chevron-down'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
             background-size: 15px;
@@ -8,7 +13,7 @@
         }
     }
     .dataTables_filter {
-        @apply ml-auto;
+        @apply float-right ml-auto;
         @media (max-width: $sm) {
             @apply w-full ml-0 mt-3;
             input {
@@ -20,7 +25,7 @@
         }
     }
     .dataTables_wrapper {
-        @apply flex flex-wrap;
+        @apply flex-wrap;
     }
     .dataTables_paginate {
         @apply ml-auto;
@@ -59,13 +64,13 @@
         }
     }
     .dataTables_info {
-        @apply flex items-center;
+        @apply float-left flex items-center;
         @media (max-width: $sm) {
             @apply mx-auto;
         }
     }
     .dataTables_paginate {
-        @apply flex items-center;
+        @apply float-right flex items-center;
         span {
             @apply flex;
         }
@@ -87,6 +92,14 @@
             @apply bg-white w-5 h-5 rounded-full absolute top-0 bottom-0 left-0 my-auto ml-5 bg-center cursor-pointer shadow;
         }
     }
+}
+
+.dataTables_length {
+    @apply float-left;
+}
+
+.dataTables_filter {
+    @apply float-left;
 }
 
 .dataTables_length select {

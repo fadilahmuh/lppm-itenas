@@ -122,9 +122,8 @@ class MainController extends Controller
     }
 
     public function test() {
-        $list_dsn = [3,7];
-        $data = Dosen::findMany($list_dsn);
-        dd($data);
+        $data = Penelitian::find(1);
+        dd($data->getjurusan());
     }
 
     public function input() {

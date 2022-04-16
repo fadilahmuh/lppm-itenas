@@ -5,6 +5,7 @@ use App\Http\Controllers\InsentifController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\PenelitianController;
 use App\Http\Controllers\PkmController;
+use App\Http\Controllers\PublikasiController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -33,6 +34,7 @@ Route::middleware('auth:pegawai,dosen')->group(function() {
         Route::resource('insentif', InsentifController::class)->only(['index']);
         Route::resource('pkm', PkmController::class)->only(['index']);
         Route::resource('hki', HkiController::class)->only(['index']);
+        Route::resource('publikasi', PublikasiController::class)->only(['index']);
     });
     Route::get('/history', [MainController::class, 'history'])->name('history');
     
@@ -41,6 +43,7 @@ Route::middleware('auth:pegawai,dosen')->group(function() {
     Route::resource('insentif', InsentifController::class)->except(['index']);
     Route::resource('pkm', PkmController::class)->except(['index']);
     Route::resource('hki', HkiController::class)->except(['index']);
+    Route::resource('publikasi', PublikasiController::class)->except(['index']);
     // Route::get('/form-penelitian', [MainController::class, 'input_penelitian'])->name('penelitian');
     // Route::get('/form-pkm', [MainController::class, 'input_pkm'])->name('pkm');
     // Route::get('/form-isentif', [MainController::class, 'input_insentif'])->name('insentif');
@@ -54,7 +57,7 @@ Route::middleware('auth:pegawai,dosen')->group(function() {
     Route::get('/data-publikasi', [MainController::class, 'get_pub'])->name('get_pub');
 });
 
-Route::middleware('auth:pegawai,dosen')->group(function() {
+Route::middleware('auth:pegawai')->group(function() {
     Route::get('/kotak-masuk', [MainController::class, 'inbox'])->name('inbox');
 });
 

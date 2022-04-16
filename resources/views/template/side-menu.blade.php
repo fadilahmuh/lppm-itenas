@@ -7,52 +7,59 @@
     <ul>
         <li>
             <a href="{{ route('base') }}" class="side-menu @if(url()->current()==route('base')) side-menu--active @endif">
-                <div class="side-menu__icon"> <i data-feather="home"></i> </div>
+                <div class="side-menu__icon"><i class="fa-solid fa-house fa-xl"></i></div>
                 <div class="side-menu__title"> Dashboard </div>
             </a>
         </li>
         <li>
+            <a href="{{ route('penelitian.index') }}" class="side-menu @if(url()->current()==route('penelitian.index')) side-menu--active @endif">
+                <div class="side-menu__icon"> <i class="fa-solid fa-microscope fa-xl"></i> </div>
+                <div class="side-menu__title"> Data Penelitian </div>
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('pkm.index') }}" class="side-menu @if(url()->current()==route('pkm.index')) side-menu--active @endif">
+                <div class="side-menu__icon"> <i class="fa-solid fa-calendar-days fa-xl"></i> </div>
+                <div class="side-menu__title"> Data PKM </div>
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('insentif.index') }}" class="side-menu @if(url()->current()==route('insentif.index')) side-menu--active @endif">
+                <div class="side-menu__icon"> <i class="fa-solid fa-receipt fa-xl"></i> </div>
+                <div class="side-menu__title"> Data Insentif </div>
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('hki.index') }}" class="side-menu @if(url()->current()==route('hki.index')) side-menu--active @endif">
+                <div class="side-menu__icon"> <i class="fa-solid fa-file-invoice fa-xl"></i> </div>
+                <div class="side-menu__title"> Data HKI </div>
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('publikasi.index') }}" class="side-menu @if(url()->current()==route('publikasi.index')) side-menu--active @endif">
+                <div class="side-menu__icon"> <i class="fa-regular fa-file-lines fa-xl"></i> </div>
+                <div class="side-menu__title"> Data Publikasi </div>
+            </a>
+        </li>
+        {{-- <li>
             <a href="javascript:;" class="side-menu @if(Request::segment(1) == 'data') side-menu--active @endif">
                 <div class="side-menu__icon"> <i data-feather="book"></i> </div>
                 <div class="side-menu__title"> List Data Hibah <i data-feather="chevron-down" class="side-menu__sub-icon"></i> </div>
             </a>
             <ul class="">
-                <li>
-                    <a href="{{ route('penelitian.index') }}" class="side-menu">
-                        <div class="side-menu__icon"> <i class="fa-solid fa-microscope"></i> </div>
-                        <div class="side-menu__title"> Penelitian </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('pkm.index') }}" class="side-menu">
-                        <div class="side-menu__icon"> <i class="fa-solid fa-calendar-days"></i> </div>
-                        <div class="side-menu__title"> PKM </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('insentif.index') }}" class="side-menu">
-                        <div class="side-menu__icon"> <i class="fa-solid fa-receipt"></i> </div>
-                        <div class="side-menu__title"> Insentif </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('hki.index') }}" class="side-menu">
-                        <div class="side-menu__icon"> <i class="fa-solid fa-file-invoice"></i> </div>
-                        <div class="side-menu__title"> HKI </div>
-                    </a>
-                </li>
+                
             </ul>
-        </li>
+        </li> --}}
         <li>
             <a href="{{ route('input')}}" class="side-menu @if(url()->current()==route('input')) side-menu--active @endif">
-                <div class="side-menu__icon"> <i data-feather="edit"></i> </div>
-                <div class="side-menu__title"> Input data Hibah </div>
+                <div class="side-menu__icon"><i class="fa-regular fa-pen-to-square fa-xl"></i> </div>
+                <div class="side-menu__title"> Input data </div>
             </a>
         </li>
         @auth('dosen')
         <li>
             <a href="{{ route('history') }}" class="side-menu @if(url()->current()==route('history')) side-menu--active @endif">
-                <div class="side-menu__icon"> <i data-feather="hard-drive"></i> </div>
+                <div class="side-menu__icon"> <i class="fa-solid fa-clock-rotate-left fa-xl"></i> </div>
                 <div class="side-menu__title"> Riwayat Input Data </div>
             </a>
         </li>
@@ -60,7 +67,7 @@
         @auth('pegawai')
         <li>
             <a href="{{ route('inbox')}}" class="side-menu @if(url()->current()==route('inbox')) side-menu--active @endif">
-                <div class="side-menu__icon"> <i data-feather="inbox"></i> </div>
+                <div class="side-menu__icon"> <i class="fa-solid fa-inbox fa-xl"></i> </div>
                 <div class="side-menu__title"> Kotak Masuk </div>
             </a>
         </li>

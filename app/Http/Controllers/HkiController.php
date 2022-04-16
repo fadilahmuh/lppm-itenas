@@ -18,7 +18,7 @@ class HkiController extends Controller
      */
     public function index()
     {
-        $title = 'Hibah HKI';
+        $title = 'Data HKI';
         $data = Hki::where('status', 1)->get();
 
         return view('template.table-hki', compact('title','data'));
