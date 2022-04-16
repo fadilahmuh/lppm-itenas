@@ -30,8 +30,9 @@ class MainController extends Controller
         select tahun from insentifs WHERE STATUS = 1 AND deleted_at IS NULL UNION ALL
         select tahun from hkis WHERE STATUS = 1 AND deleted_at IS NULL"));
 
+        
         $tahun = range($r[0]->tahun,end($r)->tahun);
-        // dd($tahun);
+        //dd($tahun);
 
         $penelitians = Penelitian::where('status', 1)->get();
         // $penelitians = Penelitian::all();
@@ -122,8 +123,9 @@ class MainController extends Controller
     }
 
     public function test() {
-        $data = Penelitian::find(1);
-        dd($data->getjurusan());
+        $list_dsn = [3,7];
+        $data = Dosen::findMany($list_dsn);
+        dd($data);
     }
 
     public function input() {

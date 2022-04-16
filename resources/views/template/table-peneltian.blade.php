@@ -10,7 +10,8 @@
                 <th class="border-b-2 text-center whitespace-no-wrap">Jenis Hibah</th>
                 <th class="border-b-2 text-center whitespace-no-wrap">Dosen Ketua</th>
                 <th class="border-b-2 text-center whitespace-no-wrap">Dosen Anggota</th>
-                <th class="border-b-2 text-center whitespace-no-wrap">Amggota Mahasiswa</th>
+                <th class="border-b-2 text-center whitespace-no-wrap">Nama Mitra</th>
+                <th class="border-b-2 text-center whitespace-no-wrap">Anggota Mahasiswa</th>
                 <th class="border-b-2 text-center whitespace-no-wrap">Jumlah</th>
                 <th class="border-b-2 text-center whitespace-no-wrap">Tahun</th>
                 <th class="border-b-2 text-center whitespace-no-wrap">#</th>
@@ -34,6 +35,9 @@
                     -
                     @endif
                 </td>
+                <td class="text-center border-b">{{$d->nama_mitra}}
+
+                </td>    
                 <td class="w-40 border-b">
                     @if(!empty($d->getMhsAnggota()))
                         @foreach ($d->getMhsAnggota() as $da)
