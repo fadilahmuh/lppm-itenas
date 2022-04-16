@@ -2,13 +2,15 @@
 
 @section('table')
 <div class="intro-y datatable-wrapper box p-5 mt-5">
-    <table class="table table-report table-report--bordered display datatable w-full">
+    <table class="table table-report table-report--bordered display nowrap datatable w-full">
         <thead>
             <tr>
                 <th class="border-b-2 text-center whitespace-no-wrap">Judul</th>
+                <th class="border-b-2 text-center whitespace-no-wrap">Jurusan/Bidang</th>
                 <th class="border-b-2 text-center whitespace-no-wrap">Jenis Hibah</th>
                 <th class="border-b-2 text-center whitespace-no-wrap">Dosen Ketua</th>
                 <th class="border-b-2 text-center whitespace-no-wrap">Dosen Anggota</th>
+                <th class="border-b-2 text-center whitespace-no-wrap">Amggota Mahasiswa</th>
                 <th class="border-b-2 text-center whitespace-no-wrap">Jumlah</th>
                 <th class="border-b-2 text-center whitespace-no-wrap">Tahun</th>
                 <th class="border-b-2 text-center whitespace-no-wrap">#</th>
@@ -20,6 +22,7 @@
                 <td class="border-b text-center">
                     <div class="font-medium whitespace-no-wrap">{{$d->judul}}</div>
                 </td>
+                <td class="text-center border-b">{{$d->getjurusan()}} </td>
                 <td class="text-center border-b">{{$d->jenis_hibah->nama}} </td>
                 <td class="text-center border-b">{{$d->dosen_ketua->nama}}</td>
                 <td class="w-40 border-b">
@@ -29,7 +32,16 @@
                         @endforeach
                     @else
                     -
-                    @endauth
+                    @endif
+                </td>
+                <td class="w-40 border-b">
+                    @if(!empty($d->getMhsAnggota()))
+                        @foreach ($d->getMhsAnggota() as $da)
+                            <div class="font-medium whitespace-no-wrap text-center">{{$da->nama}}</div>
+                        @endforeach
+                    @else
+                    -
+                    @endif
                 </td>
                 <td class="text-center border-b">{{number_format($d->jumlah)}}</td>
                 <td class="text-center border-b">{{$d->tahun}}</td>

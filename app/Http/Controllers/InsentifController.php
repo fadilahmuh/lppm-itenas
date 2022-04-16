@@ -19,7 +19,7 @@ class InsentifController extends Controller
      */
     public function index()
     {
-        $title = 'Hibah Insentif';
+        $title = 'Data Insentif';
         $data = Insentif::where('status', 1)->get();
 
         return view('template.table-insentif', compact('title','data'));

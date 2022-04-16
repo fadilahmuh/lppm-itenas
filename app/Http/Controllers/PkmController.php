@@ -18,7 +18,7 @@ class PkmController extends Controller
      */
     public function index()
     {
-        $title = 'Hibah PKM';
+        $title = 'Data PKM';
         $data = Pkm::where('status', 1)->get();
 
         return view('template.table-pkm', compact('title','data'));

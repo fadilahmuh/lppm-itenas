@@ -19,7 +19,7 @@ class PenelitianController extends Controller
      */
     public function index()
     {
-        $title = 'Hibah Penelitian';
+        $title = 'Data Penelitian';
         $data = Penelitian::where('status', 1)->get();
 
         return view('template.table-peneltian', compact('title','data'));

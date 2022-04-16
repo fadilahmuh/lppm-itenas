@@ -31,7 +31,7 @@ class MainController extends Controller
         ->select('*')
         ->get();
     
-        dd($users);
+        // dd($users);
 
         $penelitians = Penelitian::where('status', 1)->get();
         // $penelitians = Penelitian::all();
@@ -125,9 +125,8 @@ class MainController extends Controller
     }
 
     public function test() {
-        $list_dsn = [3,7];
-        $data = Dosen::findMany($list_dsn);
-        dd($data);
+        $data = Penelitian::find(1);
+        dd($data->getjurusan());
     }
 
     public function input() {

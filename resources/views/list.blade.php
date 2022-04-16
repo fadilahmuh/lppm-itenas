@@ -1,13 +1,13 @@
 @extends('template.app')
 
 @section('lib-css')
-{{-- <link rel="stylesheet" type="text/css" href="{{ asset('js/datatable/datatables.min.css') }}"/> --}}
+{{-- <link rel="stylesheet" type="text/css" href="{{ asset('js/datatable/datatables') }}"/> --}}
 @endsection
 
 @section('content')
 <div class="intro-y flex items-center h-10">
     <h2 class="text-lg font-medium mr-5">
-        List {{$title}}
+        {{$title}}
     </h2>
 </div>  
 @if($errors->any())
@@ -39,7 +39,8 @@
 @section('line-script')
 <script>
     $('.datatable').DataTable({
-        responsive: true,
+        "scrollX": true,
+        // "dom": '<"dataTables_wrapper"fltip>'
     });
 
     // $('.btn-edit').click(function (e) { 
