@@ -36,4 +36,20 @@ class Insentif extends Model
     public function getDosenAnggota(){
         return  Dosen::findMany(explode(',', $this->penulis_anggota));
     }
+    public function getjurusan(){
+        $j =[];
+        $ketua = Dosen::find( $this->dosen_ketua_id);
+        array_push($j, $ketua->jurusan);
+        $anggota = Dosen::findMany(explode(',', $this->dosen_anggota));
+        foreach ($anggota as $a){
+            array_push($j, $a->jurusan);
+        }
+        $j = array_unique($j);
+        $j = implode(", ",$j);
+        return $j;
+    }
+
+    public function getMhsAnggota(){
+        return Mahasiswa::findMany(explode(',', $this->anggota_mhs));
+    }
 }

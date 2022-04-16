@@ -35,8 +35,12 @@
                     -
                     @endif
                 </td>
-                <td class="text-center border-b">{{$d->nama_mitra}}
-
+                <td class="text-center border-b">
+                    @if(!empty($d->nama_mitra))
+                     {{$d->nama_mitra}}
+                     @else
+                     -
+                     @endif
                 </td>    
                 <td class="w-40 border-b">
                     @if(!empty($d->getMhsAnggota()))
