@@ -1,7 +1,8 @@
 
 <form action="{{ route('pkm.store') }}" method="POST" enctype="multipart/form-data">
 @csrf
-@method('PUT')
+<input type="hidden" name="jenis" value="pkm">
+@method('POST')
     <div class="box p-5" id="input">
         <div>
             <label>Judul PKM</label>

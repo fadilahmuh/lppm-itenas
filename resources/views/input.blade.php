@@ -14,13 +14,13 @@
             Tambah Data Baru
         </h2>
     </div>
-</div>      
+</div>   
 <div class="pos intro-y grid grid-cols-12 gap-5 mt-5">
     <div class="col-span-12 lg:col-span-4 md:col-span-12 xxl:col-span-3">
         <div class="intro-y box p-5">
             <div class="pos__tabs nav-tabs mt-1">
-                <button data-toggle="tab" data-target="#penelitian" href="javascript:;" class="flex items-center px-3 py-2 rounded-md w-full active"> <i class="fa-solid fa-microscope text-lg mr-2"></i> Penelitian </button>
-                <button data-toggle="tab" data-target="#pkm" href="javascript:;" class="flex items-center px-3 py-2 rounded-md w-full"> <i class="fa-solid fa-calendar-days text-lg mr-2"></i> PKM </button>
+                <button data-toggle="tab" data-target="#penelitian" href="javascript:;" class="flex items-center px-3 py-2 rounded-md w-full @if(!is_null(old('jenis')) && old('jenis') == 'penelitian') active @elseif(is_null(old('jenis'))) active @endif"> <i class="fa-solid fa-microscope text-lg mr-2"></i> Penelitian </button>
+                <button data-toggle="tab" data-target="#pkm" href="javascript:;" class="flex items-center px-3 py-2 rounded-md w-full @if(old('jenis') == 'pkm') active @endif"> <i class="fa-solid fa-calendar-days text-lg mr-2"></i> PKM </button>
                 <button data-toggle="tab" data-target="#insentif" href="javascript:;" class="flex items-center px-3 py-2 rounded-md w-full"> <i class="fa-solid fa-receipt text-lg mr-2"></i> Insentif </button>
                 <button data-toggle="tab" data-target="#hki" href="javascript:;" class="flex items-center px-3 py-2 rounded-md w-full"> <i class="fa-solid fa-file-invoice text-lg mr-2"></i> HKI </button>
             </div>
@@ -38,11 +38,11 @@
         @endif
         
         <div class="tab-content">
-            <div class="tab-content__pane active" id="penelitian">
+            <div class="tab-content__pane @if(!is_null(old('jenis')) && old('jenis') == 'penelitian') active @elseif(is_null(old('jenis'))) active @endif" id="penelitian">
                 @include('template.form-penelitian')
             </div>
           
-            <div class="tab-content__pane" id="pkm">
+            <div class="tab-content__pane @if(old('jenis') == 'pkm') active @endif" id="pkm">
                 @include('template.form-pkm')
             </div>
 

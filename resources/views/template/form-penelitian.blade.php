@@ -1,10 +1,11 @@
 
 <form action="{{ route('penelitian.store') }}" method="POST" enctype="multipart/form-data">
 @csrf
+<input type="hidden" name="jenis" value="penelitian">
     <div class="box p-5" id="input">
         <div>
             <label>Judul Penelitian</label>
-            <input name="judul_penelitian" type="text" class="input w-full border mt-2" placeholder="--Judul Penelitian--">
+            <input name="judul_penelitian" type="text" class="input w-full border mt-2" placeholder="--Judul Penelitian--" value="{{old('judul_penelitian')}}">
         </div>
         <div class="mt-3">
             <label>Dosen Ketua</label>
