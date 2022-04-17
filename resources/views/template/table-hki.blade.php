@@ -5,20 +5,22 @@
     <table class="table table-report table-report--bordered display datatable w-full">
         <thead>
             <tr>
-                <th class="border-b-2 text-center whitespace-no-wrap">Nama HKI</th>
-                <th class="border-b-2 text-center whitespace-no-wrap">Jenis HKI</th>
-                <th class="border-b-2 text-center whitespace-no-wrap">Jurusan</th>
-                <th class="border-b-2 text-center whitespace-no-wrap">Dosen Ketua</th>
-                <th class="border-b-2 text-center whitespace-no-wrap">Jumlah</th>
-                <th class="border-b-2 text-center whitespace-no-wrap">Tahun</th>
-                <th class="border-b-2 text-center whitespace-no-wrap">#</th>
+                <th class="border-b-2 text-center whitespace-nowrap">Nama HKI</th>
+                <th class="border-b-2 text-center whitespace-nowrap">Jenis HKI</th>
+                <th class="border-b-2 text-center whitespace-nowrap">Jurusan</th>
+                <th class="border-b-2 text-center whitespace-nowrap">Dosen Ketua</th>
+                <th class="border-b-2 text-center whitespace-nowrap">Jumlah</th>
+                <th class="border-b-2 text-center whitespace-nowrap">Tahun</th>
+                @auth('pegawai','web')
+                <th class="border-b-2 text-center whitespace-nowrap">#</th>
+                @endauth
             </tr>
         </thead>
         <tbody>
             @foreach ($data as $d)
             <tr>
                 <td class="border-b text-center">
-                    <div class="font-medium whitespace-no-wrap">{{$d->judul}}</div>
+                    <div class="font-medium whitespace-nowrap">{{$d->judul}}</div>
                 </td>
                 <td class="text-center border-b">{{$d->jenis_hki}} </td>
                 <td class="text-center border-b">{{$d->getjurusan()}} </td>

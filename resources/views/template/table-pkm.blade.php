@@ -5,23 +5,25 @@
     <table class="table table-report table-report--bordered display nowrap datatable w-full">
         <thead>
             <tr>
-                <th class="border-b-2 text-center whitespace-no-wrap">Judul</th>
-                <th class="border-b-2 text-center whitespace-no-wrap">Jurusan/Bidang</th>
-                <th class="border-b-2 text-center whitespace-no-wrap">Jenis Hibah</th>
-                <th class="border-b-2 text-center whitespace-no-wrap">Dosen Ketua</th>
-                <th class="border-b-2 text-center whitespace-no-wrap">Dosen Anggota</th>
-                <th class="border-b-2 text-center whitespace-no-wrap">Anggota Mahasiswa</th>
-                <th class="border-b-2 text-center whitespace-no-wrap">Nama Mitra</th>
-                <th class="border-b-2 text-center whitespace-no-wrap">Jumlah</th>
-                <th class="border-b-2 text-center whitespace-no-wrap">Tahun</th>
-                <th class="border-b-2 text-center whitespace-no-wrap">#</th>
+                <th class="border-b-2 text-center whitespace-nowrap">Judul</th>
+                <th class="border-b-2 text-center whitespace-nowrap">Jurusan/Bidang</th>
+                <th class="border-b-2 text-center whitespace-nowrap">Jenis Hibah</th>
+                <th class="border-b-2 text-center whitespace-nowrap">Dosen Ketua</th>
+                <th class="border-b-2 text-center whitespace-nowrap">Dosen Anggota</th>
+                <th class="border-b-2 text-center whitespace-nowrap">Anggota Mahasiswa</th>
+                <th class="border-b-2 text-center whitespace-nowrap">Nama Mitra</th>
+                <th class="border-b-2 text-center whitespace-nowrap">Jumlah</th>
+                <th class="border-b-2 text-center whitespace-nowrap">Tahun</th>
+                @auth('pegawai','web')
+                <th class="border-b-2 text-center whitespace-nowrap">#</th>
+                @endauth
             </tr>
         </thead>
         <tbody>
             @foreach ($data as $d)
             <tr>
                 <td class="border-b text-center">
-                    <div class="font-medium whitespace-no-wrap">{{$d->judul}}</div>
+                    <div class="font-medium whitespace-nowrap">{{$d->judul}}</div>
                 </td>
                 <td class="text-center border-b">{{$d->getjurusan()}} </td>
                 <td class="text-center border-b">{{$d->jenis_hibah->nama}} </td>
@@ -29,7 +31,7 @@
                 <td class="w-40 border-b">
                     @if(!empty($d->getDosenAnggota()))
                         @foreach ($d->getDosenAnggota() as $da)
-                            <div class="font-medium whitespace-no-wrap text-center">{{$da->nama}}</div>
+                            <div class="font-medium whitespace-nowrap text-center">{{$da->nama}}</div>
                         @endforeach
                     @else
                     -
@@ -38,7 +40,7 @@
                 <td class="w-40 border-b">
                     @if(!empty($d->getMhsAnggota()))
                         @foreach ($d->getMhsAnggota() as $ma)
-                            <div class="font-medium whitespace-no-wrap text-center">{{$ma->nama}}</div>
+                            <div class="font-medium whitespace-nowrap text-center">{{$ma->nama}}</div>
                         @endforeach
                     @else
                     -

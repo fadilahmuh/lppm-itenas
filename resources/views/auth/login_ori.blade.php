@@ -58,7 +58,7 @@
                         </label>
 
                         @if (Route::has('password.request'))
-                        <a class="text-sm text-blue-500 hover:text-blue-700 whitespace-no-wrap no-underline hover:underline ml-auto"
+                        <a class="text-sm text-blue-500 hover:text-blue-700 whitespace-nowrap no-underline hover:underline ml-auto"
                             href="{{ route('password.request') }}">
                             {{ __('Forgot Your Password?') }}
                         </a>
@@ -67,7 +67,7 @@
 
                     <div class="flex flex-wrap">
                         <button type="submit"
-                        class="w-full select-none font-bold whitespace-no-wrap p-3 rounded-lg text-base leading-normal no-underline text-gray-100 bg-blue-500 hover:bg-blue-700 sm:py-4">
+                        class="w-full select-none font-bold whitespace-nowrap p-3 rounded-lg text-base leading-normal no-underline text-gray-100 bg-blue-500 hover:bg-blue-700 sm:py-4">
                             {{ __('Login') }}
                         </button>
 
