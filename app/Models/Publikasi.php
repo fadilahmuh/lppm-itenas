@@ -14,8 +14,8 @@ class Publikasi extends Model
         'penulis_anggota',
         'penulis_external',
         'jurnal',
-        'jenis_publikasi',
-        'dana',
+        'jenis_publikasi_id',
+        'sumber_dana',
         'lingkup',
         'tanggal_publish',
         'tahun',
@@ -27,9 +27,9 @@ class Publikasi extends Model
     	return $this->belongsTo(Dosen::class);
     }
 
-    // public function jenis_hibah(){
-    // 	return $this->belongsTo(Ref_jenishibah::class);
-    // }
+    public function jenis_publikasi(){
+    	return $this->belongsTo(Ref_publikasijenis::class);
+    }
 
     public function getPenulisInternal()
     {

@@ -16,6 +16,10 @@ class PublikasiController extends Controller
     public function index()
     {
         //
+        $title = 'Publikasi';
+        $data = Publikasi::all();
+
+        return view('template.table-publikasi', compact('title','data'));
     }
 
     /**
@@ -68,7 +72,7 @@ class PublikasiController extends Controller
      * @param  \App\Models\Publikasi  $publikasi
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatePublikasiRequest $request, Publikasi $publikasi)
+    public function update(StorePublikasiRequest $request, Publikasi $publikasi)
     {
         //
     }
