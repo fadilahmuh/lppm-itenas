@@ -2,7 +2,7 @@
 
 @section('table')
 <div class="intro-y datatable-wrapper box p-5 mt-5">
-    <table class="table table-report table-report--bordered display datatable w-full">
+    <table class="table table-report table-report--bordered display nowrap datatable w-full">
         <thead>
             <tr>
                 <th class="border-b-2 text-center whitespace-no-wrap">Judul</th>

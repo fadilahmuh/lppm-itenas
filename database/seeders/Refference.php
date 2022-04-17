@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Ref_jenishibah;
 use App\Models\Ref_jenisinsentif;
 use App\Models\Ref_jenispublikasi;
+use App\Models\Ref_publikasijenis;
 use Illuminate\Database\Seeder;
 
 class Refference extends Seeder
@@ -58,6 +59,27 @@ class Refference extends Seeder
         Ref_jenispublikasi::create(['nama' => 'E-HKI']);
         Ref_jenispublikasi::create(['nama' => 'Pengajuan ISBN Buku']);
         Ref_jenispublikasi::create(['nama' => 'Produk Iptek dan Lainnya']);
+
+        Ref_publikasijenis::create(['nama' => 'Buku Ber-ISBN']);
+        Ref_publikasijenis::create(['nama' => 'Buku Internasional Ber-ISBN (diedarkan minimal di tiga negara)']);
+        Ref_publikasijenis::create(['nama' => 'Hak Kekayaan Intelektual (HKI) - Tingkat Internasional (minimal 4 Negara)']);
+        Ref_publikasijenis::create(['nama' => 'Hak Kekayaan Intelektual (HKI) - Tingkat Nasional']);
+        Ref_publikasijenis::create(['nama' => 'Jurnal Internasional Bereputasi ber-ISSN']);
+        Ref_publikasijenis::create(['nama' => 'Jurnal Internasional Terindeks']);
+        Ref_publikasijenis::create(['nama' => 'Jurnal Internasional Terindeks pada WoS atau Scopus, SJR IF =< 0,1']);
+        Ref_publikasijenis::create(['nama' => 'Jurnal Internasional ber-ISSN']);
+        Ref_publikasijenis::create(['nama' => 'Jurnal Nasional Terakreditasi Peringkat Sinta 1 dan 2']);
+        Ref_publikasijenis::create(['nama' => 'Jurnal Nasional Terakreditasi Peringkat Sinta 3 s.d 6']);
+        Ref_publikasijenis::create(['nama' => 'Jurnal Nasional Tidak Terakreditasi']);
+        Ref_publikasijenis::create(['nama' => 'Jurnal Nasional ber-ISSN Terakreditasi Dikti']);
+        Ref_publikasijenis::create(['nama' => 'Jurnal Nasional ber-ISSN berbahasa Inggris/Bhs Resmi PBB Terindeks DOAJ']);
+        Ref_publikasijenis::create(['nama' => 'Jurnal Nasional ber-ISSN tidak terakreditasi']);
+        Ref_publikasijenis::create(['nama' => 'Menerjemahkan/menyadur Naskah buku (hasilnya ber-ISBN)']);
+        Ref_publikasijenis::create(['nama' => 'Prosiding/Seminar Internasional (ber-ISBN)']);
+        Ref_publikasijenis::create(['nama' => 'Prosiding/Seminar Internasional yang Terindeks']);
+        Ref_publikasijenis::create(['nama' => 'Prosiding/Seminar Nasional (ber-ISBN)']);
+        Ref_publikasijenis::create(['nama' => 'Rancangan dan Karya Teknologi yang tidak dipatenkan;rancangan dan Karya seni monumental/seni pertunjukan; karya sastra - Tingkat Internasional']);
+        Ref_publikasijenis::create(['nama' => 'Rancangan dan Karya Teknologi yang tidak dipatenkan; rancangan dan Karya seni monumental/seni pertunjukan;karya sastra - Tingkat Nasional']);
 
     }
 }
