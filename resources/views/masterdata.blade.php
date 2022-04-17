@@ -60,6 +60,9 @@
         <div class="col-span-12 mt-6 box">
         <div class="text-center text-lg font-bold mt-4">Data Mahasiswa</div>
         <div class="intro-y datatable-wrapper box p-5">
+            <div class="mb-4">
+                <a href="{{ route('mhs.create') }}" class="button text-white bg-theme-1 shadow-md">Add Data Mahasiswa</a>
+            </div>
             <table class="table table-report table-report--bordered display datatable w-full">
                 <thead>
                     <tr>
