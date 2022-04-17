@@ -37,7 +37,7 @@ Route::middleware('auth:pegawai,dosen')->group(function() {
         Route::get('/dosen/add', [MasterDataController::class, 'create_dosen'])->name('dosen.create');
         Route::post('/dosen/store', [MasterDataController::class, 'store_dosen'])->name('dosen.store');
         Route::get('/mhs/add', [MasterDataController::class, 'create_mhs'])->name('mhs.create');
-        Route::get('/mhs/create', [MasterDataController::class, 'store_mhs'])->name('mhs.store');
+        Route::post('/mhs/create', [MasterDataController::class, 'store_mhs'])->name('mhs.store');
     });
     Route::prefix('data')->group(function() {
         Route::resource('penelitian', PenelitianController::class)->only(['index']);

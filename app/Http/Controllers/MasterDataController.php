@@ -74,6 +74,41 @@ class MasterDataController extends Controller
     {
         $title = 'Create Mahasiswa';
 
-        return view('template.app', compact('title'));
+        return view('template.form-mahasiswa', compact('title'));
+    }
+    
+    public function store_mhs(Request $request)
+    {
+        // dd($request->all());
+        $rules = array(
+            'nrp' => 'required|unique:mahasiswas,nrp',
+            'nama' => 'required|unique:mahasiswas,nama',
+            'jurusan' => 'required',
+        );    
+        $messages = array(
+            'nrp.required' => 'NRP Mahasiswa tidak boleh kosong!',
+            'nrp.unique' => 'NRP Mahasiswa sudah terdaftar!',
+            'nama.required' => 'Nama Mahasiswa tidak boleh kosong!',
+            'nama.unique' => 'Nama Mahasiswa sudah terdaftar!',
+            'jurusan.required' => 'Jurusan tidak boleh kosong!',
+        );
+
+        $request->all();
+        $validator = Validator::make($request->all(), $rules, $messages);        
+
+        if ($validator->fails()) {
+            return redirect()->back()->withInput()->withErrors($validator);
+        } else {
+            Mahasiswa::create([
+                'nrp' => $request->nrp,
+                'nama' => $request->nama,
+                'jurusan' => $request->jurusan,
+                'password' => bcrypt('itenas2022')
+            ]);
+
+            $msg = 'Data Mahasiswa berhasil ditambahkan.';
+   
+            return redirect()->route('masterdata')->with('success',$msg);
+        }
     }
 }
