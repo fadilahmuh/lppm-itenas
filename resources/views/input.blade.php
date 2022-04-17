@@ -23,6 +23,7 @@
                 <button data-toggle="tab" data-target="#pkm" href="javascript:;" class="flex items-center px-3 py-2 rounded-md w-full @if(old('jenis') == 'pkm') active @endif"> <i class="fa-solid fa-calendar-days text-lg mr-2"></i> PKM </button>
                 <button data-toggle="tab" data-target="#insentif" href="javascript:;" class="flex items-center px-3 py-2 rounded-md w-full"> <i class="fa-solid fa-receipt text-lg mr-2"></i> Insentif </button>
                 <button data-toggle="tab" data-target="#hki" href="javascript:;" class="flex items-center px-3 py-2 rounded-md w-full"> <i class="fa-solid fa-file-invoice text-lg mr-2"></i> HKI </button>
+                <button data-toggle="tab" data-target="#publikasi" href="javascript:;" class="flex items-center px-3 py-2 rounded-md w-full"> <i class="fa-regular fa-file-lines text-lg mr-2"></i> Publikasi </button>
             </div>
         </div>
     </div>
@@ -52,6 +53,10 @@
 
             <div class="tab-content__pane" id="hki">
                 @include('template.form-hki')
+            </div>
+
+            <div class="tab-content__pane" id="publikasi">
+                @include('template.form-publikasi')
             </div>
            
         </div>

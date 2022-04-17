@@ -21,8 +21,9 @@ class CreatePublikasisTable extends Migration
             $table->string("penulis_anggota")->nullable();
             $table->string("penulis_external")->nullable();
             $table->string('jurnal')->nullable();
-            $table->unsignedInteger("jenis_publikasi")->index()->nullable();
-            $table->string('dana')->nullable();
+            $table->string('url')->nullable(false);
+            $table->unsignedInteger("jenis_publikasi_id")->index()->nullable();
+            $table->string('sumber_dana')->nullable();
             $table->string('lingkup')->nullable();
             $table->date('tanggal_publish');
             $table->year('tahun');

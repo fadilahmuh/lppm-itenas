@@ -16,6 +16,10 @@ class PublikasiController extends Controller
     public function index()
     {
         //
+        $title = 'Publikasi';
+        $data = Publikasi::all();
+
+        return view('template.table-publikasi', compact('title','data'));
     }
 
     /**
