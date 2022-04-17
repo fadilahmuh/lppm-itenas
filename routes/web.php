@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DosenController;
 use App\Http\Controllers\HkiController;
 use App\Http\Controllers\InsentifController;
 use App\Http\Controllers\MainController;
@@ -30,7 +31,13 @@ Route::middleware('auth:pegawai,dosen')->group(function() {
     // Route::get('/input2', [MainController::class, 'input2']);
     Route::get('/profil', [MainController::class, 'profil'])->name('profil');
     Route::get('/test', [MainController::class, 'test']);
-    Route::get('/masterdata', [MasterDataController::class, 'index'])->name('masterdata');
+    // Route::get('/masterdata', [MasterDataController::class, 'index'])->name('masterdata');
+    Route::prefix('masterdata')->group(function() {
+        Route::get('/', [MasterDataController::class, 'index'])->name('masterdata');
+        Route::get('/dosen/add', [MasterDataController::class, 'create_dosen'])->name('dosen.create');
+        Route::post('/dosen/store', [MasterDataController::class, 'store_dosen'])->name('dosen.store');
+        Route::get('/add/mhs', [MasterDataController::class, 'create_mhs'])->name('mhs.create');
+    });
     Route::prefix('data')->group(function() {
         Route::resource('penelitian', PenelitianController::class)->only(['index']);
         Route::resource('insentif', InsentifController::class)->only(['index']);

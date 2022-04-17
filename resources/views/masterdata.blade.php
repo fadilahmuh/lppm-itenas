@@ -22,12 +22,15 @@
 <div class="grid grid-cols-12 gap-6">
     <div class="col-span-12 xxl:col-span-9 grid grid-cols-12 gap-6">
         <div class="col-span-12 mt-6 box">
-        <div class="text-center text-lg font-bold mt-6">Data Dosen</div>
-        <div class="intro-y datatable-wrapper box p-5 mt-5">
+        <div class="text-center text-lg font-bold mt-4">Data Dosen</div>
+        <div class="intro-y datatable-wrapper box p-5">
+            <div class="mb-4">
+                <a href="{{ route('dosen.create') }}" class="button text-white bg-theme-1 shadow-md">Add Data Dosen</a>
+            </div>
             <table class="table table-report table-report--bordered display datatable w-full">
                 <thead>
                     <tr>
-                        <th class="border-b-2 text-center whitespace-no-wrap">Nama Dosen</th>
+                        <th class="border-b-2 text-left whitespace-no-wrap">Nama Dosen</th>
                         <th class="border-b-2 text-center whitespace-no-wrap">NIP</th>
                         <th class="border-b-2 text-center whitespace-no-wrap">NIDN</th>
                         <th class="border-b-2 text-center whitespace-no-wrap">JURUSAN</th>
@@ -37,7 +40,7 @@
                 <tbody>
                     @foreach ($dsn as $ds)
                     <tr>
-                        <td class="text-center border-b">{{$ds->nama}} </td>
+                        <td class="text-left border-b">{{$ds->nama}} </td>
                         <td class="text-center border-b">{{$ds->nip}} </td>
                         <td class="text-center border-b">{{$ds->nidn}} </td>
                         <td class="text-center border-b">{{$ds->jurusan}} </td>
@@ -55,8 +58,8 @@
 <div class="grid grid-cols-12 gap-6 mt-8">
     <div class="col-span-12 xxl:col-span-9 grid grid-cols-12 gap-6">
         <div class="col-span-12 mt-6 box">
-        <div class="text-center text-lg font-bold mt-6">Data Mahasiswa</div>
-        <div class="intro-y datatable-wrapper box p-5 mt-5">
+        <div class="text-center text-lg font-bold mt-4">Data Mahasiswa</div>
+        <div class="intro-y datatable-wrapper box p-5">
             <table class="table table-report table-report--bordered display datatable w-full">
                 <thead>
                     <tr>
