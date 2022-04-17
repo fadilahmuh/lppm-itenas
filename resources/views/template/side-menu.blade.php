@@ -76,8 +76,8 @@
     <div class="side-nav__devider my-6"></div>
     <ul>
         <li>
-            <a href="" class="side-menu">
-                <div class="side-menu__icon"><i class="fa-solid fa-house fa-xl"></i></div>
+            <a href="{{ route('masterdata')}}" class="side-menu @if(url()->current()==route('masterdata')) side-menu--active @endif">
+                <div class="side-menu__icon"><i class="fa-solid fa-database fa-xl"></i></div>
                 <div class="side-menu__title"> Master Data </div>
             </a>
         </li>
