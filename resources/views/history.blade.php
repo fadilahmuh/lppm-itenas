@@ -26,19 +26,19 @@
                 <table class="table table-report table-report--bordered display datatable w-full">
                     <thead>
                         <tr>
-                            <th class="border-b-2 whitespace-no-wrap">Data</th>
-                            <th class="border-b-2 text-center whitespace-no-wrap">Judul</th>
-                            <th class="border-b-2 text-center whitespace-no-wrap">Dosen Ketua</th>
-                            <th class="border-b-2 text-center whitespace-no-wrap">Status</th>
-                            <th class="border-b-2 text-center whitespace-no-wrap">Terakhir diubah</th>
-                            <th class="border-b-2 text-center whitespace-no-wrap">#</th>
+                            <th class="border-b-2 whitespace-nowrap">Data</th>
+                            <th class="border-b-2 text-center whitespace-nowrap">Judul</th>
+                            <th class="border-b-2 text-center whitespace-nowrap">Dosen Ketua</th>
+                            <th class="border-b-2 text-center whitespace-nowrap">Status</th>
+                            <th class="border-b-2 text-center whitespace-nowrap">Terakhir diubah</th>
+                            <th class="border-b-2 text-center whitespace-nowrap">#</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($data as $d)
                         <tr>
                             <td class="border-b">
-                                <div class="font-medium whitespace-no-wrap">{{$d->table_name}}</div>
+                                <div class="font-medium whitespace-nowrap">{{$d->table_name}}</div>
                             </td>
                             <td class="text-center border-b">{{$d->getKegiatan()->judul}} </td>
                             <td class="text-center border-b">{{$d->getKegiatan()->dosen_ketua->nama}}</td>

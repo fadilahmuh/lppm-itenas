@@ -49,7 +49,7 @@
                                             @elseif(Auth::guard('dosen')->check())
                                             <a href="javascript:;" class="font-medium truncate mr-5">{{ Auth::guard('dosen')->user()->nama }}</a> 
                                             @endif
-                                            <div class="text-xs text-gray-500 ml-auto whitespace-no-wrap">05:09 AM</div>
+                                            <div class="text-xs text-gray-500 ml-auto whitespace-nowrap">05:09 AM</div>
                                         </div>
                                         <div class="w-full truncate text-gray-600">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 20</div>
                                     </div>
@@ -62,7 +62,7 @@
                                     <div class="ml-2 overflow-hidden">
                                         <div class="flex items-center">
                                             <a href="javascript:;" class="font-medium truncate mr-5">Johnny Depp</a> 
-                                            <div class="text-xs text-gray-500 ml-auto whitespace-no-wrap">05:09 AM</div>
+                                            <div class="text-xs text-gray-500 ml-auto whitespace-nowrap">05:09 AM</div>
                                         </div>
                                         <div class="w-full truncate text-gray-600">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem </div>
                                     </div>
@@ -75,7 +75,7 @@
                                     <div class="ml-2 overflow-hidden">
                                         <div class="flex items-center">
                                             <a href="javascript:;" class="font-medium truncate mr-5">Russell Crowe</a> 
-                                            <div class="text-xs text-gray-500 ml-auto whitespace-no-wrap">01:10 PM</div>
+                                            <div class="text-xs text-gray-500 ml-auto whitespace-nowrap">01:10 PM</div>
                                         </div>
                                         <div class="w-full truncate text-gray-600">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 20</div>
                                     </div>
@@ -88,7 +88,7 @@
                                     <div class="ml-2 overflow-hidden">
                                         <div class="flex items-center">
                                             <a href="javascript:;" class="font-medium truncate mr-5">Al Pacino</a> 
-                                            <div class="text-xs text-gray-500 ml-auto whitespace-no-wrap">05:09 AM</div>
+                                            <div class="text-xs text-gray-500 ml-auto whitespace-nowrap">05:09 AM</div>
                                         </div>
                                         <div class="w-full truncate text-gray-600">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomi</div>
                                     </div>
@@ -101,7 +101,7 @@
                                     <div class="ml-2 overflow-hidden">
                                         <div class="flex items-center">
                                             <a href="javascript:;" class="font-medium truncate mr-5">Edward Norton</a> 
-                                            <div class="text-xs text-gray-500 ml-auto whitespace-no-wrap">01:10 PM</div>
+                                            <div class="text-xs text-gray-500 ml-auto whitespace-nowrap">01:10 PM</div>
                                         </div>
                                         <div class="w-full truncate text-gray-600">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#039;s standard dummy text ever since the 1500</div>
                                     </div>

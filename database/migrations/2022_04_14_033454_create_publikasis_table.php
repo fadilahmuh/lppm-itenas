@@ -15,7 +15,21 @@ class CreatePublikasisTable extends Migration
     {
         Schema::create('publikasis', function (Blueprint $table) {
             $table->id();
+            $table->string('judul')->nullable(false);
+            $table->unsignedInteger("dosen_ketua_id")->index()->nullable(false);
+            $table->string("ketua_external")->nullable();
+            $table->string("penulis_anggota")->nullable();
+            $table->string("penulis_external")->nullable();
+            $table->string('jurnal')->nullable();
+            $table->unsignedInteger("jenis_publikasi")->index()->nullable();
+            $table->string('dana')->nullable();
+            $table->string('lingkup')->nullable();
+            $table->date('tanggal_publish');
+            $table->year('tahun');
+            $table->integer('jumlah')->nullable(false);
+            $table->boolean('status')->nullable(false);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -10,12 +10,18 @@
                     &:not(.top-menu--active) {
                         @apply opacity-0;
                         transform: translateY(50px);
-                        animation: 0.4s intro-menu-animation ease-in-out .33333s;
+                        animation: 0.4s
+                            intro-menu-animation
+                            ease-in-out
+                            0.33333s;
                         animation-fill-mode: forwards;
                         animation-delay: #{$i * 0.1}s;
                     }
                     &.top-menu--active {
-                        animation: 0.4s intro-active-menu-animation ease-in-out .33333s;
+                        animation: 0.4s
+                            intro-active-menu-animation
+                            ease-in-out
+                            0.33333s;
                         animation-fill-mode: forwards;
                     }
                 }
@@ -91,7 +97,7 @@
                     }
                 }
                 .top-menu__title {
-                    @apply ml-3 flex items-center whitespace-no-wrap;
+                    @apply ml-3 flex items-center whitespace-nowrap;
                     .top-menu__sub-icon {
                         @apply transition ease-in duration-100 w-4 h-4 ml-2;
                         @media (max-width: $xl) {

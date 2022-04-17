@@ -6,6 +6,7 @@ use App\Models\Hki;
 use App\Models\Insentif;
 use App\Models\Penelitian;
 use App\Models\Pkm;
+use App\Models\Publikasi;
 use Illuminate\Database\Seeder;
 
 class DataSeeder extends Seeder
@@ -114,6 +115,36 @@ class DataSeeder extends Seeder
             'jenis_hki' => 'Hak Cipta',
             'tahun' => '2022',
             'jumlah' => 2000000,
+            'status' => 0
+        ]);
+
+        Publikasi::create([
+            'judul' => 'Enhanced production of napthoquinone metabolite (shikonin) from cell suspension culture of Arnebia sp. and its up-scaling through bioreactor',
+            'dosen_ketua_id' => 1,
+            'penulis_anggota' => '3,7',
+            'penulis_external' => 'Udin Sarudin',
+            'jurnal'=> '3 Biotech',
+            'jenis_publikasi' => 5,
+            'dana' => 'Dikti',
+            'lingkup' =>'Internasional',
+            'tanggal_publish' => '2022-04-02',
+            'tahun' => '2022',
+            'jumlah' => 1000000,
+            'status' => 1
+        ]);
+
+        Publikasi::create([
+            'judul' => 'Spatial Organization of Fibroblast Nuclear Chromocenters: Component Tree Analysis',
+            'dosen_ketua_id' => 1,
+            'penulis_anggota' => '3,7',
+            'penulis_external' => 'Udin Sarudin',
+            'jurnal'=> 'Journal of Anatomy',
+            'jenis_publikasi' => 7,
+            'dana' => 'Pemerintah Non Dikti',
+            'lingkup' =>'Internasional',
+            'tanggal_publish' => '2022-01-02',
+            'tahun' => '2022',
+            'jumlah' => 2500000,
             'status' => 0
         ]);
     }

@@ -12,6 +12,7 @@ use App\Models\RawQue;
 use App\Models\Ref_jenishibah;
 use App\Models\Ref_jenisinsentif;
 use App\Models\Ref_jenispublikasi;
+use App\Models\Ref_publikasijenis;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -123,8 +124,7 @@ class MainController extends Controller
     }
 
     public function test() {
-        $list_dsn = [3,7];
-        $data = Dosen::findMany($list_dsn);
+        $data = Ref_publikasijenis::all();
         dd($data);
     }
 
