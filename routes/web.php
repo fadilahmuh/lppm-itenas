@@ -8,6 +8,7 @@ use App\Http\Controllers\MasterDataController;
 use App\Http\Controllers\PenelitianController;
 use App\Http\Controllers\PkmController;
 use App\Http\Controllers\PublikasiController;
+use App\Http\Controllers\SuratController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -47,7 +48,10 @@ Route::middleware('auth:pegawai,dosen')->group(function() {
         Route::resource('publikasi', PublikasiController::class)->only(['index']);
     });
     Route::get('/history', [MainController::class, 'history'])->name('history');
-    
+
+    //Surat-Menyurat
+    Route::get('/surat', [SuratController::class, 'input_surat'])->name('input.surat');
+
 
     Route::resource('penelitian', PenelitianController::class)->except(['index']);
     Route::resource('insentif', InsentifController::class)->except(['index']);
