@@ -51,6 +51,7 @@ Route::middleware('auth:pegawai,dosen')->group(function() {
 
     //Surat-Menyurat
     Route::get('/surat', [SuratController::class, 'input_surat'])->name('input.surat');
+    Route::post('/surat/store', [SuratController::class, 'store_surat'])->name('surat.store');
 
 
     Route::resource('penelitian', PenelitianController::class)->except(['index']);

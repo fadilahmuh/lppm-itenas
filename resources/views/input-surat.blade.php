@@ -8,7 +8,7 @@
 @section('content')
 <div class="intro-y flex items-center h-10">
     <h2 class="text-lg font-medium mr-5">
-        Input Data Dosen
+        Input Surat
     </h2>
 </div>
 @if($errors->any())
@@ -19,45 +19,42 @@
 <div class="grid grid-cols-12 gap-6">
     <div class="col-span-12 xxl:col-span-9 grid grid-cols-12 gap-6">
         <div class="col-span-12 mt-2">
-        <form action="{{ route('dosen.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('surat.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('POST')
             <div class="box p-5">
-                <div>
-                    <label>Nama Dosen</label>
-                    <input type="text" name="nama" class="input w-full border mt-2" placeholder="--Nama Dosen--">
-                </div>
                 <div class="mt-3">
-                    <label>NIP</label>
-                    <input type="text" name="nip" class="input w-full border mt-2" placeholder="--NIP--"  autocomplete="off">
-                </div>
-                <div class="mt-3">
-                    <label>NIDN</label>
-                    <input type="text" name="nidn" class="input w-full border mt-2" placeholder="--NIDN--">
-                </div>
-                <div class="mt-3">
-                    <label class="mb-2">Anggota Dosen</label>
-                    <select name="jurusan" class="select2 input w-full border mt-2 select-jurusan" data-placeholder="--Pilih Jurusan Dosen--">
+                    <label class="mb-2">Jenis Surat</label>
+                    <select name="jenis-surat" class="select2 input w-full border mt-2 select-jenis-surat" data-placeholder="--Pilih Jenis Surat--">
                         <option></option>
-                        <option value="Teknik Elektro">Teknik Elektro</option>
-                        <option value="Teknik Mesin">Teknik Mesin</option>
-                        <option value="Teknik Industri">Teknik Industri</option>
-                        <option value="Teknik Kimia">Teknik Kimia</option>
-                        <option value="Informatika">Informatika</option>
-                        <option value="Sistem Informasi">Sistem Informasi</option>
-                        <option value="Teknik Sipil">Teknik Sipil</option>
-                        <option value="Teknik Geodesi">Teknik Geodesi</option>
-                        <option value="Teknik Lingkungan">Teknik Lingkungan</option>
-                        <option value="Perencanaan Wilayah Kota">Perencanaan Wilayah Kota</option>
-                        <option value="Arsitektur">Arsitektur</option>
-                        <option value="Desain Interior">Desain Interior</option>
-                        <option value="Desain Produk">Desain Produk</option>
-                        <option value="Desain Komunikasi Visual">Desain Komunikasi Visual</option>
+                        <option value="Surat Keterangan">Surat Keterangan</option>
                     </select>
                 </div>
                 <div class="mt-3">
-                    <label>Email</label>
-                    <input type="email" name="email" class="input w-full border mt-2" placeholder="--email--"  autocomplete="off">
+                    <label>Nomor Surat</label>
+                    <input type="text" name="no-surat" class="input w-full border mt-2" placeholder="--Nomor Surat--">
+                </div>
+                <div class="mt-3">
+                    <label>Pembuat Surat</label>
+                    <input type="text" name="pembuat-id" class="input w-full border mt-2" placeholder="--Nama Pembuat--">
+                </div>
+                <div class="mt-3">
+                    <label class="mb-2">Jenis Kegiatan</label>
+                    <select name="nama-kegiatan" class="select2 input w-full border mt-2 select-nama-kegiatan" data-placeholder="--Pilih Jenis Kegiatan--">
+                        <option></option>
+                        <option value="PKM">Kegiatan PKM</option>
+                        <option value="HKI">Kegiatan HKI</option>
+                        <option value="Penelitian">Kegiatan Penelitian</option>
+                    </select>
+                </div>
+                <div class="mt-3">
+                    <label class="mb-2">Nama Kegiatan</label>
+                    <select name="kegiatan-id" class="select2 input w-full border mt-2 select-nama-kegiatan" data-placeholder="--Pilih Nama Kegiatan--">
+                        <option></option>
+                        <option value="PKM">Kegiatan PKM</option>
+                        <option value="HKI">Contoh Judul HKI</option>
+                        <option value="Penelitian">Kegiatan Penelitian</option>
+                    </select>
                 </div>
             </div>
             <button type="submit" class="button w-full mt-5 text-white bg-theme-1 shadow-md disabled:bg-theme-4">Submit</button>

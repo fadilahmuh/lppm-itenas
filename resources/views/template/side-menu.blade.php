@@ -47,13 +47,19 @@
                 <div class="side-menu__title"> List Data Hibah <i data-feather="chevron-down" class="side-menu__sub-icon"></i> </div>
             </a>
             <ul class="">
-                
+
             </ul>
         </li> --}}
         <li>
             <a href="{{ route('input')}}" class="side-menu @if(url()->current()==route('input')) side-menu--active @endif">
                 <div class="side-menu__icon"><i class="fa-regular fa-pen-to-square fa-xl"></i> </div>
                 <div class="side-menu__title"> Input data </div>
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('input.surat')}}" class="side-menu @if(url()->current()==route('input.surat')) side-menu--active @endif">
+                <div class="side-menu__icon"><i class="fa-regular fa-pen-to-square fa-xl"></i> </div>
+                <div class="side-menu__title"> Surat Menyurat </div>
             </a>
         </li>
         @auth('dosen')
