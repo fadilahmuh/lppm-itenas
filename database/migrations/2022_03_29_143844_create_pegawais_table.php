@@ -17,6 +17,7 @@ class CreatePegawaisTable extends Migration
             $table->id();
             $table->string('nama');
             $table->string('nip')->unique();
+            $table->string('jabatan')->nullable(false);
             $table->string('password');
             $table->string('email')->unique();
             $table->string('pict')->default('default_profile_picture.jpg');

@@ -24,7 +24,7 @@ class UserSeeder extends Seeder
             'email' => 'fadilah@lppm.itenas.ac.id',
             'jurusan' => 'Informatika',
         ]);
-        
+
         Dosen::create([
             'nama' => 'Gilang Rama',
             'nip' => '152018033',
@@ -37,11 +37,12 @@ class UserSeeder extends Seeder
         Pegawai::create([
             'nama' => 'Andika Fauzi',
             'nip' => '152018019',
+            'jabatan' => 'Ketua',
             'password' => bcrypt('123456789'),
             'email' => 'andika@lppm.itenas.ac.id',
         ]);
 
         // Dosen::create(['nama' => '','nip' => '','password' => bcrypt('123456789'),'nidn' => '','email' => '','jurusan' => 'Informatika']);
-      
+
     }
 }
