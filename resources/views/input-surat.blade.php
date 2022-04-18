@@ -36,20 +36,22 @@
                 </div>
                 <div class="mt-3">
                     <label>Pembuat Surat</label>
-                    <input type="text" name="pembuat-id" class="input w-full border mt-2" placeholder="--Nama Pembuat--">
+                    <input type="text" class="input w-full border mt-2 dsn_place" placeholder="{{Auth::user()->nama}}" disabled>
+                    <input name="pembuat-id" type="hidden" class="input w-full border mt-2" value="{{Auth::user()->nip}}">
+                    {{-- <input type="text" name="pembuat-id" class="input w-full border mt-2" placeholder="--Nama Pembuat--"> --}}
                 </div>
                 <div class="mt-3">
                     <label class="mb-2">Jenis Kegiatan</label>
-                    <select name="nama-kegiatan" class="select2 input w-full border mt-2 select-nama-kegiatan" data-placeholder="--Pilih Jenis Kegiatan--">
+                    <select name="nama-kegiatan" class="select2 input w-full border mt-2 jenis-kegiatan" data-placeholder="--Pilih Jenis Kegiatan--">
                         <option></option>
-                        <option value="PKM">Kegiatan PKM</option>
-                        <option value="HKI">Kegiatan HKI</option>
-                        <option value="Penelitian">Kegiatan Penelitian</option>
+                        <option value="penelitian">Kegiatan Penelitian</option>
+                        <option value="pkm">Kegiatan PKM</option>
+                        <option value="hki">Kegiatan HKI</option>
                     </select>
                 </div>
                 <div class="mt-3">
                     <label class="mb-2">Nama Kegiatan</label>
-                    <select name="kegiatan-id" class="select2 input w-full border mt-2 select-nama-kegiatan" data-placeholder="--Pilih Nama Kegiatan--">
+                    <select name="kegiatan-id" class="select2 input w-full border mt-2 select-nama-kegiatan" data-placeholder="--Pilih Nama Kegiatan--" data-list="{{ route('get_keg') }}">
                         <option></option>
                         <option value="PKM">Kegiatan PKM</option>
                         <option value="HKI">Contoh Judul HKI</option>
@@ -71,7 +73,31 @@
 
 @section('line-script')
 <script>
-    $('.select-jurusan').select2({
+    $('.select2').select2({
+        width: "100%",
+    });
+
+    var url_keg = $('.select-nama-kegiatan').data('list');
+    $('.select-nama-kegiatan').select2({
+        minimumResultsForSearch: -1,
+        ajax: {
+            url: url_keg,
+            dataType: 'json',
+            delay: 250,
+            data: function (params) {
+                return {
+                    k:  $('.jenis-kegiatan').val(),
+                    q: params.term, // search term
+                };
+            },
+            processResults: function(data) 
+            {
+                return {
+                    results: data
+                };
+            },
+            cache: true
+        },
         width: "100%",
     });
 </script>

@@ -310,4 +310,45 @@ class MainController extends Controller
             return response()->json($response);  
         }
     }
+
+    public function get_keg(Request $request) {
+        if ($request->ajax()) {
+            
+            // if($request->has('q')){
+            //     $search = $request->q;
+            //     $data = Ref_jenispublikasi::where('nama','LIKE', '%'.$search.'%')->get();
+            // }elseif($request->has('k')){
+            //     if($request->k == 'penelitan'){
+            //         $data = Penelitian::where('status', 1)->get();
+            //     }elseif($request->k == 'pkm'){
+            //         $data = Pkm::where('status', 1)->get();
+            //     }elseif($request->k == 'hki'){
+            //         $data = Hki::where('status', 1)->get();
+            //     }
+                
+            // }
+
+            if($request->k == 'penelitian'){
+                $data = Penelitian::all();
+            }elseif($request->k == 'pkm'){
+                $data = Pkm::all();
+            }elseif($request->k == 'hki'){
+                $data = Hki::all();
+            }
+
+            $response = array();
+            foreach($data as $d){
+                $response[] = array(
+                    "id"=>$d->id,
+                    "text"=>$d->judul
+                );
+            }
+                // $response[] = array(
+                //     "id"=>$request->k,
+                //     "text"=>$request->k
+                // );
+    
+            return response()->json($response);  
+        }
+    }
 }
