@@ -43,23 +43,23 @@ class PkmController extends Controller
     public function store(StorePkmRequest $request)
     {
         $rules = array(
-            'judul_pkm' => 'required',
-            'jenis_hibah' => 'required',
-            'mulai' => 'required',
-            'selesai' => 'required|after:mulai',
-            'tahun' => 'required',
-            'jumlah' => 'required|integer',
+            'pkm_judul_pkm' => 'required',
+            'pkm_jenis_hibah' => 'required',
+            'pkm_mulai' => 'required',
+            'pkm_selesai' => 'required|after:mulai',
+            'pkm_tahun' => 'required',
+            'pkm_jumlah' => 'required|integer',
             'status' => 'required|boolean',
         );    
         $messages = array(
-            'judul_pkm.required' => 'Judul penelitian tidak boleh kosong!',
-            'jenis_hibah.required' => 'Jenis Hibah tidak boleh kosong!',
-            'mulai.required' => 'Tanggal mulai tidak boleh kosong!',
-            'selesai.required' => 'Tanggal selesai tidak boleh kosong!',
-            'selesai.after' => 'Tanggal Mulai-Selesai tidak valid!',
-            'tahun.required' => 'Tahun tidak boleh kosong!!',
-            'jumlah.required' => 'Jumlah tidak boleh kosong!!',
-            'jumlah.integer' => 'Jumlah tidak valid, masukan nominal angka!!',
+            'pkm_judul_pkm.required' => 'Judul penelitian tidak boleh kosong!',
+            'pkm_jenis_hibah.required' => 'Jenis Hibah tidak boleh kosong!',
+            'pkm_mulai.required' => 'Tanggal mulai tidak boleh kosong!',
+            'pkm_selesai.required' => 'Tanggal selesai tidak boleh kosong!',
+            'pkm_selesai.after' => 'Tanggal Mulai-Selesai tidak valid!',
+            'pkm_tahun.required' => 'Tahun tidak boleh kosong!!',
+            'pkm_jumlah.required' => 'Jumlah tidak boleh kosong!!',
+            'pkm_jumlah.integer' => 'Jumlah tidak valid, masukan nominal angka!!',
             'status.required' => 'Status tidak valid!',
             'status.boolean' => 'Status tidak valid!',
         );
