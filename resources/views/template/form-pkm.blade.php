@@ -6,32 +6,32 @@
     <div class="box p-5" id="input">
         <div>
             <label>Judul PKM</label>
-            <input name="judul_pkm" type="text" class="input w-full border mt-2" placeholder="--Judul PKM--">
+            <input name="pkm_judul_pkm" type="text" class="input w-full border mt-2" placeholder="--Judul PKM--">
         </div>
         <div class="mt-3">
             <label>Dosen Ketua</label>
             @if(Auth::guard('pegawai')->check())
-            <select name="dosen_ketua" class="select2 input w-full border mt-2 select-dosen" data-placeholder="--Pilih dosen ketua--" data-list="{{ route('get_dosen') }}"></select>
+            <select name="pkm_dosen_ketua" class="select2 input w-full border mt-2 select-dosen" data-placeholder="--Pilih dosen ketua--" data-list="{{ route('get_dosen') }}"></select>
             @elseif(Auth::guard('dosen')->check())
             <input type="text" class="input w-full border mt-2 dsn_place" placeholder="{{Auth::user()->nama}}" disabled>
-            <input name="dosen_ketua" type="hidden" class="input w-full border mt-2" value="{{Auth::user()->nip}}">
+            <input name="pkm_dosen_ketua" type="hidden" class="input w-full border mt-2" value="{{Auth::user()->nip}}">
             @endif 
         </div>
         <div class="mt-3">
             <label class="mb-2">Anggota Dosen</label>
-            <select name="dosen_anggota[]" class="select2 input w-full border mt-2 select-dosen" multiple data-placeholder="--Pilih anggota dosen--" data-list="{{ route('get_dosen') }}"></select>
+            <select name="pkm_dosen_anggota[]" class="select2 input w-full border mt-2 select-dosen" multiple data-placeholder="--Pilih anggota dosen--" data-list="{{ route('get_dosen') }}"></select>
         </div>
         <div class="mt-3">
             <label class="mb-2">Anggota Mahasiswa</label>
-            <select name="anggota_mhs[]" class="select2 input w-full border mt-2 select-mhs" multiple style="width: 100%" data-placeholder="--Pilih anggota mahasiswa--" data-list="{{ route('get_mhs') }}"></select>
+            <select name="pkm_anggota_mhs[]" class="select2 input w-full border mt-2 select-mhs" multiple style="width: 100%" data-placeholder="--Pilih anggota mahasiswa--" data-list="{{ route('get_mhs') }}"></select>
         </div>
         <div class="mt-3">
             <label class="mb-2">Jenis Hibah</label>
-            <select name="jenis_hibah" class="select2 input w-full border mt-2 select-hibah" style="width: 100%" data-placeholder="--Pilih Jenis Hibah--" data-list="{{ route('get_hibah') }}"></select>
+            <select name="pkm_jenis_hibah" class="select2 input w-full border mt-2 select-hibah" style="width: 100%" data-placeholder="--Pilih Jenis Hibah--" data-list="{{ route('get_hibah') }}"></select>
         </div>
         <div class="mt-3">
             <label>Mitra</label>
-            <input name="nama_mitra" type="text" class="input w-full border mt-2" placeholder="--Nama Mitra (Opsional)--">
+            <input name="pkm_nama_mitra" type="text" class="input w-full border mt-2" placeholder="--Nama Mitra (Opsional)--">
         </div>
         <div class="mt-3" id="inline-form">
             <div class="grid grid-cols-12 gap-2">
@@ -39,21 +39,21 @@
                     <label for="">Tanggal Mulai</label>
                     <div class="relative mt-2">
                         <div class="absolute rounded-l w-10 h-full flex items-center justify-center bg-gray-100 border text-gray-600"><i class="fa-solid fa-calendar"></i></div>
-                        <input name="mulai" type="text" class="input ts-datepicker pl-12 w-full border col-span-4" placeholder="Pilih Tanggal" autocomplete="off">
+                        <input name="pkm_mulai" type="text" class="input ts-datepicker pl-12 w-full border col-span-4" placeholder="Pilih Tanggal" autocomplete="off">
                     </div>
                 </div>
                 <div class="col-span-4">
                     <label for="">Tanggal Selesai</label>
                     <div class="relative mt-2">
                         <div class="absolute rounded-l w-10 h-full flex items-center justify-center bg-gray-100 border text-gray-600"><i class="fa-solid fa-calendar"></i></div>
-                        <input name="selesai" type="text" class="input ts-datepicker pl-12 w-full border col-span-4" placeholder="Pilih Tanggal" autocomplete="off">
+                        <input name="pkm_selesai" type="text" class="input ts-datepicker pl-12 w-full border col-span-4" placeholder="Pilih Tanggal" autocomplete="off">
                     </div>
                 </div>
                 <div class="col-span-4">
                     <label for="">Tahun</label>
                     <div class="relative mt-2">
                         <div class="absolute rounded-l w-10 h-full flex items-center justify-center bg-gray-100 border text-gray-600"><i class="fa-solid fa-calendar-week"></i></div>
-                        <input name="tahun" type="text" class="bs-yearpicker input pl-12 w-full border col-span-4" value="" placeholder="--Pilih Tahun--" autocomplete="off">
+                        <input name="pkm_tahun" type="text" class="bs-yearpicker input pl-12 w-full border col-span-4" value="" placeholder="--Pilih Tahun--" autocomplete="off">
                     </div>
                 </div>
             </div>
@@ -62,7 +62,7 @@
             <label>Jumlah</label>
             <div class="relative mt-2">
                 <div class="absolute rounded-l w-10 h-full flex items-center justify-center bg-gray-100 border text-gray-600">Rp. </div>
-                <input name="jumlah" type="text" class="input rupiah pl-12 w-full border col-span-4" value="" placeholder="--Jumlah Dana Hibah--" autocomplete="off">
+                <input name="pkm_jumlah" type="text" class="input rupiah pl-12 w-full border col-span-4" value="" placeholder="--Jumlah Dana Hibah--" autocomplete="off">
             </div>
         </div>
 

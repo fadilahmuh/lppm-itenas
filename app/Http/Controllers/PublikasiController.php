@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Publikasi;
 use App\Http\Requests\StorePublikasiRequest;
 use App\Http\Requests\UpdatePublikasiRequest;
+use App\Models\Dosen;
+use Illuminate\Http\Client\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class PublikasiController extends Controller
 {
@@ -17,7 +21,7 @@ class PublikasiController extends Controller
     {
         //
         $title = 'Publikasi';
-        $data = Publikasi::all();
+        $data = Publikasi::where('status', 1)->get();
 
         return view('template.table-publikasi', compact('title','data'));
     }
@@ -27,9 +31,9 @@ class PublikasiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+       
     }
 
     /**
@@ -40,7 +44,66 @@ class PublikasiController extends Controller
      */
     public function store(StorePublikasiRequest $request)
     {
-        //
+        // dd($request->all());
+        $rules = array(
+            'pub_judul_publikasi' => 'required',
+            'pub_jurnal' => 'required',
+            'pub_url' => 'required',
+            'pub_jenis_publikasi' => 'required',
+            'pub_sumber_dana' => 'required',
+            'pub_tanggal_publish' => 'required',
+            'pub_jumlah' => 'required|integer',
+            'status' => 'required|boolean',
+        );    
+        $messages = array(
+            'pub_judul_publikasi.required' => 'Judul publikasi tidak boleh kosong!',
+            'pub_jurnal.required' => 'Nama jurnal/proceeding/penerbit tidak boleh kosong!',
+            'pub_url.required' => 'URL publikasi tidak boleh kosong!',
+            'pub_jenis_publikasi.required' => 'Jenis Publikasi tidak boleh kosong!',
+            'pub_sumber_dana.required' => 'Tahun tidak boleh kosong!!',
+            'pub_tanggal_publish.required' => 'Tahun tidak boleh kosong!!',
+            'pub_jumlah.required' => 'Jumlah tidak boleh kosong!!',
+            'pub_jumlah.integer' => 'Jumlah tidak valid, masukan nominal angka!!',
+            'status.required' => 'Status tidak valid!',
+            'status.boolean' => 'Status tidak valid!',
+        );
+
+        $request->all();
+        $validator = Validator::make($request->all(), $rules, $messages);        
+
+        if ($validator->fails()) {
+            return redirect()->back()->withInput()->withErrors($validator);
+        } else {
+            // dd($request->all());
+            if (Auth::guard('dosen')->check()){
+                $stat = 0;
+            }elseif(Auth::guard('pegawai')->check()){
+                $stat = $request->status;
+            }
+
+            Publikasi::create([
+                'judul' => $request->pub_judul_publikasi,
+                'dosen_ketua_id' => $request->pub_dosen_ketua,
+                'ketua_external' => $request->pub_penulis_external,
+                'penulis_anggota' => $request->pub_penulis_anggota,
+                'penulis_external' => $request->pub_penulis_external,
+                'jurnal' => $request->pub_jurnal,
+                'url' => $request->pub_url,
+                'jenis_publikasi_id' => $request->pub_jenis_publikasi,
+                'sumber_dana' => $request->pub_sumber_dana,
+                'lingkup' => $request->pub_lingkup,
+                'tanggal_publish' => $request->pub_tanggal_publish,
+                'tahun' => $request->pub_tahun,
+                'jumlah' => $request->pub_jumlah,
+                'status' => $stat,
+                
+            ]);
+
+
+            $msg = 'Data Publikasi berhasil ditambahkan.';
+   
+            return redirect()->route('input')->with('success',$msg);
+        }
     }
 
     /**

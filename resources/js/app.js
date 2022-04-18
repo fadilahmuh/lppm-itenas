@@ -1,5 +1,5 @@
 
-require('./bootstrap');
+// require('./bootstrap');
 
 // 3rd Parties
 // import bootstrap from './bootstrap'

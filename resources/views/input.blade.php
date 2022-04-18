@@ -21,9 +21,9 @@
             <div class="pos__tabs nav-tabs mt-1">
                 <button data-toggle="tab" data-target="#penelitian" href="javascript:;" class="flex items-center px-3 py-2 rounded-md w-full @if(!is_null(old('jenis')) && old('jenis') == 'penelitian') active @elseif(is_null(old('jenis'))) active @endif"> <i class="fa-solid fa-microscope text-lg mr-2"></i> Penelitian </button>
                 <button data-toggle="tab" data-target="#pkm" href="javascript:;" class="flex items-center px-3 py-2 rounded-md w-full @if(old('jenis') == 'pkm') active @endif"> <i class="fa-solid fa-calendar-days text-lg mr-2"></i> PKM </button>
-                <button data-toggle="tab" data-target="#insentif" href="javascript:;" class="flex items-center px-3 py-2 rounded-md w-full"> <i class="fa-solid fa-receipt text-lg mr-2"></i> Insentif </button>
-                <button data-toggle="tab" data-target="#hki" href="javascript:;" class="flex items-center px-3 py-2 rounded-md w-full"> <i class="fa-solid fa-file-invoice text-lg mr-2"></i> HKI </button>
-                <button data-toggle="tab" data-target="#publikasi" href="javascript:;" class="flex items-center px-3 py-2 rounded-md w-full"> <i class="fa-regular fa-file-lines text-lg mr-2"></i> Publikasi </button>
+                <button data-toggle="tab" data-target="#insentif" href="javascript:;" class="flex items-center px-3 py-2 rounded-md w-full @if(old('jenis') == 'insentif') active @endif"> <i class="fa-solid fa-receipt text-lg mr-2"></i> Insentif </button>
+                <button data-toggle="tab" data-target="#hki" href="javascript:;" class="flex items-center px-3 py-2 rounded-md w-full @if(old('jenis') == 'hki') active @endif"> <i class="fa-solid fa-file-invoice text-lg mr-2"></i> HKI </button>
+                <button data-toggle="tab" data-target="#publikasi" href="javascript:;" class="flex items-center px-3 py-2 rounded-md w-full @if(old('jenis') == 'publikasi') active @endif"> <i class="fa-regular fa-file-lines text-lg mr-2"></i> Publikasi </button>
             </div>
         </div>
     </div>
@@ -47,15 +47,15 @@
                 @include('template.form-pkm')
             </div>
 
-            <div class="tab-content__pane" id="insentif">
+            <div class="tab-content__pane @if(old('jenis') == 'insentif') active @endif" id="insentif">
                 @include('template.form-insentif')
             </div>
 
-            <div class="tab-content__pane" id="hki">
+            <div class="tab-content__pane @if(old('jenis') == 'hki') active @endif" id="hki">
                 @include('template.form-hki')
             </div>
 
-            <div class="tab-content__pane" id="publikasi">
+            <div class="tab-content__pane @if(old('jenis') == 'publikasi') active @endif" id="publikasi">
                 @include('template.form-publikasi')
             </div>
            
@@ -79,6 +79,11 @@
 
 @section('line-script')
 <script>
+    $('.select2').select2({
+        width: "100%",
+        minimumResultsForSearch: -1
+    });
+
     var url_dsn = $('.select-dosen').data('list');
     $('.select-dosen').select2({
         ajax: {
@@ -188,6 +193,28 @@
         width: "100%",
     });
 
+    var url_pub = $('.select-pub2').data('list');
+    $('.select-pub2').select2({
+        ajax: {
+            url: url_pub,
+            dataType: 'json',
+            delay: 250,
+            data: function (params) {
+                return {
+                    q: params.term, // search term
+                };
+            },
+            processResults: function(data) 
+            {
+                return {
+                    results: data
+                };
+            },
+            cache: true
+        },
+        width: "100%",
+    });
+
     $('.bs-yearpicker').datepicker({
         autoclose: true,
         format: " yyyy",
@@ -215,6 +242,7 @@
             numeralThousandsGroupStyle: 'thousand'
         });
     });
+
 
 </script>
 

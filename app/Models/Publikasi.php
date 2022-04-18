@@ -14,6 +14,7 @@ class Publikasi extends Model
         'penulis_anggota',
         'penulis_external',
         'jurnal',
+        'url',
         'jenis_publikasi_id',
         'sumber_dana',
         'lingkup',

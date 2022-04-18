@@ -1,5 +1,6 @@
 <form action="{{ route('hki.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
+    <input type="hidden" name="jenis" value="hki">
 <div class="box p-5" id="input">
     <div>
         <label>Nama HKI</label>

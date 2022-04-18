@@ -107,6 +107,8 @@ class MainController extends Controller
         select 'Insentif' as table_name, id,dosen_ketua_id, jumlah, status, updated_at from insentifs WHERE dosen_ketua_id = ". Auth::user()->id ." AND deleted_at IS NULL
         UNION ALL
         select 'HKI' as table_name, id, dosen_ketua_id, jumlah, status, updated_at from hkis WHERE dosen_ketua_id = ". Auth::user()->id ." AND deleted_at IS NULL
+        UNION ALL
+        select 'Publikasi' as table_name, id, dosen_ketua_id, jumlah, status, updated_at from publikasis WHERE dosen_ketua_id = ". Auth::user()->id ." AND deleted_at IS NULL
         ORDER BY updated_at ASC"));
 
         $mydata = array_map(function ($value) {
@@ -119,7 +121,7 @@ class MainController extends Controller
             $data->push($r);
         };
 
-        // // dd($d);
+        // dd($data);
         return view('history', compact('title', 'data'));
     }
 
@@ -297,6 +299,28 @@ class MainController extends Controller
                 $data = Ref_jenispublikasi::where('nama','LIKE', '%'.$search.'%')->get();
             }else {
                 $data = Ref_jenispublikasi::all();
+            }
+
+            $response = array();
+            foreach($data as $d){
+                $response[] = array(
+                    "id"=>$d->id,
+                    "text"=>$d->nama
+                );
+            }
+    
+            return response()->json($response);  
+        }
+    }
+
+    public function get_jenispub(Request $request) {
+        if ($request->ajax()) {
+            
+            if($request->has('q')){
+                $search = $request->q;
+                $data = Ref_publikasijenis::where('nama','LIKE', '%'.$search.'%')->get();
+            }else {
+                $data = Ref_publikasijenis::all();
             }
 
             $response = array();

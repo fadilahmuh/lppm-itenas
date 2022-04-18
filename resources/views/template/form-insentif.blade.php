@@ -1,5 +1,6 @@
 <form action="{{ route('insentif.store') }}" method="POST" enctype="multipart/form-data">
 @csrf
+<input type="hidden" name="jenis" value=" insentif">
     <div class="box p-5" id="input">
         <div class="">
             <label class="mb-2">Jenis Insentif</label>

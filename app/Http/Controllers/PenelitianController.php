@@ -32,13 +32,7 @@ class PenelitianController extends Controller
      */
     public function create(Request $request)
     {
-        if ($request->ajax()) {
-            $form = view('template.user.form-penelitian')->render();
-
-            return response([
-                'form' =>  $form
-            ]);  
-        }
+       
     }
 
     /**

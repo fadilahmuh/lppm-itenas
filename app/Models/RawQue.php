@@ -26,6 +26,8 @@ class RawQue extends Model
             return Hki::find($this->id);
         }elseif($this->table_name == 'Penelitian'){
             return Penelitian::find($this->id);
+        }elseif($this->table_name == 'Publikasi'){
+            return Publikasi::find($this->id);
         }
     }
 }

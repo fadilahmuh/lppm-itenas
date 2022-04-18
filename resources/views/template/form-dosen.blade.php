@@ -36,7 +36,7 @@
                     <input type="text" name="nidn" class="input w-full border mt-2" placeholder="--NIDN--">
                 </div>
                 <div class="mt-3">
-                    <label class="mb-2">Anggota Dosen</label>
+                    <label class="mb-2">Jurusan</label>
                     <select name="jurusan" class="select2 input w-full border mt-2 select-jurusan" data-placeholder="--Pilih Jurusan Dosen--">
                         <option></option>
                         <option value="Teknik Elektro">Teknik Elektro</option>
@@ -63,13 +63,13 @@
             <button type="submit" class="button w-full mt-5 text-white bg-theme-1 shadow-md disabled:bg-theme-4">Submit</button>
             </form>
         </div>
-        
     </div>
 </div>
 @endsection
 
 @section('lib-script')
 <script src="{{ asset('js/select2/dist/js/select2.js') }}"></script>
+<script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
 @endsection
 
 @section('line-script')

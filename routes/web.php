@@ -65,6 +65,7 @@ Route::middleware('auth:pegawai,dosen')->group(function() {
     Route::get('/data-hibah', [MainController::class, 'get_hibah'])->name('get_hibah');
     Route::get('/data-insentif', [MainController::class, 'get_insentif'])->name('get_insentif');
     Route::get('/data-publikasi', [MainController::class, 'get_pub'])->name('get_pub');
+    Route::get('/data-publikasi2', [MainController::class, 'get_jenispub'])->name('get_pub2');
 });
 
 Route::middleware('auth:pegawai')->group(function() {
