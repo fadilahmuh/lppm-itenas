@@ -33,12 +33,12 @@ class StorePkmRequest extends FormRequest
     protected function prepareForValidation()
     {
         $this->merge([
-            'dosen_anggota' => isset($this->dosen_anggota) ? implode(',', $this->dosen_anggota) : $this->dosen_anggota,
-            'anggota_mhs' => isset($this->anggota_mhs) ? implode(',', $this->anggota_mhs) : $this->anggota_mhs,
-            'mulai' => Carbon::createFromFormat('d/m/Y', $this->mulai)->format('Y-m-d'),
-            'selesai' => Carbon::createFromFormat('d/m/Y', $this->selesai)->format('Y-m-d'),
-            'tahun' => isset($this->tahun) ? Carbon::createFromFormat('Y', $this->tahun)->format('Y') : $this->tahun,
-            'jumlah' => (int)Str::replace(',', '', $this->jumlah),
+            'pkm_dosen_anggota' => isset($this->pkm_dosen_anggota) ? implode(',', $this->pkm_dosen_anggota) : $this->pkm_dosen_anggota,
+            'pkm_anggota_mhs' => isset($this->pkm_anggota_mhs) ? implode(',', $this->pkm_anggota_mhs) : $this->pkm_anggota_mhs,
+            'pkm_mulai' => Carbon::createFromFormat('d/m/Y', $this->pkm_mulai)->format('Y-m-d'),
+            'pkm_selesai' => Carbon::createFromFormat('d/m/Y', $this->pkm_selesai)->format('Y-m-d'),
+            'pkm_tahun' => isset($this->pkm_tahun) ? Carbon::createFromFormat('Y', $this->pkm_tahun)->format('Y') : $this->pkm_tahun,
+            'pkm_jumlah' => (int)Str::replace(',', '', $this->pkm_jumlah),
         ]);
     }
 }

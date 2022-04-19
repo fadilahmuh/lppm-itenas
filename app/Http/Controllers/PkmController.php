@@ -79,16 +79,16 @@ class PkmController extends Controller
                 $stat = $request->status;
             }
             Pkm::create([
-                'judul' => $request->judul_pkm,
+                'judul' => $request->pkm_judul_pkm,
                 'dosen_ketua_id' => $ketua->id,
-                'dosen_anggota' => $request->dosen_anggota,
-                'anggota_mhs' => $request->anggota_mhs,
-                'jenis_hibah_id' => $request->jenis_hibah,
-                'nama_mitra' => $request->nama_mitra,
-                'mulai' => $request->mulai,
-                'selesai' => $request->selesai,
-                'tahun' => $request->tahun,
-                'jumlah' => $request->jumlah,
+                'dosen_anggota' => $request->pkm_dosen_anggota,
+                'anggota_mhs' => $request->pkm_anggota_mhs,
+                'jenis_hibah_id' => $request->pkm_jenis_hibah,
+                'nama_mitra' => $request->pkm_nama_mitra,
+                'mulai' => $request->pkm_mulai,
+                'selesai' => $request->pkm_selesai,
+                'tahun' => $request->pkm_tahun,
+                'jumlah' => $request->pkm_jumlah,
                 'status' => $stat,
                 
             ]);
