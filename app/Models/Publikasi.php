@@ -4,9 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Publikasi extends Model
 {
+    use SoftDeletes;
+    
     protected $fillable = [
         'judul',
         'dosen_ketua_id',
@@ -39,7 +42,7 @@ class Publikasi extends Model
 
     public function getPenulisExternal()
     {
-        return explode(',', $this->penulis_external);
+        return explode(';', $this->penulis_external);
     }
     
     public function getjurusan(){

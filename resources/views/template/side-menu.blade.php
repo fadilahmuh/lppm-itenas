@@ -56,12 +56,6 @@
                 <div class="side-menu__title"> Input data </div>
             </a>
         </li>
-        <li>
-            <a href="{{ route('input.surat')}}" class="side-menu @if(url()->current()==route('input.surat')) side-menu--active @endif">
-                <div class="side-menu__icon"><i class="fa-regular fa-pen-to-square fa-xl"></i> </div>
-                <div class="side-menu__title"> Surat Menyurat </div>
-            </a>
-        </li>
         @auth('dosen')
         <li>
             <a href="{{ route('history') }}" class="side-menu @if(url()->current()==route('history')) side-menu--active @endif">
@@ -79,7 +73,18 @@
         </li>
         @endauth
     </ul>
-    <div class="side-nav__devider my-6"></div>
+    @auth('pegawai')
+    <div class="side-nav__devider my-3"></div>
+    <ul>
+        <li>
+            <a href="{{ route('surat.input')}}" class="side-menu @if(url()->current()==route('surat.input')) side-menu--active @endif">
+                <div class="side-menu__icon"><i class="fa-regular fa-pen-to-square fa-xl"></i> </div>
+                <div class="side-menu__title"> Surat Menyurat </div>
+            </a>
+        </li>
+    </ul>
+    @endauth
+    <div class="side-nav__devider my-3"></div>
     <ul>
         <li>
             <a href="{{ route('masterdata')}}" class="side-menu @if(url()->current()==route('masterdata')) side-menu--active @endif">

@@ -33,12 +33,12 @@ class StorePenelitianRequest extends FormRequest
     protected function prepareForValidation()
     {
         $this->merge([
-            'dosen_anggota' => isset($this->dosen_anggota) ? implode(',', $this->dosen_anggota) : $this->dosen_anggota,
-            'anggota_mhs' => isset($this->anggota_mhs) ? implode(',', $this->anggota_mhs) : $this->anggota_mhs,
-            'mulai' => Carbon::createFromFormat('d/m/Y', $this->mulai)->format('Y-m-d'),
-            'selesai' => Carbon::createFromFormat('d/m/Y', $this->selesai)->format('Y-m-d'),
-            'tahun' => isset($this->tahun) ? Carbon::createFromFormat('Y', $this->tahun)->format('Y') : $this->tahun,
-            'jumlah' => (int)Str::replace(',', '', $this->jumlah),
+            'plt_dosen_anggota' => isset($this->plt_dosen_anggota) ? implode(',', $this->plt_dosen_anggota) : $this->plt_dosen_anggota,
+            'plt_anggota_mhs' => isset($this->plt_anggota_mhs) ? implode(',', $this->plt_anggota_mhs) : $this->plt_anggota_mhs,
+            'plt_mulai' => Carbon::createFromFormat('d/m/Y', $this->plt_mulai)->format('Y-m-d'),
+            'plt_selesai' => Carbon::createFromFormat('d/m/Y', $this->plt_selesai)->format('Y-m-d'),
+            'plt_tahun' => isset($this->plt_tahun) ? Carbon::createFromFormat('Y', $this->plt_tahun)->format('Y') : $this->plt_tahun,
+            'plt_jumlah' => (int)Str::replace(',', '', $this->plt_jumlah),
         ]);
     }
 }

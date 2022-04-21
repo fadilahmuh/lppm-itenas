@@ -80,7 +80,8 @@ class MainController extends Controller
         $latest = DB::select(DB::raw("select 'Penelitian' as table_name, id, jumlah, status, updated_at from penelitians WHERE STATUS = 0 UNION ALL
         select 'Pkm' as table_name, id, jumlah, status, updated_at from pkms WHERE STATUS = 0 UNION all
         select 'Insentif' as table_name, id, jumlah, status, updated_at from insentifs WHERE STATUS = 0 UNION all
-        select 'HKI' as table_name, id, jumlah, status, updated_at from hkis WHERE STATUS = 0
+        select 'HKI' as table_name, id, jumlah, status, updated_at from hkis WHERE STATUS = 0 UNION all
+        select 'Publikasi' as table_name, id, jumlah, status, updated_at from publikasis WHERE STATUS = 0
         ORDER BY updated_at DESC"));
 
         $latest = array_map(function ($value) {
@@ -313,29 +314,14 @@ class MainController extends Controller
         }
     }
 
-    public function get_keg(Request $request) {
+    public function get_pub2(Request $request) {
         if ($request->ajax()) {
             
-            // if($request->has('q')){
-            //     $search = $request->q;
-            //     $data = Ref_jenispublikasi::where('nama','LIKE', '%'.$search.'%')->get();
-            // }elseif($request->has('k')){
-            //     if($request->k == 'penelitan'){
-            //         $data = Penelitian::where('status', 1)->get();
-            //     }elseif($request->k == 'pkm'){
-            //         $data = Pkm::where('status', 1)->get();
-            //     }elseif($request->k == 'hki'){
-            //         $data = Hki::where('status', 1)->get();
-            //     }
-                
-            // }
-
-            if($request->k == 'penelitian'){
-                $data = Penelitian::all();
-            }elseif($request->k == 'pkm'){
-                $data = Pkm::all();
-            }elseif($request->k == 'hki'){
-                $data = Hki::all();
+            if($request->has('q')){
+                $search = $request->q;
+                $data = Ref_publikasijenis::where('nama','LIKE', '%'.$search.'%')->get();
+            }else {
+                $data = Ref_publikasijenis::all();
             }
 
             $response = array();
@@ -346,6 +332,49 @@ class MainController extends Controller
                 );
             }
     
+            return response()->json($response);  
+        }
+    }
+
+    public function get_keg(Request $request) {
+        if ($request->ajax()) {
+            
+            if($request->has('q')){
+                $search = $request->q;
+                if($request->k == 'penelitian'){
+                    $data = Penelitian::where('judul','LIKE', '%'.$search.'%')->where('status', 1)->get();
+                }elseif($request->k == 'pkm'){
+                    $data = Pkm::where('judul','LIKE', '%'.$search.'%')->where('status', 1)->get();
+                }elseif($request->k == 'hki'){
+                    $data = Hki::where('judul','LIKE', '%'.$search.'%')->where('status', 1)->get();
+                }
+            }elseif($request->has('k')){
+                if($request->k == 'penelitian'){
+                    $data = Penelitian::where('status', 1)->get();
+                }elseif($request->k == 'pkm'){
+                    $data = Pkm::where('status', 1)->get();
+                }elseif($request->k == 'hki'){
+                    $data = Hki::where('status', 1)->get();
+                }
+                
+            }
+
+            // if($request->k == 'penelitian'){
+            //     $data = Penelitian::all();
+            // }elseif($request->k == 'pkm'){
+            //     $data = Pkm::all();
+            // }elseif($request->k == 'hki'){
+            //     $data = Hki::all();
+            // }
+
+            $response = array();
+            foreach($data as $d){
+                $response[] = array(
+                    "id"=>$d->id,
+                    "text"=>$d->judul
+                );
+            }
+
             return response()->json($response);  
         }
     }

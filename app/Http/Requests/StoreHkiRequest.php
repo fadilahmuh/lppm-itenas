@@ -33,9 +33,9 @@ class StoreHkiRequest extends FormRequest
     protected function prepareForValidation()
     {
         $this->merge([
-            'dosen_anggota' => isset($this->dosen_anggota) ? implode(',', $this->dosen_anggota) : $this->dosen_anggota,
-            'tahun' => isset($this->tahun) ? Carbon::createFromFormat('Y', $this->tahun)->format('Y') : $this->tahun,
-            'jumlah' => (int)Str::replace(',', '', $this->jumlah),
+            'hki_dosen_anggota' => isset($this->hki_dosen_anggota) ? implode(',', $this->hki_dosen_anggota) : $this->hki_dosen_anggota,
+            'hki_tahun' => isset($this->hki_tahun) ? Carbon::createFromFormat('Y', $this->hki_tahun)->format('Y') : $this->hki_tahun,
+            'hki_jumlah' => (int)Str::replace(',', '', $this->hki_jumlah),
         ]);
     }
 }

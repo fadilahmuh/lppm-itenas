@@ -193,10 +193,10 @@
         width: "100%",
     });
 
-    var url_pub = $('.select-pub2').data('list');
+    var url_pub2 = $('.select-pub2').data('list');
     $('.select-pub2').select2({
         ajax: {
-            url: url_pub,
+            url: url_pub2,
             dataType: 'json',
             delay: 250,
             data: function (params) {
@@ -213,6 +213,13 @@
             cache: true
         },
         width: "100%",
+    });
+
+    $('.pub_external').select2({
+        tags: true,
+        tokenSeparators: [";"],
+        width: "100%",
+        minimumResultsForSearch: -1,
     });
 
     $('.bs-yearpicker').datepicker({

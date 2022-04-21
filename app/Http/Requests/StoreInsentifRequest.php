@@ -33,9 +33,9 @@ class StoreInsentifRequest extends FormRequest
     protected function prepareForValidation()
     {
         $this->merge([
-            'dosen_anggota' => isset($this->dosen_anggota) ? implode(',', $this->dosen_anggota) : $this->dosen_anggota,
-            'tahun' => isset($this->tahun) ? Carbon::createFromFormat('Y', $this->tahun)->format('Y') : $this->tahun,
-            'jumlah' => (int)Str::replace(',', '', $this->jumlah),
+            'ins_dosen_anggota' => isset($this->ins_dosen_anggota) ? implode(',', $this->ins_dosen_anggota) : $this->ins_dosen_anggota,
+            'ins_tahun' => isset($this->ins_tahun) ? Carbon::createFromFormat('Y', $this->ins_tahun)->format('Y') : $this->ins_tahun,
+            'ins_jumlah' => (int)Str::replace(',', '', $this->ins_jumlah),
         ]);
     }
 }

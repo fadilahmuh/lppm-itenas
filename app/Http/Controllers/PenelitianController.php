@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Penelitian;
 use App\Http\Requests\StorePenelitianRequest;
 use App\Models\Dosen;
+use App\Models\Mahasiswa;
 use App\Models\Ref_jenishibah;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Session;
 
 class PenelitianController extends Controller
 {
@@ -45,31 +47,57 @@ class PenelitianController extends Controller
     {
         // dd($request->all());
         $rules = array(
-            'judul_penelitian' => 'required',
-            'jenis_hibah' => 'required',
-            'mulai' => 'required',
-            'selesai' => 'required|after:mulai',
-            'tahun' => 'required',
-            'jumlah' => 'required|integer',
-            'status' => 'required|boolean',
+            'plt_dosen_ketua' => 'required',
+            'plt_judul_penelitian' => 'required',
+            'plt_jenis_hibah' => 'required',
+            'plt_mulai' => 'required',
+            'plt_selesai' => 'required|after:mulai',
+            'plt_tahun' => 'required',
+            'plt_jumlah' => 'required|integer',
+            'plt_status' => 'required|boolean',
         );    
         $messages = array(
-            'judul_penelitian.required' => 'Judul penelitian tidak boleh kosong!',
-            'jenis_hibah.required' => 'Jenis Hibah tidak boleh kosong!',
-            'mulai.required' => 'Tanggal mulai tidak boleh kosong!',
-            'selesai.required' => 'Tanggal selesai tidak boleh kosong!',
-            'selesai.after' => 'Tanggal Mulai-Selesai tidak valid!',
-            'tahun.required' => 'Tahun tidak boleh kosong!!',
-            'jumlah.required' => 'Jumlah tidak boleh kosong!!',
-            'jumlah.integer' => 'Jumlah tidak valid, masukan nominal angka!!',
-            'status.required' => 'Status tidak valid!',
-            'status.boolean' => 'Status tidak valid!',
+            'plt_dosen_ketua.required' => 'Dosen Ketua tidak boleh kosong!',
+            'plt_judul_penelitian.required' => 'Judul penelitian tidak boleh kosong!',
+            'plt_jenis_hibah.required' => 'Jenis Hibah tidak boleh kosong!',
+            'plt_mulai.required' => 'Tanggal mulai tidak boleh kosong!',
+            'plt_selesai.required' => 'Tanggal selesai tidak boleh kosong!',
+            'plt_selesai.after' => 'Tanggal Mulai-Selesai tidak valid!',
+            'plt_tahun.required' => 'Tahun tidak boleh kosong!!',
+            'plt_jumlah.required' => 'Jumlah tidak boleh kosong!!',
+            'plt_jumlah.integer' => 'Jumlah tidak valid, masukan nominal angka!!',
+            'plt_status.required' => 'Status tidak valid!',
+            'plt_status.boolean' => 'Status tidak valid!',
         );
 
         $request->all();
         $validator = Validator::make($request->all(), $rules, $messages);        
 
         if ($validator->fails()) {
+            if($request->has('plt_dosen_ketua')){
+                $dk = Dosen::find($request->plt_dosen_ketua);
+                Session::flash('plt_dosen_ketua', array($dk->id, $dk->nama));
+            }   
+            if($request->has('plt_dosen_anggota')){
+                $da = Dosen::findMany(explode(',', $request->plt_dosen_anggota));
+                $j =[];
+                foreach ($da as $a){
+                    array_push($j, [ $a->id,$a->nama]);
+                }
+                Session::flash('plt_dosen_anggota', $j);
+            }
+            if($request->has('plt_anggota_mhs')){
+                $ma = Mahasiswa::findMany(explode(',', $request->plt_anggota_mhs));
+                $k =[];
+                foreach ($ma as $a){
+                    array_push($k, [ $a->id,$a->nama]);
+                }
+                Session::flash('plt_anggota_mhs', $k);
+            }
+            if($request->has('plt_jenis_hibah')){
+                $jh = Ref_jenishibah::find($request->plt_jenis_hibah);
+                Session::flash('plt_jenis_hibah', array($jh->id, $jh->nama));
+            }
             return redirect()->back()->withInput()->withErrors($validator);
         } else {
             // dd($request->all());
@@ -77,26 +105,26 @@ class PenelitianController extends Controller
                 $ketua = Auth::user();
                 $stat = 0;
             }elseif(Auth::guard('pegawai')->check()){
-                $ketua = Dosen::find($request->dosen_ketua);
-                $stat = $request->status;
+                $ketua = Dosen::find($request->plt_dosen_ketua);
+                $stat = $request->plt_status;
             }
             Penelitian::create([
-                'judul' => $request->judul_penelitian,
+                'judul' => $request->plt_judul_penelitian,
                 'dosen_ketua_id' => $ketua->id,
-                'dosen_anggota' => $request->dosen_anggota,
-                'anggota_mhs' => $request->anggota_mhs,
-                'jenis_hibah_id' => $request->jenis_hibah,
-                'nama_mitra' => $request->nama_mitra,
-                'mulai' => $request->mulai,
-                'selesai' => $request->selesai,
-                'tahun' => $request->tahun,
-                'jumlah' => $request->jumlah,
+                'dosen_anggota' => $request->plt_dosen_anggota,
+                'anggota_mhs' => $request->plt_anggota_mhs,
+                'jenis_hibah_id' => $request->plt_jenis_hibah,
+                'nama_mitra' => $request->plt_nama_mitra,
+                'mulai' => $request->plt_mulai,
+                'selesai' => $request->plt_selesai,
+                'tahun' => $request->plt_tahun,
+                'jumlah' => $request->plt_jumlah,
                 'status' => $stat,
                 
             ]);
 
 
-            $msg = 'Data Hibah Penelitian berhasil ditambahkan.';
+            $msg = 'Data Penelitian berhasil ditambahkan.';
    
             return redirect()->route('input')->with('success',$msg);
         }
@@ -142,25 +170,25 @@ class PenelitianController extends Controller
     {
         // dd($penelitian);
         $rules = array(
-            'judul_penelitian' => 'required',
-            'jenis_hibah' => 'required',
-            'mulai' => 'required',
-            'selesai' => 'required|after:mulai',
-            'tahun' => 'required',
-            'jumlah' => 'required|integer',
-            'status' => 'required|boolean',
+            'plt_judul_penelitian' => 'required',
+            'plt_jenis_hibah' => 'required',
+            'plt_mulai' => 'required',
+            'plt_selesai' => 'required|after:mulai',
+            'plt_tahun' => 'required',
+            'plt_jumlah' => 'required|integer',
+            'plt_status' => 'required|boolean',
         );    
         $messages = array(
-            'judul_penelitian.required' => 'Judul penelitian tidak boleh kosong!',
-            'jenis_hibah.required' => 'Jenis Hibah tidak boleh kosong!',
-            'mulai.required' => 'Tanggal mulai tidak boleh kosong!',
-            'selesai.required' => 'Tanggal selesai tidak boleh kosong!',
-            'selesai.after' => 'Tanggal Mulai-Selesai tidak valid!',
-            'tahun.required' => 'Tahun tidak boleh kosong!!',
-            'jumlah.required' => 'Jumlah tidak boleh kosong!!',
-            'jumlah.integer' => 'Jumlah tidak valid, masukan nominal angka!!',
-            'status.required' => 'Status tidak valid!',
-            'status.boolean' => 'Status tidak valid!',
+            'plt_judul_penelitian.required' => 'Judul penelitian tidak boleh kosong!',
+            'plt_jenis_hibah.required' => 'Jenis Hibah tidak boleh kosong!',
+            'plt_mulai.required' => 'Tanggal mulai tidak boleh kosong!',
+            'plt_selesai.required' => 'Tanggal selesai tidak boleh kosong!',
+            'plt_selesai.after' => 'Tanggal Mulai-Selesai tidak valid!',
+            'plt_tahun.required' => 'Tahun tidak boleh kosong!!',
+            'plt_jumlah.required' => 'Jumlah tidak boleh kosong!!',
+            'plt_jumlah.integer' => 'Jumlah tidak valid, masukan nominal angka!!',
+            'plt_status.required' => 'Status tidak valid!',
+            'plt_status.boolean' => 'Status tidak valid!',
         );
 
         $request->all();
@@ -173,20 +201,20 @@ class PenelitianController extends Controller
                 $ketua = Auth::user();
                 $stat = 0;
             }elseif(Auth::guard('pegawai')->check()){
-                $ketua = Dosen::find($request->dosen_ketua);
-                $stat = $request->status;
+                $ketua = Dosen::find($request->plt_dosen_ketua);
+                $stat = $request->plt_status;
             }
             $penelitian->update([
-                'judul' => $request->judul_penelitian,
+                'judul' => $request->plt_judul_penelitian,
                 'dosen_ketua_id' => $ketua->id,
-                'dosen_anggota' => $request->dosen_anggota,
-                'anggota_mhs' => $request->anggota_mhs,
-                'jenis_hibah_id' => $request->jenis_hibah,
-                'nama_mitra' => $request->nama_mitra,
-                'mulai' => $request->mulai,
-                'selesai' => $request->selesai,
-                'tahun' => $request->tahun,
-                'jumlah' => $request->jumlah,
+                'dosen_anggota' => $request->plt_dosen_anggota,
+                'anggota_mhs' => $request->plt_anggota_mhs,
+                'jenis_hibah_id' => $request->plt_jenis_hibah,
+                'nama_mitra' => $request->plt_nama_mitra,
+                'mulai' => $request->plt_mulai,
+                'selesai' => $request->plt_selesai,
+                'tahun' => $request->plt_tahun,
+                'jumlah' => $request->plt_jumlah,
                 'status' => $stat,
                 
             ]);
@@ -204,8 +232,31 @@ class PenelitianController extends Controller
      * @param  \App\Models\Penelitian  $penelitian
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Penelitian $penelitian)
+    public function destroy($id)
     {
         //
+    }
+    
+    public function accept($id)
+    {
+        $data = Penelitian::find($id);
+        // dd($data);
+        $data->update([
+            'status' => 1
+        ]);
+
+        $msg = 'Data berhasil dikonfirmasi!';
+
+        return redirect()->route('inbox')->with('success',$msg);
+    }
+
+    public function delete($id)
+    {
+        $data = Penelitian::find($id);
+        $data->delete();
+
+        $msg = 'Data berhasil dihapus!';
+
+        return redirect()->route('penelitian.index')->with('success',$msg);
     }
 }

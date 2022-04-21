@@ -35,7 +35,7 @@ class StorePublikasiRequest extends FormRequest
         $this->merge([
             'pub_penulis_anggota' => isset($this->pub_penulis_anggota) ? implode(',', $this->pub_penulis_anggota) : $this->pub_penulis_anggota,
             'pub_tanggal_publish' => Carbon::createFromFormat('d/m/Y', $this->pub_tanggal_publish)->format('Y-m-d'),
-            'pub_tahun' => isset($this->tahun) ? Carbon::createFromFormat('Y', $this->pub_tahun)->format('Y') : $this->pub_tahun,
+            'pub_tahun' => isset($this->pub_tahun) ? Carbon::createFromFormat('Y', $this->pub_tahun)->format('Y') : $this->pub_tahun,
             'pub_jumlah' => (int)Str::replace(',', '', $this->pub_jumlah),
         ]);
     }

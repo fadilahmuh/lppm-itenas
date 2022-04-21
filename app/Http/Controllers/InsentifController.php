@@ -6,9 +6,12 @@ use App\Models\Insentif;
 use App\Http\Requests\StoreInsentifRequest;
 use App\Http\Requests\UpdateInsentifRequest;
 use App\Models\Dosen;
+use App\Models\Ref_jenisinsentif;
+use App\Models\Ref_jenispublikasi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Session;
 
 class InsentifController extends Controller
 {
@@ -44,28 +47,50 @@ class InsentifController extends Controller
     public function store(StoreInsentifRequest $request)
     {
         $rules = array(
-            'judul_publikasi' => 'required',
-            'jenis_insentif' => 'required',
-            'jenis_publikasi' => 'required',
-            'tahun' => 'required',
-            'jumlah' => 'required|integer',
-            'status' => 'required|boolean',
+            'ins_dosen_ketua' => 'required',
+            'ins_judul_publikasi' => 'required',
+            'ins_jenis_insentif' => 'required',
+            'ins_jenis_publikasi' => 'required',
+            'ins_tahun' => 'required',
+            'ins_jumlah' => 'required|integer',
+            'ins_status' => 'required|boolean',
         );    
         $messages = array(
-            'judul_publikasi.required' => 'Judul penelitian tidak boleh kosong!',
-            'jenis_insentif.required' => 'Jenis Insentif tidak boleh kosong!',
-            'jenis_publikasi.required' => 'Jenis Publikasi tidak boleh kosong!',
-            'tahun.required' => 'Tahun tidak boleh kosong!!',
-            'jumlah.required' => 'Jumlah tidak boleh kosong!!',
-            'jumlah.integer' => 'Jumlah tidak valid, masukan nominal angka!!',
-            'status.required' => 'Status tidak valid!',
-            'status.boolean' => 'Status tidak valid!',
+            'ins_dosen_ketua.required' => 'Dosen Ketua tidak boleh kosong!',
+            'ins_judul_publikasi.required' => 'Judul publikasi tidak boleh kosong!',
+            'ins_jenis_insentif.required' => 'Jenis Insentif tidak boleh kosong!',
+            'ins_jenis_publikasi.required' => 'Jenis Publikasi tidak boleh kosong!',
+            'ins_tahun.required' => 'Tahun tidak boleh kosong!!',
+            'ins_jumlah.required' => 'Jumlah tidak boleh kosong!!',
+            'ins_jumlah.integer' => 'Jumlah tidak valid, masukan nominal angka!!',
+            'ins_status.required' => 'Status tidak valid!',
+            'ins_status.boolean' => 'Status tidak valid!',
         );
 
         $request->all();
         $validator = Validator::make($request->all(), $rules, $messages);        
 
         if ($validator->fails()) {
+            if($request->has('ins_dosen_ketua')){
+                $dk = Dosen::find($request->ins_dosen_ketua);
+                Session::flash('ins_dosen_ketua', array($dk->id, $dk->nama));
+            }   
+            if($request->has('ins_dosen_anggota')){
+                $da = Dosen::findMany(explode(',', $request->ins_dosen_anggota));
+                $j =[];
+                foreach ($da as $a){
+                    array_push($j, [ $a->id,$a->nama]);
+                }
+                Session::flash('ins_dosen_anggota', $j);
+            }
+            if($request->has('ins_jenis_insentif')){
+                $jh = Ref_jenisinsentif::find($request->ins_jenis_insentif);
+                Session::flash('ins_jenis_insentif', array($jh->id, $jh->nama));
+            }
+            if($request->has('ins_jenis_publikasi')){
+                $jh = Ref_jenispublikasi::find($request->ins_jenis_publikasi);
+                Session::flash('ins_jenis_publikasi', array($jh->id, $jh->nama));
+            }
             return redirect()->back()->withInput()->withErrors($validator);
         } else {
             // dd($request->all());
@@ -73,23 +98,23 @@ class InsentifController extends Controller
                 $ketua = Auth::user();
                 $stat = 0;
             }elseif(Auth::guard('pegawai')->check()){
-                $ketua = Dosen::find($request->dosen_ketua);
-                $stat = $request->status;
+                $ketua = Dosen::find($request->ins_dosen_ketua);
+                $stat = $request->ins_status;
             }
             Insentif::create([
-                'judul' => $request->judul_publikasi,
+                'judul' => $request->ins_judul_publikasi,
                 'dosen_ketua_id' => $ketua->id,
-                'penulis_anggota' => $request->dosen_anggota,
-                'jenis_insentif_id' => $request->jenis_insentif,
-                'jenis_publikasi_id' => $request->jenis_publikasi,
-                'jurnal' => $request->jurnal,
-                'tahun' => $request->tahun,
-                'jumlah' => $request->jumlah,
+                'penulis_anggota' => $request->ins_dosen_anggota,
+                'jenis_insentif_id' => $request->ins_jenis_insentif,
+                'jenis_publikasi_id' => $request->ins_jenis_publikasi,
+                'jurnal' => $request->ins_jurnal,
+                'tahun' => $request->ins_tahun,
+                'jumlah' => $request->ins_jumlah,
                 'status' => $stat,
                 
             ]);
 
-            $msg = 'Data Hibah Insentif berhasil ditambahkan.';
+            $msg = 'Data Insentif berhasil ditambahkan.';
    
             return redirect()->route('input')->with('success',$msg);
         }
@@ -134,22 +159,22 @@ class InsentifController extends Controller
     public function update(StoreInsentifRequest $request, Insentif $insentif)
     {
         $rules = array(
-            'judul_publikasi' => 'required',
-            'jenis_insentif' => 'required',
-            'jenis_publikasi' => 'required',
-            'tahun' => 'required',
-            'jumlah' => 'required|integer',
-            'status' => 'required|boolean',
+            'ins_judul_publikasi' => 'required',
+            'ins_jenis_insentif' => 'required',
+            'ins_jenis_publikasi' => 'required',
+            'ins_tahun' => 'required',
+            'ins_jumlah' => 'required|integer',
+            'ins_status' => 'required|boolean',
         );    
         $messages = array(
-            'judul_publikasi.required' => 'Judul penelitian tidak boleh kosong!',
-            'jenis_insentif.required' => 'Jenis Insentif tidak boleh kosong!',
-            'jenis_publikasi.required' => 'Jenis Publikasi tidak boleh kosong!',
-            'tahun.required' => 'Tahun tidak boleh kosong!!',
-            'jumlah.required' => 'Jumlah tidak boleh kosong!!',
-            'jumlah.integer' => 'Jumlah tidak valid, masukan nominal angka!!',
-            'status.required' => 'Status tidak valid!',
-            'status.boolean' => 'Status tidak valid!',
+            'ins_judul_publikasi.required' => 'Judul penelitian tidak boleh kosong!',
+            'ins_jenis_insentif.required' => 'Jenis Insentif tidak boleh kosong!',
+            'ins_jenis_publikasi.required' => 'Jenis Publikasi tidak boleh kosong!',
+            'ins_tahun.required' => 'Tahun tidak boleh kosong!!',
+            'ins_jumlah.required' => 'Jumlah tidak boleh kosong!!',
+            'ins_jumlah.integer' => 'Jumlah tidak valid, masukan nominal angka!!',
+            'ins_status.required' => 'Status tidak valid!',
+            'ins_status.boolean' => 'Status tidak valid!',
         );
 
         $request->all();
@@ -163,25 +188,25 @@ class InsentifController extends Controller
                 $ketua = Auth::user();
                 $stat = 0;
             }elseif(Auth::guard('pegawai')->check()){
-                $ketua = Dosen::find($request->dosen_ketua);
-                $stat = $request->status;
+                $ketua = Dosen::find($request->ins_dosen_ketua);
+                $stat = $request->ins_status;
             }
-            Insentif::create([
-                'judul' => $request->judul_publikasi,
+            $insentif->update([
+                'judul' => $request->ins_judul_publikasi,
                 'dosen_ketua_id' => $ketua->id,
-                'penulis_anggota' => $request->dosen_anggota,
-                'jenis_insentif_id' => $request->jenis_insentif,
-                'jenis_publikasi_id' => $request->jenis_publikasi,
-                'jurnal' => $request->jurnal,
-                'tahun' => $request->tahun,
-                'jumlah' => $request->jumlah,
+                'penulis_anggota' => $request->ins_dosen_anggota,
+                'jenis_insentif_id' => $request->ins_jenis_insentif,
+                'jenis_publikasi_id' => $request->ins_jenis_publikasi,
+                'jurnal' => $request->ins_jurnal,
+                'tahun' => $request->ins_tahun,
+                'jumlah' => $request->ins_jumlah,
                 'status' => $stat,
                 
             ]);
 
             $msg = 'Data Hibah Insentif berhasil diupdate.';
    
-            return redirect()->route('pkm.index')->with('success',$msg);
+            return redirect()->route('insentif.index')->with('success',$msg);
         }
     }
 
@@ -194,5 +219,28 @@ class InsentifController extends Controller
     public function destroy(Insentif $insentif)
     {
         //
+    }
+
+    public function accept($id)
+    {
+        $data = Insentif::find($id);
+        // dd($data);
+        $data->update([
+            'status' => 1
+        ]);
+
+        $msg = 'Data berhasil dikonfirmasi!';
+
+        return redirect()->route('inbox')->with('success',$msg);
+    }
+
+    public function delete($id)
+    {
+        $data = Insentif::find($id);
+        $data->delete();
+
+        $msg = 'Data berhasil dihapus!';
+
+        return redirect()->route('insentif.index')->with('success',$msg);
     }
 }

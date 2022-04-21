@@ -8,13 +8,24 @@
 
 @section('content')
 
-<div class="col-span-12 mt-8">
+<div class="col-span-12 mt-4">
     <div class="intro-y flex items-center h-10">
         <h2 class="text-lg font-medium truncate mr-5">
             Edit Data
         </h2>
     </div>
 </div>  
+
+<div class="col-span-12">
+    @if($errors->any())
+    @foreach($errors->getMessages() as $this_error)
+    <div class="rounded-md px-5 py-4 mb-3 bg-theme-31 text-theme-6">{{$this_error[0]}}</div> 
+    @endforeach
+    @endif 
+    @if(Session::has('success'))
+        <div class="rounded-md px-5 py-4 mb-2 bg-theme-18 text-theme-9">{{ Session('success') }} </div>
+    @endif
+</div> 
 
 @yield('edt-form')
 
@@ -139,6 +150,35 @@
             cache: true
         },
         width: "100%",
+    });
+
+    var url_pub2 = $('.select-pub2').data('list');
+    $('.select-pub2').select2({
+        ajax: {
+            url: url_pub2,
+            dataType: 'json',
+            delay: 250,
+            data: function (params) {
+                return {
+                    q: params.term, // search term
+                };
+            },
+            processResults: function(data) 
+            {
+                return {
+                    results: data
+                };
+            },
+            cache: true
+        },
+        width: "100%",
+    });
+
+    $('.pub_external').select2({
+        tags: true,
+        tokenSeparators: [";"],
+        width: "100%",
+        minimumResultsForSearch: -1,
     });
 
     $('.bs-yearpicker').datepicker({
