@@ -15,12 +15,11 @@ class CreateSuratsTable extends Migration
     {
         Schema::create('surats', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('pembuat-id')->index()->nullable(false);
-            $table->string('jenis-surat')->nullable(false);
-            $table->integer('no-surat')->nullable(false);
-            $table->integer('nama-kegiatan')->nullable(false);
-            $table->unsignedInteger('kegiatan-id')->index()->nullable(false);
-            $table->date('tanggal-dibuat');
+            $table->unsignedInteger('pembuat_id')->index()->nullable(false);
+            $table->string('jenis_surat')->nullable(false);
+            $table->string('no_surat')->nullable(false);
+            $table->string('nama_kegiatan')->nullable(false);
+            $table->unsignedInteger('kegiatan_id')->index()->nullable(false);
             $table->string('qr');
             $table->string('file');
             $table->timestamps();

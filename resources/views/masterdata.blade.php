@@ -93,8 +93,6 @@
 
 @section('line-script')
 <script>
-    $('.datatable').DataTable({
-        "scrollX": true
-    });
+    $('.datatable').DataTable();
 </script>
 @endsection

@@ -77,11 +77,32 @@
     <div class="side-nav__devider my-3"></div>
     <ul>
         <li>
+            <a href="javascript:;" class="side-menu">
+                <div class="side-menu__icon"> <i class="fa-solid fa-envelope fa-xl"></i> </div>
+                <div class="side-menu__title"> Surat Menyurat <i data-feather="chevron-down"
+                        class="side-menu__sub-icon"></i> </div>
+            </a>
+            <ul class="">
+                <li>
+                    <a href="{{ route('surat.index') }}" class="side-menu">
+                        <div class="side-menu__icon"> <i class="fa-solid fa-chevron-right"></i> </div>
+                        <div class="side-menu__title"> Data Surat </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('surat.input')}}" class="side-menu">
+                        <div class="side-menu__icon"> <i class="fa-solid fa-chevron-right"></i> </div>
+                        <div class="side-menu__title"> Buat Surat </div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        {{-- <li>
             <a href="{{ route('surat.input')}}" class="side-menu @if(url()->current()==route('surat.input')) side-menu--active @endif">
                 <div class="side-menu__icon"><i class="fa-regular fa-pen-to-square fa-xl"></i> </div>
                 <div class="side-menu__title"> Surat Menyurat </div>
             </a>
-        </li>
+        </li> --}}
     </ul>
     @endauth
     <div class="side-nav__devider my-3"></div>

@@ -25,8 +25,12 @@
                     <div class="font-medium whitespace-nowrap">{{$d->judul}}</div>
                 </td>
                 <td class="text-center border-b">{{$d->getjurusan()}} </td>
-                <td class="text-center border-b">{{$d->jenis_insentif->nama}} </td>
-                <td class="text-center border-b">{{$d->jenis_publikasi->nama}} </td>
+                <td class="text-center border-b">
+                    <div class="text-center whitespace-nowrap">{{$d->jenis_insentif->nama}}</div>
+                </td>
+                <td class="text-center border-b">
+                    <div class="text-center whitespace-nowrap">{{$d->jenis_publikasi->nama}}</div>
+                </td>
                 <td class="text-center border-b">{{$d->dosen_ketua->nama}}</td>
                 <td class="w-40 border-b">
                     @if(!empty($d->getDosenAnggota()))

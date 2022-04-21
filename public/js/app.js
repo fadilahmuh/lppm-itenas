@@ -640,12 +640,11 @@ __webpack_require__.r(__webpack_exports__);
       url: url,
       dataType: "json",
       success: function success(response) {
-        // $('#large-modal-size-preview').html(response.modal);
-        // $('#large-modal-size-preview').modal('show');
-        console.log(response.modal);
+        $('#large-modal-size-preview').html(response.modal);
+        $('#large-modal-size-preview').modal('show');
       },
       error: function error(xhr, ajaxOptions, thrownError) {
-        console.log(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+        alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
       }
     });
   });

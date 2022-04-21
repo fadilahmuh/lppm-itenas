@@ -77,11 +77,11 @@ class MainController extends Controller
     public function inbox() {
         $title = 'Kotak Masuk';
 
-        $latest = DB::select(DB::raw("select 'Penelitian' as table_name, id, jumlah, status, updated_at from penelitians WHERE STATUS = 0 UNION ALL
-        select 'Pkm' as table_name, id, jumlah, status, updated_at from pkms WHERE STATUS = 0 UNION all
-        select 'Insentif' as table_name, id, jumlah, status, updated_at from insentifs WHERE STATUS = 0 UNION all
-        select 'HKI' as table_name, id, jumlah, status, updated_at from hkis WHERE STATUS = 0 UNION all
-        select 'Publikasi' as table_name, id, jumlah, status, updated_at from publikasis WHERE STATUS = 0
+        $latest = DB::select(DB::raw("select 'Penelitian' as table_name, id, jumlah, status, updated_at from penelitians WHERE STATUS = 0  AND deleted_at IS NULL UNION ALL
+        select 'Pkm' as table_name, id, jumlah, status, updated_at from pkms WHERE STATUS = 0  AND deleted_at IS NULL UNION all
+        select 'Insentif' as table_name, id, jumlah, status, updated_at from insentifs WHERE STATUS = 0  AND deleted_at IS NULL UNION all
+        select 'HKI' as table_name, id, jumlah, status, updated_at from hkis WHERE STATUS = 0  AND deleted_at IS NULL UNION all
+        select 'Publikasi' as table_name, id, jumlah, status, updated_at from publikasis WHERE STATUS = 0  AND deleted_at IS NULL
         ORDER BY updated_at DESC"));
 
         $latest = array_map(function ($value) {
@@ -94,7 +94,7 @@ class MainController extends Controller
             $data->push($r);
         };
 
-        // dd($d);
+        // dd($data);
         return view('inbox', compact('title', 'data'));
     }
 

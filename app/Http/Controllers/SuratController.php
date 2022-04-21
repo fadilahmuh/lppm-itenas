@@ -6,14 +6,24 @@ use App\Models\Hki;
 use App\Models\Pegawai;
 use App\Models\Penelitian;
 use App\Models\Pkm;
+use App\Models\Surat;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use QrCode;
 use PDF;
+use Session;
 
 class SuratController extends Controller
 {
-    //
+    public function index()
+    {
+        $title = 'Data Surat';
+        $data = Surat::all();
+
+        return view('template.table-surat', compact('title','data'));
+    }
+
     public function input_surat()
     {
         $title = 'Create Surat';
@@ -23,55 +33,72 @@ class SuratController extends Controller
 
     public function store_surat(Request $request)
     {
-        
-        $key = substr(base_convert(sha1(uniqid(mt_rand())), 16, 36), 0, 10);
-        $qrl = route('surat.cek',  $key);
-
-        $pembuat = Pegawai::find($request->pembuat_id);
-        if($request->nama_kegiatan == 'penelitian'){
-            $kegiatan = 'Penelitian';
-            $data = Penelitian::find($request->kegiatan_id);
-            // $waktu = Carbon::$data->mulai->translatedFormat('d F Y') .' - '. Carbon::now()->translatedFormat('d F Y');
-            $waktu = Carbon::parse($data->mulai)->format('d/m/Y').' - '. Carbon::parse($data->selesai)->format('d/m/Y');
-        }elseif($request->nama_kegiatan == 'pkm'){
-            $kegiatan = 'Pengabdian Kepada Masyarakat';
-            $data = Pkm::find($request->kegiatan_id);
-            $waktu = Carbon::parse($data->mulai)->format('d/m/Y').' - '. Carbon::parse($data->selesai)->format('d/m/Y');
-        }elseif($request->nama_kegiatan == 'hki'){
-            $kegiatan = 'Hak Kekayaan Intelektual';
-            $data = Hki::find($request->kegiatan_id);
-            $waktu = $data->tahun;
-        }
-        $nosurat = $request->no_surat.'/C.02.01/LPPM/'.$this->getRomawi(date('m')).'/'.date("Y");
-
-        // dd($request->all(),$nosurat,$waktu,$data->getlistdosen());
-
-        $qrcode = base64_encode(QrCode::format('svg')->size(80)->errorCorrection('H')->generate($qrl));
-        $pdf = PDF::loadview('surat-keterangan', compact('qrcode','pembuat','waktu','kegiatan','data','nosurat'))->setPaper('A4', 'potrait');
-        return $pdf->stream();
-
+        // dd($request->all());
         $rules = array(
-            'pembuat-id' => 'required',
-            'jenis-surat' => 'required',
-            'no-surat' => 'required',
-            'nama-kegiatan' => 'required',
-            'kegiatan-id' => 'required',
-            'pembuat-id' => 'required',
-
+            'jenis_surat' => 'required',
+            'no_surat' => 'required',
+            'nama_kegiatan' => 'required',
+            'kegiatan_id' => 'required',
         );
         $messages = array(
-            'nama.required' => 'Nama Dosen tidak boleh kosong!',
-            'nama.unique' => 'Nama Dosen sudah terdaftar!',
-            'nip.required' => 'NIP tidak boleh kosong!',
-            'nip.unique' => 'NIP sudah terdaftar!',
-            'nidn.required' => 'NIDN tidak boleh kosong!',
-            'nidn.unique' => 'NIDN sudah terdaftar!',
-            'email.required' => 'Email tidak boleh kosong!',
-            'email.unique' => 'Email sudah terdaftar!',
-            'jurusan.required' => 'Jurusan tidak boleh kosong!',
+            'jenis_surat.required' => 'Jenis surat tidak boleh kosong!',
+            'no_surat.required' => 'Nomor tidak boleh kosong!',
+            'nama_kegiatan.required' => 'Nama Dosen tidak boleh kosong!',
+            'kegiatan_id.required' => 'Nama Dosen tidak boleh kosong!',
         );
 
+        $request->all();
+        $validator = Validator::make($request->all(), $rules, $messages);        
+
+        if ($validator->fails()) {
+            return redirect()->back()->withInput()->withErrors($validator);
+        } else {
+            $key = substr(base_convert(sha1(uniqid(mt_rand())), 16, 36), 0, 10);;
+            $nosurat = $request->no_surat.'/C.02.01/LPPM/'.$this->getRomawi(date('m')).'/'.date("Y");
+            if($request->nama_kegiatan == 'penelitian'){
+                $kegiatan = 'Penelitian';
+            }elseif($request->nama_kegiatan == 'pkm'){
+                $kegiatan = 'Pengabdian Kepada Masyarakat';
+            }elseif($request->nama_kegiatan == 'hki'){
+                $kegiatan = 'Hak Kekayaan Intelektual';
+            }
+            $dasur = Surat::create([
+                'pembuat_id' => (int)$request->pembuat_id,
+                'jenis_surat' => $request->jenis_surat,
+                'no_surat' => $nosurat,
+                'nama_kegiatan' => $kegiatan,
+                'kegiatan_id' => (int)$request->kegiatan_id,
+                'qr' => $key,
+                
+            ]);
+
+            Session::flash('redirect', route('surat.tampil',  $key));
+            $msg = 'Surat Berhasil sibuat.';
+            return redirect()->route('surat.index')->with('success',$msg);
+        }
         
+    }
+
+    public function tampil_surat($id)
+    {
+        $dasur = Surat::where('qr',$id)->first();
+
+        // dd($dasur);
+
+        $qrl = route('surat.cek',  $dasur->qr);
+        $qrcode = base64_encode(QrCode::format('svg')->size(80)->errorCorrection('H')->generate($qrl));
+
+        $pdf = PDF::loadview('surat-keterangan2', compact('dasur','qrcode'))->setPaper('A4', 'potrait');
+        return $pdf->stream();
+    }
+
+    public function cek_surat($id)
+    {
+        $title = 'LPPM Digital Signature';
+
+        $dasur = Surat::where('qr',$id)->first();
+
+        return view('cek-surat',compact('title','dasur'));
     }
 
     function getRomawi($bln){

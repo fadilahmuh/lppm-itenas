@@ -99,10 +99,20 @@
 }
 
 .dataTables_filter {
-    @apply float-left;
+    @apply float-left mb-4;
 }
 
 .dataTables_length select {
     @apply pr-8 #{!important};
     @apply border #{!important};
+}
+
+.dataTables_scroll{
+    table {
+        @apply m-0 #{!important};
+    }
+}
+
+.dataTables_scrollBody {
+    @apply mb-4;
 }

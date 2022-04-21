@@ -27,14 +27,14 @@
                     
                     @if(!empty($publikasi->penulis_anggota))
                     <div class="text-gray-600 font-normal mt-3 text-sm">Anggota Penulis Internal</div>
-                    @foreach ($penelitian->getPenulisInternal() as $da)
+                    @foreach ($publikasi->getPenulisInternal() as $da)
                         <a href="#" class="font-semibold text-base block" >{{$da->nama}}</a>
                     @endforeach
 				    @endif  
 
-                    @if(!empty($publikasi->getPenulisExterna()))
+                    @if(!empty($publikasi->getPenulisExternal()))
                     <div class="text-gray-600 font-normal mt-3 text-sm">Anggota Penulis External</div>
-                    @foreach ($penelitian->getPenulisExternal() as $da)
+                    @foreach ($publikasi->getPenulisExternal() as $da)
                         <a href="#" class="font-semibold text-base block" >{{$da}}</a>
                     @endforeach
 					@endif

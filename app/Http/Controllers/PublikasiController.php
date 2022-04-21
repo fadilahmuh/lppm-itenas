@@ -7,7 +7,7 @@ use App\Http\Requests\StorePublikasiRequest;
 use App\Http\Requests\UpdatePublikasiRequest;
 use App\Models\Dosen;
 use App\Models\Ref_publikasijenis;
-use Illuminate\Http\Client\Request;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Session;
@@ -132,18 +132,15 @@ class PublikasiController extends Controller
      */
     public function show(Request $request, Publikasi $publikasi)
     {
-        // if ($request->ajax()) {
+        // dd($publikasi);
+        if ($request->ajax()) {
 
-        //     $modal = view('template.modal-publikasi',compact('publikasi'))->render();
-        //     dd($modal);
-        //     return response()->json([
-        //         'modal' =>  $modal
-        //     ]);  
-        // }
-
-        return response()->json([
-            'modal' =>  'tes tes tes tes'
-        ]); 
+            $modal = view('template.modal-publikasi',compact('publikasi'))->render();
+            // dd($modal);
+            return response()->json([
+                'modal' =>  $modal
+            ]);  
+        }
     }
 
     /**

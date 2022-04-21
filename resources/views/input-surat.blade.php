@@ -27,12 +27,13 @@
                     <label class="mb-2">Jenis Surat</label>
                     <select name="jenis_surat" class="select2 input w-full border mt-2 select-jenis-surat" data-placeholder="--Pilih Jenis Surat--">
                         <option></option>
-                        <option value="Surat Keterangan">Surat Keterangan</option>
+                        <option @if(old('jenis_surat')== 'Surat Keterangan') selected="selected" @endif value="Surat Keterangan">Surat Keterangan</option>
+                        <option>Surat Kerja</option>
                     </select>
                 </div>
                 <div class="mt-3">
                     <label>Nomor Surat</label>
-                    <input type="text" name="no_surat" class="input w-full border mt-2" placeholder="--Nomor Surat--">
+                    <input type="text" name="no_surat" value="{{old('no_surat')}}" class="input w-full border mt-2" placeholder="--Nomor Surat--">
                 </div>
                 <div class="mt-3">
                     <label>Pembuat Surat</label>
@@ -44,9 +45,9 @@
                     <label class="mb-2">Jenis Kegiatan</label>
                     <select name="nama_kegiatan" class="select2 input w-full border mt-2 jenis-kegiatan" data-placeholder="--Pilih Jenis Kegiatan--">
                         <option></option>
-                        <option value="penelitian">Kegiatan Penelitian</option>
-                        <option value="pkm">Kegiatan PKM</option>
-                        <option value="hki">Kegiatan HKI</option>
+                        <option @if(old('pub_sumber_dana')== 'penelitian') selected="selected" @endif value="penelitian">Kegiatan Penelitian</option>
+                        <option @if(old('pub_sumber_dana')== 'pkm') selected="selected" @endif value="pkm">Kegiatan PKM</option>
+                        <option @if(old('pub_sumber_dana')== 'hki') selected="selected" @endif value="hki">Kegiatan HKI</option>
                     </select>
                 </div>
                 <div class="mt-3">

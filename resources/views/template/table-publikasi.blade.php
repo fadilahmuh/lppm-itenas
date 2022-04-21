@@ -76,7 +76,9 @@
                      -
                      @endif
                 </td> 
-                <td class="text-center border-b">{{$d->jenis_publikasi->nama}}</td>
+                <td class="text-center border-b">
+                    <div class="text-center whitespace-nowrap">{{$d->jenis_publikasi->nama}}</div>
+                </td>
                 <td class="text-center border-b">{{$d->lingkup}}</td>
                 <td class="text-center border-b">{{$d->sumber_dana}}</td>
                 <td class="text-center border-b">

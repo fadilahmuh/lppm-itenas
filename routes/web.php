@@ -83,8 +83,10 @@ Route::middleware('auth:pegawai')->group(function() {
 
     //Surat-Menyurat
     Route::prefix('surat')->name('surat.')->group(function() {
-        Route::get('/', [SuratController::class, 'input_surat'])->name('input');
+        Route::get('/', [SuratController::class, 'index'])->name('index');
+        Route::get('/buat', [SuratController::class, 'input_surat'])->name('input');
         Route::post('/store', [SuratController::class, 'store_surat'])->name('store');
+        Route::get('/view/{id}', [SuratController::class, 'tampil_surat'])->name('tampil');
         Route::get('/cek/{id}', [SuratController::class, 'cek_surat'])->name('cek');
     });
    
