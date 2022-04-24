@@ -14,18 +14,16 @@ class Dosen extends Authenticatable
 
     protected $guard = 'dosen';
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'nama',
         'nip',
         'nidn',
-        'email',
         'jurusan',
-        'password',
+        'pict',
+        'gs_id',
+        'sinta_id',
+        'scopus_id',
+        'keahlian'
     ];
 
     /**

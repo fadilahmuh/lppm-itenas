@@ -168,10 +168,6 @@ class MainController extends Controller
         if ($request->ajax()) {
             $form = view('template.user.form-penelitian')->render();
 
-            // return response()->json([
-            //     'form' =>  $form
-            // ]);  
-
             return response([
                 'form' =>  $form
             ]);  

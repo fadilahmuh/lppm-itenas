@@ -27,6 +27,14 @@
 
     <!-- END: Profile Menu -->
     <div class="col-span-12 lg:col-span-8 xxl:col-span-9">
+        @if($errors->any())
+            @foreach($errors->getMessages() as $this_error)
+            <div class="rounded-md px-5 py-4 mb-3 bg-theme-31 text-theme-6">{{$this_error[0]}}</div> 
+            @endforeach
+        @endif 
+        @if(Session::has('success'))
+            <div class="rounded-md px-5 py-4 mb-2 bg-theme-18 text-theme-9">{{ Session('success') }} </div>
+        @endif
         <!-- BEGIN: Daily Sales -->
         <div class="intro-y box lg:mt-5">
             <div class="flex items-center px-5 py-5 sm:py-3 border-b border-gray-200">
@@ -164,21 +172,61 @@
             <div class="p-5">
                 <div class="border-l-2 border-theme-1 pl-4">
                     <p class="font-normal text-gray-600">G-scholar ID</p> 
-                    <h3 class="font-semibold">5113gb2b</h3>
+                    @if (empty(Auth::user()->gs_id))
+                    <h3 class="font-semibold">-</h3>
+                    @else
+                    <h3 class="font-semibold">{{ Auth::user()->gs_id }}</h3>
+                    @endif
                 </div>
                 <div class="border-l-2 border-theme-1 pl-4 mt-3">
                     <p class="font-normal text-gray-600">Scopus ID</p> 
-                    <h3 class="font-semibold">24564n2hvh</h3>
+                    @if (empty(Auth::user()->scopus_id))
+                    <h3 class="font-semibold">-</h3>
+                    @else
+                    <h3 class="font-semibold">{{ Auth::user()->scopus_id }}</h3>
+                    @endif
                 </div>
                 <div class="border-l-2 border-theme-1 pl-4 mt-3">
                     <p class="font-normal text-gray-600">Sinta ID</p> 
-                    <h3 class="font-semibold">tgvtbfgstyhj334556</h3>
+                    @if (!empty(Auth::user()->sinta_id))
+                    <h3 class="font-semibold">{{ Auth::user()->sinta_id }}</h3>
+                    @else
+                    <h3 class="font-semibold">-</h3>
+                    @endif
                 </div>
             </div>
             <div class="flex items-center px-5 py-5 sm:py-3 border-t border-gray-200">
-                <a class="button w-20 text-white bg-theme-1 shadow-md ml-auto">Edit</a>
+                <a href="javascript:;" data-toggle="modal" data-target="#basic-modal-preview" class="button w-20 text-white bg-theme-1 shadow-md ml-auto">Edit</a>
             </div>
         </div>
+    </div>
+</div>
+@endsection
+
+@section('modal')
+<div class="modal" id="basic-modal-preview">
+    <div class="modal__content px-10 pt-10 pb-4">
+        <form action="{{ route('profil.update', ['dosen'=>Auth::user()->id]) }}" enctype="multipart/form-data" method="POST">
+            @method('PUT')
+            @csrf
+        <div class="">
+            <div class="mb-2">
+                <label>G-scholar ID</label>
+                <input type="text" name="gs" class="input w-full border mt-2" placeholder="--Scholar ID--" value="{{ Auth::user()->gs_id }}">
+            </div>
+            <div class="mb-2">
+                <label>Scopus ID</label>
+                <input type="text" name="sc" class="input w-full border mt-2" placeholder="--Scopus ID--" value="{{ Auth::user()->scopus_id }}">
+            </div>
+            <div class="mb-5">
+                <label>Sinta ID</label>
+                <input type="text" name="sinta" class="input w-full border mt-2" placeholder="--Sinta ID--" value="{{ Auth::user()->sinta_id }}">
+            </div>
+            <div class="flex items-center px-5 py-5 sm:py-3 border-t border-gray-200">
+                <button type="submit" class="button w-20 text-white bg-theme-1 shadow-md ml-auto">Update</button>
+            </div>
+        </div>
+        </form>
     </div>
 </div>
 @endsection
