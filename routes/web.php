@@ -32,6 +32,7 @@ Route::middleware('auth:pegawai,dosen')->group(function() {
     Route::get('/input', [MainController::class, 'input'])->name('input');
     Route::get('/profil', [UserContoller::class, 'profil'])->name('profil');
     Route::put('/profil/update/{dosen}', [UserContoller::class, 'update_info'])->name('profil.update');
+    Route::put('/profil/update-pict/{dosen}', [UserContoller::class, 'update_pict'])->name('profil.update.pict');
     Route::get('/test', [MainController::class, 'test']);
 
     Route::prefix('masterdata')->group(function() {

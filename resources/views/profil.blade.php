@@ -1,5 +1,9 @@
 @extends('template.app')
 
+@section('lib-css')
+<link rel="stylesheet" href="{{ asset('js/dropify/dist/css/dropify.css') }}" />
+@endsection
+
 @section('content')
 
 
@@ -16,7 +20,7 @@
             <div class="flex flex-1 p-5 items-center justify-center lg:justify-start">
                 <div class="w-20 h-20 sm:w-24 sm:h-24 flex-none lg:w-20 lg:h-20 image-fit relative">
                     <img alt="Profile Picture" class="rounded-full" src="{{ asset('dist/images/'.Auth::user()->pict) }}">
-                    <a class="button absolute flex items-center justify-center bottom-0 right-0 bg-theme-1 rounded-full p-2"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-camera w-4 h-4 text-white"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg> </a>
+                    <a href="javascript:;" data-toggle="modal" data-target="#edit-picture" class="button absolute flex items-center justify-center bottom-0 right-0 bg-theme-1 rounded-full p-2"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-camera w-4 h-4 text-white"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg> </a>
                 </div>
                 <div class="ml-5">
                     <div class="w-24 sm:w-40 truncate sm:whitespace-normal font-medium text-lg">{{ Auth::user()->nama }}</div>
@@ -229,4 +233,28 @@
         </form>
     </div>
 </div>
+<div class="modal" id="edit-picture">
+    <div class="modal__content px-10 pt-10 pb-4">
+        <form action="{{ route('profil.update.pict', ['dosen'=>Auth::user()->id]) }}" enctype="multipart/form-data" method="POST">
+            @method('PUT')
+            @csrf
+        <div class="">
+            <input type="file" name="pict" class="dropify" data-default-file="{{ asset('dist/images/'.Auth::user()->pict) }}" />
+            <div class="flex items-center px-5 py-5 sm:py-3 border-t border-gray-200">
+                <button type="submit" class="button w-20 text-white bg-theme-1 shadow-md ml-auto">Update</button>
+            </div>
+        </div>
+        </form>
+    </div>
+</div>
+@endsection
+
+@section('lib-script')
+<script src="{{ asset('js/dropify/dist/js/dropify.js') }}"></script>
+@endsection
+
+@section('line-script')
+    <script>
+        $('.dropify').dropify();
+    </script>
 @endsection

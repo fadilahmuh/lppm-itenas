@@ -29,4 +29,19 @@ class UserContoller extends Controller
 
         return redirect()->route('profil')->with('success','Profile Berhasil diupdate.');
     }
+
+    public function update_pict(Request $request, Dosen $dosen)
+    {
+        if($request->hasFile('pict')){ 
+            $dosen->update([
+                'pict' => $request->pict->getClientOriginalName()
+            ]);
+
+            $request->pict->move('dist/images/', $request->pict->getClientOriginalName());
+
+            return redirect()->route('profil')->with('success','Profile Berhasil diupdate.');
+        } else {
+            return redirect()->route('profil')->with('error','Profile Picture gagal diupdate.');
+        }
+    }
 }
