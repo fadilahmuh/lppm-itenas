@@ -9,6 +9,7 @@ use App\Http\Controllers\PenelitianController;
 use App\Http\Controllers\PkmController;
 use App\Http\Controllers\PublikasiController;
 use App\Http\Controllers\SuratController;
+use App\Http\Controllers\UserContoller;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -29,10 +30,9 @@ Auth::routes();
 Route::middleware('auth:pegawai,dosen')->group(function() {
     Route::get('/', [MainController::class, 'index'])->name('base');
     Route::get('/input', [MainController::class, 'input'])->name('input');
-    // Route::get('/input2', [MainController::class, 'input2']);
-    Route::get('/profil', [MainController::class, 'profil'])->name('profil');
+    Route::get('/profil', [UserContoller::class, 'profil'])->name('profil');
     Route::get('/test', [MainController::class, 'test']);
-    // Route::get('/masterdata', [MasterDataController::class, 'index'])->name('masterdata');
+    
     Route::prefix('masterdata')->group(function() {
         Route::get('/', [MasterDataController::class, 'index'])->name('masterdata');
         Route::get('/dosen/add', [MasterDataController::class, 'create_dosen'])->name('dosen.create');
@@ -76,6 +76,8 @@ Route::middleware('auth:pegawai,dosen')->group(function() {
     Route::get('/data-publikasi', [MainController::class, 'get_pub'])->name('get_pub');
     Route::get('/data-publikasi2', [MainController::class, 'get_pub2'])->name('get_pub2');
     Route::get('/nama-kegiatan', [MainController::class, 'get_keg'])->name('get_keg');
+    Route::get('/total-jumlah/{tahun?}', [MainController::class, 'getTotalJumlah'])->name('get_jumlah');
+    Route::get('/total-biaya/{tahun?}', [MainController::class, 'getTotalBiaya'])->name('get_total');
 });
 
 Route::middleware('auth:pegawai')->group(function() {
@@ -87,7 +89,8 @@ Route::middleware('auth:pegawai')->group(function() {
         Route::get('/buat', [SuratController::class, 'input_surat'])->name('input');
         Route::post('/store', [SuratController::class, 'store_surat'])->name('store');
         Route::get('/view/{id}', [SuratController::class, 'tampil_surat'])->name('tampil');
-        Route::get('/cek/{id}', [SuratController::class, 'cek_surat'])->name('cek');
     });
    
 });
+
+Route::get('surat/cek/{id}', [SuratController::class, 'cek_surat'])->name('surat.cek');

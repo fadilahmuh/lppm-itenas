@@ -8,6 +8,7 @@ use App\Models\Insentif;
 use App\Models\Mahasiswa;
 use App\Models\Penelitian;
 use App\Models\Pkm;
+use App\Models\Publikasi;
 use App\Models\RawQue;
 use App\Models\Ref_jenishibah;
 use App\Models\Ref_jenisinsentif;
@@ -29,25 +30,25 @@ class MainController extends Controller
         select tahun from penelitians WHERE  STATUS = 1 AND deleted_at IS NULL UNION ALL
         select tahun from pkms WHERE STATUS = 1 AND deleted_at IS NULL UNION ALL
         select tahun from insentifs WHERE STATUS = 1 AND deleted_at IS NULL UNION ALL
-        select tahun from hkis WHERE STATUS = 1 AND deleted_at IS NULL"));
+        select tahun from hkis WHERE STATUS = 1 AND deleted_at IS NULL UNION ALL
+        SELECT tahun from publikasis WHERE STATUS = 1 AND deleted_at IS NULL
+        ORDER BY tahun ASC"));
 
         
         $tahun = range($r[0]->tahun,end($r)->tahun);
-        //dd($tahun);
+        // dd($tahun);
 
         $penelitians = Penelitian::where('status', 1)->get();
-        // $penelitians = Penelitian::all();
         $pkms = Pkm::where('status', 1)->get();
-        // $pkms = Pkm::all();
         $insentifs = Insentif::where('status', 1)->get();
-        // $insentifs = Insentif::all();
         $hkis = Hki::where('status', 1)->get();
-        // $hkis = Hki::all();
+        $publikasis = Publikasi::where('status', 1)->get();
 
         $latest = DB::select(DB::raw("select 'penelitian' as table_name, id, jumlah, status, created_at from penelitians WHERE STATUS = 1 UNION ALL
         select 'pkm' as table_name, id, jumlah, status, created_at from pkms WHERE STATUS = 1 UNION all
         select 'insentif' as table_name, id, jumlah, status, created_at from insentifs WHERE STATUS = 1 UNION all
-        select 'hki' as table_name, id, jumlah, status, created_at from hkis WHERE STATUS = 1
+        select 'hki' as table_name, id, jumlah, status, created_at from hkis WHERE STATUS = 1 UNION all
+        select 'publikasi' as table_name, id, jumlah, status, created_at from publikasis WHERE STATUS = 1
         ORDER BY created_at DESC"));
 
         $panel= '';
@@ -67,11 +68,14 @@ class MainController extends Controller
                 }elseif ($l->table_name == 'hki'){
                     $data = Hki::find($l->id);
                     $panel = $panel.view('template.panel-post-hki',compact('data'));
+                }elseif ($l->table_name == 'publikasi'){
+                    $data = Publikasi::find($l->id);
+                    $panel = $panel.view('template.panel-post-publikasi',compact('data'));
                 }
             }
         } 
 
-        return view('index', compact('title','panel', 'penelitians', 'pkms','insentifs', 'hkis', 'tahun'));
+        return view('index', compact('title','panel', 'penelitians', 'pkms','insentifs', 'hkis', 'publikasis','tahun'));
     }
 
     public function inbox() {
@@ -94,7 +98,6 @@ class MainController extends Controller
             $data->push($r);
         };
 
-        // dd($data);
         return view('inbox', compact('title', 'data'));
     }
 
@@ -127,8 +130,27 @@ class MainController extends Controller
     }
 
     public function test() {
-        $data = Ref_publikasijenis::all();
-        dd($data);
+
+        // jumlah
+        $databiaya = DB::select(DB::raw("
+        SELECT table_name, SUM(tabel_semua.jumlah) as total FROM 
+        (SELECT 'penelitian' as table_name, id, jumlah, status, created_at from penelitians WHERE STATUS = 1 AND deleted_at IS NULL UNION ALL
+        SELECT 'pkm' as table_name, id, jumlah, status, created_at from pkms WHERE STATUS = 1 AND deleted_at IS NULL UNION all
+        select 'insentif' as table_name, id, jumlah, status, created_at from insentifs WHERE STATUS = 1 AND deleted_at IS NULL UNION all
+        SELECT 'hki' as table_name, id, jumlah, status, created_at from hkis WHERE STATUS = 1 AND deleted_at IS NULL UNION all
+        SELECT 'publikasi' as table_name, id, jumlah, status, created_at from publikasis WHERE STATUS = 1 AND deleted_at IS NULL) tabel_semua
+        GROUP BY table_name"));
+
+        $datajumlah = DB::select(DB::raw("
+        SELECT table_name, count(tabel_semua.id) as jumlah FROM 
+        (SELECT 'penelitian' as table_name, id, jumlah, status, created_at from penelitians WHERE STATUS = 1 AND deleted_at IS NULL UNION ALL
+        SELECT 'pkm' as table_name, id, jumlah, status, created_at from pkms WHERE STATUS = 1 AND deleted_at IS NULL UNION all
+        select 'insentif' as table_name, id, jumlah, status, created_at from insentifs WHERE STATUS = 1 AND deleted_at IS NULL UNION all
+        SELECT 'hki' as table_name, id, jumlah, status, created_at from hkis WHERE STATUS = 1 AND deleted_at IS NULL UNION all
+        SELECT 'publikasi' as table_name, id, jumlah, status, created_at from publikasis WHERE STATUS = 1 AND deleted_at IS NULL) tabel_semua
+        GROUP BY TABLE_NAME"));
+
+        dd($databiaya, $datajumlah);
     }
 
     public function input() {
@@ -141,10 +163,6 @@ class MainController extends Controller
         return view('input2', compact('title'));
     }
 
-    public function profil() {
-        $title = 'Profil';
-        return view('profil', compact('title'));
-    }
 
     public function input_penelitian(Request $request) {
         if ($request->ajax()) {
@@ -359,14 +377,6 @@ class MainController extends Controller
                 
             }
 
-            // if($request->k == 'penelitian'){
-            //     $data = Penelitian::all();
-            // }elseif($request->k == 'pkm'){
-            //     $data = Pkm::all();
-            // }elseif($request->k == 'hki'){
-            //     $data = Hki::all();
-            // }
-
             $response = array();
             foreach($data as $d){
                 $response[] = array(
@@ -377,5 +387,85 @@ class MainController extends Controller
 
             return response()->json($response);  
         }
+    }
+
+    public function getTotalJumlah($tahun = null)
+    {
+        if($tahun != NULL || $tahun != ''){
+            $databiaya = DB::select(DB::raw("
+            SELECT table_name, count(tabel_semua.jumlah) as jumlah FROM 
+            (SELECT 'penelitian' as table_name, id, jumlah, status, created_at from penelitians WHERE tahun = ".$tahun." AND STATUS = 1 AND deleted_at IS NULL UNION ALL
+            SELECT 'pkm' as table_name, id, jumlah, status, created_at from pkms WHERE tahun = ".$tahun." AND STATUS = 1 AND deleted_at IS NULL UNION all
+            select 'insentif' as table_name, id, jumlah, status, created_at from insentifs WHERE tahun = ".$tahun." AND STATUS = 1 AND deleted_at IS NULL UNION all
+            SELECT 'hki' as table_name, id, jumlah, status, created_at from hkis WHERE tahun = ".$tahun." AND STATUS = 1 AND deleted_at IS NULL UNION all
+            SELECT 'publikasi' as table_name, id, jumlah, status, created_at from publikasis WHERE tahun = ".$tahun." AND STATUS = 1 AND deleted_at IS NULL) tabel_semua
+            GROUP BY table_name"));
+        }else{
+            $databiaya = DB::select(DB::raw("
+            SELECT table_name, count(tabel_semua.jumlah) as jumlah FROM 
+            (SELECT 'penelitian' as table_name, id, jumlah, status, created_at from penelitians WHERE STATUS = 1 AND deleted_at IS NULL UNION ALL
+            SELECT 'pkm' as table_name, id, jumlah, status, created_at from pkms WHERE STATUS = 1 AND deleted_at IS NULL UNION all
+            select 'insentif' as table_name, id, jumlah, status, created_at from insentifs WHERE STATUS = 1 AND deleted_at IS NULL UNION all
+            SELECT 'hki' as table_name, id, jumlah, status, created_at from hkis WHERE STATUS = 1 AND deleted_at IS NULL UNION all
+            SELECT 'publikasi' as table_name, id, jumlah, status, created_at from publikasis WHERE STATUS = 1 AND deleted_at IS NULL) tabel_semua
+            GROUP BY table_name"));
+        }
+
+        $databiaya = array_map(function ($value) {
+            return (array)$value;
+        }, $databiaya);
+
+        $label=[];
+        $data=[];
+
+        foreach ($databiaya as $db){
+            array_push($label, strtoupper($db['table_name']));
+            array_push($data, $db['jumlah']);
+        }
+
+        return response()->json([
+            'label' =>  $label,
+            'data' =>  $data,
+        ]); 
+    }
+
+    public function getTotalBiaya($tahun = null)
+    {
+        if($tahun != NULL || $tahun != ''){
+            $databiaya = DB::select(DB::raw("
+            SELECT table_name, SUM(tabel_semua.jumlah) as total FROM 
+            (SELECT 'penelitian' as table_name, id, jumlah, status, created_at from penelitians WHERE tahun = ".$tahun." AND STATUS = 1 AND deleted_at IS NULL UNION ALL
+            SELECT 'pkm' as table_name, id, jumlah, status, created_at from pkms WHERE tahun = ".$tahun." AND STATUS = 1 AND deleted_at IS NULL UNION all
+            select 'insentif' as table_name, id, jumlah, status, created_at from insentifs WHERE tahun = ".$tahun." AND STATUS = 1 AND deleted_at IS NULL UNION all
+            SELECT 'hki' as table_name, id, jumlah, status, created_at from hkis WHERE tahun = ".$tahun." AND STATUS = 1 AND deleted_at IS NULL UNION all
+            SELECT 'publikasi' as table_name, id, jumlah, status, created_at from publikasis WHERE tahun = ".$tahun." AND STATUS = 1 AND deleted_at IS NULL) tabel_semua
+            GROUP BY table_name"));
+        }else{
+            $databiaya = DB::select(DB::raw("
+            SELECT table_name, SUM(tabel_semua.jumlah) as total FROM 
+            (SELECT 'penelitian' as table_name, id, jumlah, status, created_at from penelitians WHERE STATUS = 1 AND deleted_at IS NULL UNION ALL
+            SELECT 'pkm' as table_name, id, jumlah, status, created_at from pkms WHERE STATUS = 1 AND deleted_at IS NULL UNION all
+            select 'insentif' as table_name, id, jumlah, status, created_at from insentifs WHERE STATUS = 1 AND deleted_at IS NULL UNION all
+            SELECT 'hki' as table_name, id, jumlah, status, created_at from hkis WHERE STATUS = 1 AND deleted_at IS NULL UNION all
+            SELECT 'publikasi' as table_name, id, jumlah, status, created_at from publikasis WHERE STATUS = 1 AND deleted_at IS NULL) tabel_semua
+            GROUP BY table_name"));
+        }
+
+        $databiaya = array_map(function ($value) {
+            return (array)$value;
+        }, $databiaya);
+
+        $label=[];
+        $data=[];
+
+        foreach ($databiaya as $db){
+            array_push($label, strtoupper($db['table_name']));
+            array_push($data, $db['total']);
+        }
+
+        return response()->json([
+            'label' =>  $label,
+            'data' =>  $data,
+        ]); 
     }
 }

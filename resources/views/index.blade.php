@@ -16,7 +16,7 @@
                         <div class="box p-5">
                             <div class="grid grid-cols-12">
                                 <div class="col-span-4 xl:col-span-12 sm:col-span-4 flex items-center">
-                                    <i class="fa-solid fa-microscope text-green-400 text-5xl xl:text-3xl"></i>
+                                    <i class="fa-solid fa-microscope text-gray-500 text-5xl xl:text-3xl"></i>
                                 </div>
                                 <div class="col-span-8 xl:col-span-12 sm:col-span-8">
                                     <div class="text-3xl text-right font-bold leading-8 mt-6">{{$penelitians->count()}}</div>
@@ -31,7 +31,7 @@
                         <div class="box p-5">
                             <div class="grid grid-cols-12">
                                 <div class="col-span-4 xl:col-span-12 sm:col-span-4 flex items-center">
-                                    <i class="fa-solid fa-calendar-days text-orange-500 text-5xl xl:text-3xl"></i>
+                                    <i class="fa-solid fa-calendar-days text-gray-500 text-5xl xl:text-3xl"></i>
                                 </div>
                                 <div class="col-span-8 xl:col-span-12 sm:col-span-8">
                                     <div class="text-3xl text-right font-bold leading-8 mt-6">{{$pkms->count()}}</div>
@@ -46,7 +46,7 @@
                         <div class="box p-5">
                             <div class="grid grid-cols-12">
                                 <div class="col-span-4 xl:col-span-12 sm:col-span-4 flex items-center">
-                                    <i class="fa-solid fa-receipt text-5xl xl:text-3xl"></i>
+                                    <i class="fa-solid fa-receipt text-gray-500 text-5xl xl:text-3xl"></i>
                                 </div>
                                 <div class="col-span-8 xl:col-span-12 sm:col-span-8">
                                     <div class="text-3xl text-right font-bold leading-8 mt-6">{{$hkis->count()}}</div>
@@ -61,7 +61,22 @@
                         <div class="box p-5">
                             <div class="grid grid-cols-12">
                                 <div class="col-span-4 xl:col-span-12 sm:col-span-4 flex items-center">
-                                    <i class="fa-solid fa-file-invoice text-5xl xl:text-3xl"></i>
+                                    <i class="fa-regular fa-file-lines text-gray-500 text-5xl xl:text-3xl"></i>
+                                </div>
+                                <div class="col-span-8 xl:col-span-12 sm:col-span-8">
+                                    <div class="text-3xl text-right font-bold leading-8 mt-6">{{$publikasis->count()}}</div>
+                                    <div class="text-base text-right text-gray-600 mt-1">Publikasi</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-span-12 sm:col-span-6 md:col-span-3 intro-y">
+                    <div class="report-box zoom-in">
+                        <div class="box p-5">
+                            <div class="grid grid-cols-12">
+                                <div class="col-span-4 xl:col-span-12 sm:col-span-4 flex items-center">
+                                    <i class="fa-solid fa-file-invoice text-gray-500 text-5xl xl:text-3xl"></i>
                                 </div>
                                 <div class="col-span-8 xl:col-span-12 sm:col-span-8">
                                     <div class="text-3xl text-right font-bold leading-8 mt-6">{{$insentifs->count()}}</div>
@@ -86,11 +101,16 @@
             <div class="grid grid-cols-12 gap-12 mt-5">
                 <div class="col-span-12 md:col-span-6 box intro-x">
                     <div class="flex flex-col sm:flex-row items-center p-5 border-b border-gray-200 text-center justify-center">
-                        <h2 class="font-medium text-base">Statistik Hibah Pertahun</h2>
-                        <select class="input border ml-auto">
+                        <h2 class="font-medium text-base">Statistik Jumlah Kegiatan</h2>
+                        <select id="select-jumlah" class="input border ml-auto">
                             @foreach ($tahun as $t) 
-                            <option value="{{$t}}">{{$t}}</option>
+                                @if($loop->last)
+                                    <option selected value="{{ route('get_jumlah', ['tahun'=>$t]) }}">{{$t}}</option>
+                                @else
+                                    <option  value="{{ route('get_jumlah', ['tahun'=>$t]) }}">{{$t}}</option>
+                                @endif
                             @endforeach
+                            <option value="{{ route('get_jumlah') }}">Semua</option>
                         </select>
                     </div>
                     <div class="p-5" id="pie-chart">
@@ -107,11 +127,16 @@
                 </div>
                 <div class="col-span-12 md:col-span-6 box intro-x">
                     <div class="flex flex-col sm:flex-row items-center p-5 border-b border-gray-200 text-center justify-center">
-                        <h2 class="font-medium text-base">Statistik Jumlah Hibah Pertahun</h2>
-                        <select class="input border ml-auto">
+                        <h2 class="font-medium text-base">Statistik Jumlah Biaya Kegiatan</h2>
+                        <select id="select-total" class="input border ml-auto">
                             @foreach ($tahun as $t) 
-                            <option value="{{$t}}">{{$t}}</option>
+                                @if($loop->last)
+                                    <option selected value="{{ route('get_total', ['tahun'=>$t]) }}">{{$t}}</option>
+                                @else
+                                    <option  value="{{ route('get_total', ['tahun'=>$t]) }}">{{$t}}</option>
+                                @endif
                             @endforeach
+                            <option value="{{ route('get_total') }}">Semua</option>
                         </select>
                     </div>
                     <div class="p-5" id="vertical-bar-chart">
@@ -160,34 +185,42 @@
 
 @section('line-script')
 <script>    
-    // if ($('#pie-chart-widget').length) {
-        let ctx = $('#pie-chart-widget')[0].getContext('2d')
-        let myPieChart = new Chart(ctx, {
-            type: 'pie',
-            data: {
-                labels: ["Penelitian", "PKM", "Insentif", "HKI"],
-                datasets: [{
-                    data: [15, 10, 5 ,4],
-                    backgroundColor: ["#FF8B26", "#FFC533", "#285FD3", "#4bde81"],
-                    hoverBackgroundColor: ["#FF8B26", "#FFC533", "#285FD3","#4bde81"],
-                    borderWidth: 5,
-                    borderColor: "#fff"
-                }]
-            }
-        });
-    // };
+    let ctx = $('#pie-chart-widget')[0].getContext('2d')
+    let myPieChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ["", "", "", "", ""],
+            datasets: [{
+                data: [0, 0, 0, 0, 0],
+                backgroundColor: ["#9b5de5", "#f15bb5", "#fee440", "#00bbf9", "#00f5d4"],
+                borderWidth: 5,
+                borderColor: "#fff"
+            }]
+        }
+    });
+    
+    $.ajax({
+        type: "GET",
+        url: $('#select-jumlah').val(),
+        dataType: "json",
+        success: function (response) {
+            myPieChart.data.datasets[0].data = response.data;
+            myPieChart.data.labels = response.label;
+            myPieChart.update();
 
-    if ($('#vertical-bar-chart-widget').length) {
-        const ctx = $('#vertical-bar-chart-widget');
-        const myChart = new Chart(ctx, {
+        }
+    }); 
+
+
+    let ctx2 = $('#vertical-bar-chart-widget');
+    let myChart = new Chart(ctx2, {
         type: 'bar',
         data: {
-            labels: ['Penelitian', 'PKM', 'Insentif', 'HKI'],
+            labels: ["", "", "", "", ""],
             datasets: [{
                 label: 'Total Dana Hibah',
-                data: [11000000, 5000000, 3000000, 900000],
-                backgroundColor: ["#FF8B26", "#FFC533", "#285FD3", "#4bde81"],
-                borderColor: ["#FF8B26", "#FFC533", "#285FD3", "#4bde81"],
+                data: [0, 0, 0, 0, 0],
+                backgroundColor: ["#9b5de5", "#f15bb5", "#fee440", "#00bbf9", "#00f5d4"],
                 borderWidth: 1
             }]
         },
@@ -206,15 +239,45 @@
                 display: false
             },
         }
-        });
-    };
+    }); 
 
-    myPieChart.data.datasets[0].data = [3, 3, 3 ,3];
-    myPieChart.update();
+    $.ajax({
+        type: "GET",
+        url: $('#select-total').val(),
+        dataType: "json",
+        success: function (response) {
+            myChart.data.datasets[0].data = response.data;
+            myChart.data.labels = response.label;
+            myChart.update();
+        }
+    });    
 
-    $('').click(function (e) { 
-        e.preventDefault();
-        
+    $('#select-jumlah').change(function (e) { 
+        url = $(this).val();
+        $.ajax({
+        type: "GET",
+        url: url,
+        dataType: "json",
+        success: function (response) {
+            myPieChart.data.datasets[0].data = response.data;
+            myPieChart.data.labels = response.label;
+            myPieChart.update();
+        }
+    }); 
+    });
+
+    $('#select-total').change(function (e) { 
+        url = $(this).val();
+        $.ajax({
+        type: "GET",
+        url: url,
+        dataType: "json",
+        success: function (response) {
+            myChart.data.datasets[0].data = response.data;
+            myChart.data.labels = response.label;
+            myChart.update();
+        }
+    }); 
     });
 </script>
 @endsection
