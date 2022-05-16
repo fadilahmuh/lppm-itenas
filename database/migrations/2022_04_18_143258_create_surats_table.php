@@ -21,7 +21,7 @@ class CreateSuratsTable extends Migration
             $table->string('nama_kegiatan')->nullable(false);
             $table->unsignedInteger('kegiatan_id')->index()->nullable(false);
             $table->string('qr');
-            $table->string('file');
+            $table->string('file')->nullable();
             $table->timestamps();
         });
     }

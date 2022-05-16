@@ -23,7 +23,9 @@ class Dosen extends Authenticatable
         'gs_id',
         'sinta_id',
         'scopus_id',
-        'keahlian'
+        'keahlian',
+        'password',
+        'email'
     ];
 
     /**
