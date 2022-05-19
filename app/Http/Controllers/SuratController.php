@@ -7,6 +7,7 @@ use App\Models\Pegawai;
 use App\Models\Penelitian;
 use App\Models\Pkm;
 use App\Models\Surat;
+use App\Models\SuratMasuk;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -20,8 +21,9 @@ class SuratController extends Controller
     {
         $title = 'Data Surat';
         $data = Surat::all();
+        $data2 = SuratMasuk::all();
 
-        return view('template.table-surat', compact('title','data'));
+        return view('template.table-surat', compact('title','data', 'data2'));
     }
 
     public function input_surat()
@@ -90,6 +92,53 @@ class SuratController extends Controller
 
         $pdf = PDF::loadview('surat-keterangan2', compact('dasur','qrcode'))->setPaper('A4', 'potrait');
         return $pdf->stream();
+    }
+
+    public function input_surat_masuk()
+    {
+        $title = 'Create Surat Masuk';
+
+        return view('input-surat-masuk', compact('title'));
+    }
+
+    public function store_surat_masuk(Request $request)
+    {
+        // dd($request->all());
+        $rules = array(
+            'perihal_surat' => 'required',
+            'dari_surat' => 'required',
+            'tanggal_masuk' => 'required',
+            'file_surat' => 'required|mimes:pdf',
+        );
+        $messages = array(
+            'perihal_surat.required' => 'Perihal surat tidak boleh kosong!',
+            'dari_surat.required' => 'Asal surat tidak boleh kosong!',
+            'tanggal_masuk.required' => 'Tanggal masuk surat tidak boleh kosong!',
+            'file_surat.required' => 'File tidak boleh kosong!',
+            'file_surat.mimes' => 'Format file tidak didukung!',
+        );
+
+        $request->all();
+        $validator = Validator::make($request->all(), $rules, $messages);        
+
+        if ($validator->fails()) {
+            return redirect()->back()->withInput()->withErrors($validator);
+        } else {
+
+            SuratMasuk::create([
+                'perihal' => $request->perihal_surat,
+                'dari' => $request->dari_surat,
+                'lampiran' => $request->lampiran,
+                'tanggal_masuk' => Carbon::createFromFormat('d/m/Y', $request->tanggal_masuk)->format('Y-m-d'),
+                'file' =>  date("YmdHis").'-'.$request->file_surat->getClientOriginalName()
+            ]);
+
+            $request->file_surat->move('files/surat/', date("YmdHis").'-'.$request->file_surat->getClientOriginalName());
+
+            $msg = 'Surat Masuk Berhasil dibuat.';
+            return redirect()->route('surat.index')->with('success',$msg);
+        }
+        
     }
 
     public function cek_surat($id)

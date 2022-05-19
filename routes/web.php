@@ -91,6 +91,11 @@ Route::middleware('auth:pegawai')->group(function() {
         Route::get('/buat', [SuratController::class, 'input_surat'])->name('input');
         Route::post('/store', [SuratController::class, 'store_surat'])->name('store');
         Route::get('/view/{id}', [SuratController::class, 'tampil_surat'])->name('tampil');
+        
+        Route::prefix('masuk')->name('masuk.')->group(function() {
+            Route::get('/', [SuratController::class, 'input_surat_masuk'])->name('input');
+            Route::post('/store', [SuratController::class, 'store_surat_masuk'])->name('store');
+        });
     });
    
 });

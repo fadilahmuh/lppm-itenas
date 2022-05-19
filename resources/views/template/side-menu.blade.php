@@ -92,7 +92,13 @@
                 <li>
                     <a href="{{ route('surat.input')}}" class="side-menu">
                         <div class="side-menu__icon"> <i class="fa-solid fa-chevron-right"></i> </div>
-                        <div class="side-menu__title"> Buat Surat </div>
+                        <div class="side-menu__title"> Buat Surat Keluar</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('surat.masuk.input')}}" class="side-menu">
+                        <div class="side-menu__icon"> <i class="fa-solid fa-chevron-right"></i> </div>
+                        <div class="side-menu__title"> Buat Surat Masuk </div>
                     </a>
                 </li>
             </ul>
